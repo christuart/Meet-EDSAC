@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 128 128"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="info panel.svg"
+   inkscape:export-filename="C:\Users\cis24\Desktop\Meet EDSAC\Assets\Sprites\large info panel.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"
+   style="enable-background:new">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4"
+     inkscape:cx="84.618782"
+     inkscape:cy="52.657127"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     units="px"
+     showborder="true"
+     inkscape:showpageshadow="false"
+     inkscape:snap-page="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1137"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3365" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 1 copy 1"
+     style="display:none"
+     transform="translate(0,96)">
+    <ellipse
+       style="fill:#4b60ff;fill-opacity:1;stroke:none;stroke-opacity:0.55491327"
+       id="path4710"
+       cx="69"
+       cy="-35.375"
+       rx="94"
+       ry="85.375" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-924.3622)"
+     style="display:inline;opacity:1">
+    <path
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100.00005,1003.2938 20,1.2624 -1.3e-4,-52.194 c 0,0 -0.0958,-20 -20.000003,-20 l -72,0 c -19.83308,0 -20,20 -20,20 l 0,52.6972 20.000132,-0.252 0,-52.4452 72.000001,0 z"
+       id="path3340-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccsscccccc" />
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100.00005,990.6034 20,0.5048 -1.3e-4,33.254 c 0,0 -0.0958,20 -20.000003,20 l -72,0 c -19.83308,0 -20,-20 -20,-20 l 0,-30.474 20.000132,-3.7884 0,34.2624 72.000001,0 z"
+       id="path3340-4-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccsscccccc" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:7.69999981;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5276"
+       width="80"
+       height="75"
+       x="25"
+       y="952.36218" />
+  </g>
+  <g
+     style="display:none;opacity:1"
+     transform="translate(0,-924.3622)"
+     id="g4226"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1 copy">
+    <path
+       sodipodi:nodetypes="ccsscc"
+       inkscape:connector-curvature="0"
+       id="path4228"
+       d="m 120.01193,1010.8698 -0.0192,-58.5076 c 0,0 -0.0958,-20 -20.000003,-20 l -72,0 c -19.8330804,0 -20.0000004,20 -20.0000004,20 l 0,58.5056"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\cis24\Desktop\Meet EDSAC\Assets\Sprites\large info panel outline.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="ccsscc"
+       inkscape:connector-curvature="0"
+       id="path4230"
+       d="m 120.01203,976.9662 -0.0192,47.396 c 0,0 -0.0958,20 -19.999995,20 l -71.999976,0 c -19.8330804,0 -20.0000004,-20 -20.0000004,-20 l 0,-34.0096"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\cis24\Desktop\Meet EDSAC\Assets\Sprites\large info panel outline.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>

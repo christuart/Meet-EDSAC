@@ -1,0 +1,19 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SetSkybox.cs">
+    <Files>
+      <File FileName="Assets\Scripts\WorldSpaceCanvasHinge.cs" Line="12" Column="2" />
+      <File FileName="..\..\Documents\GitHub\EDSAC-Project-Summer-2015\InteractionLogicWithKinectDemo\Assets\HighlightPanelController.cs" Line="1" Column="1" />
+      <File FileName="..\..\Documents\GitHub\EDSAC-Project-Summer-2015\InteractionLogicWithKinectDemo\Assets\Scripts\HighlightController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LabelController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\InfoHolderController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\InspectorController.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleGalleryController.cs" Line="42" Column="5" />
+      <File FileName="Assets\SetSkybox.cs" Line="11" Column="7" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
