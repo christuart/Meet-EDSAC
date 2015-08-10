@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<EDSAC>
+<row>
+	<rowname>Rear</rowname>
+	<rack>
+		<racknumber>1</racknumber>
+		<chassis>
+			<chassisnumber>1</chassisnumber>
+			<chassisworldlabel>Generic Chassis 1/1</chassisworldlabel>
+			<chassisuilabel>Generic Chassis</chassisuilabel>
+			<valve>
+				<valvetype>SmallRed</valvetype>
+				<valvex>0.1</valvex>
+				<valvey>0.3</valvey>
+			</valve>
+			<valve>
+				<valvetype>SmallRed</valvetype>
+				<valvex>0.3</valvex>
+				<valvey>0.3</valvey>
+			</valve>
+			<valve>
+				<valvetype>SmallRed</valvetype>
+				<valvex>0.5</valvex>
+				<valvey>0.3</valvey>
+			</valve>
+			<valve>
+				<valvetype>SmallRed</valvetype>
+				<valvex>0.1</valvex>
+				<valvey>0.7</valvey>
+			</valve>
+			<valve>
+				<valvetype>SmallRed</valvetype>
+				<valvex>0.3</valvex>
+				<valvey>0.7</valvey>
+			</valve>
+			<valve>
+				<valvetype>SmallRed</valvetype>
+				<valvex>0.5</valvex>
+				<valvey>0.7</valvey>
+			</valve>
+		</chassis>
+	</rack>
+</row>
+</EDSAC>

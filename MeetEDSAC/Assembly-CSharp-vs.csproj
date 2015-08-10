@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{70A366AE-4203-6CAF-B49D-27EB367FB8D0}</ProjectGuid>
+	<ProjectGuid>{0A927E39-4C3F-F52A-1849-9D14520CF841}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,15 +46,29 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CameraFacingBillboard.cs" />
+     <Compile Include="Assets\CameraSettingsMirror.cs" />
+     <Compile Include="Assets\Controller.cs" />
+     <Compile Include="Assets\InspectionPointController.cs" />
+     <Compile Include="Assets\LabelAlignmentOnChassis.cs" />
+     <Compile Include="Assets\Scripts\GestureInfoInterpreter.cs" />
      <Compile Include="Assets\Scripts\InfoHolderController.cs" />
      <Compile Include="Assets\Scripts\InspectorController.cs" />
      <Compile Include="Assets\Scripts\LabelController.cs" />
      <Compile Include="Assets\Scripts\ObscurableObjectsController.cs" />
+     <Compile Include="Assets\Scripts\SetMaterialNotInstance.cs" />
+     <Compile Include="Assets\Scripts\SimpleGalleryController.cs" />
+     <Compile Include="Assets\Scripts\TinyXmlReader.cs" />
      <Compile Include="Assets\Scripts\Tools.cs" />
+     <Compile Include="Assets\Scripts\View Point Mesh System\ViewPointMesh.cs" />
+     <Compile Include="Assets\Scripts\View Point Mesh System\ViewPointMeshBuilder.cs" />
+     <Compile Include="Assets\Scripts\View Point Mesh System\ViewPointMeshCameraController.cs" />
+     <Compile Include="Assets\Scripts\View Point Mesh System\ViewPointMeshVertex.cs" />
      <Compile Include="Assets\Scripts\ViewThroughCuboidController.cs" />
      <Compile Include="Assets\Scripts\WorldSpaceCanvasHinge.cs" />
      <Compile Include="Assets\SetSkybox.cs" />
-     <Compile Include="Assets\SimpleGalleryController.cs" />
+     <Compile Include="Assets\maxCamera.cs" />
+     <Compile Include="Assets\setup_rack.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
@@ -106,6 +120,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\DLAA.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrainDX11.shader" />
+     <None Include="Assets\_Content\EDSAC.xml" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\MotionBlurClear.shader" />
@@ -149,7 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{C280410C-DCB4-604F-960B-1AA493105BD2}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+      <Project>{5BED5A86-8031-0131-296B-559943A86997}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

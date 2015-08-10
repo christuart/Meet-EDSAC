@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
+public enum InformationContent { INTRODUCTION, INITIAL_ORDERS, MEMORY_STORAGE, DIVISION, ORDER_CODES, WORD_LENGTH, ACCUMULATOR, SCALING, COMPUTATION_SPEED, NONE };
+
 public class InfoHolderController : MonoBehaviour {
 
 	public GameObject[] content;
@@ -20,7 +22,11 @@ public class InfoHolderController : MonoBehaviour {
 			PlaceObjectInInfoUI(shownContentId);
 		}
 	}
-
+	
+	public void PlaceObjectInInfoUI(InformationContent contentId) {
+		Debug.Log (contentId);
+		PlaceObjectInInfoUI((int)contentId);
+	}
 	public void PlaceObjectInInfoUI(int contentId) {
 		if (contentId < 0 || contentId >= content.Length) {
 			return;
@@ -36,6 +42,7 @@ public class InfoHolderController : MonoBehaviour {
 				sr.content = rt;
 				sr.verticalNormalizedPosition = 1f;
 
+				shownContentId = contentId;
 				currentContentId = contentId;
 			} else {
 				content[i].SetActive(false);
