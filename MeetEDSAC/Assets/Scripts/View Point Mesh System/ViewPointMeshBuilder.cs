@@ -24,6 +24,10 @@ public class ViewPointMeshBuilder : MonoBehaviour {
 	
 	public ViewPointMeshBuilder connectAnotherBuilderOnTheLeft;
 	public ViewPointMeshBuilder connectAnotherBuilderOnTheRight;
+	public ViewPointMeshBuilder lessZoomedBuilder;
+	public float entryByZoomFieldOfView = 0f;
+	public ViewPointMeshBuilder moreZoomedBuilder;
+	public float exitByZoomFieldOfView = 0f;
 
 	public InformationContent informationContent;
 
@@ -72,10 +76,7 @@ public class ViewPointMeshBuilder : MonoBehaviour {
 					builtMeshVertices[i,j].left = builtMeshVertices[i,j-1];
 					builtMeshVertices[i,j-1].right = builtMeshVertices[i,j];
 				}
-				if (associatedLabels != null) builtMeshVertices[i,j].associatedLabels = associatedLabels;
-				if (associatedLabelParent != null) builtMeshVertices[i,j].associatedLabelParent = associatedLabelParent;
-				builtMeshVertices[i,j].informationContent = informationContent;
-				builtMeshVertices[i,j].isCloseToObjects = isCloseToObjects;
+				SetVertexVariables(builtMeshVertices[i,j]);
 			}
 			if (loopAround) {
 				builtMeshVertices[i,0].left = builtMeshVertices[i,columns-1];
@@ -114,7 +115,17 @@ public class ViewPointMeshBuilder : MonoBehaviour {
 
 	}
 
-
+	public void SetVertexVariables(ViewPointMeshVertex target) {
+		if (associatedLabels != null) target.associatedLabels = associatedLabels;
+		if (associatedLabelParent != null) target.associatedLabelParent = associatedLabelParent;
+		target.informationContent = informationContent;
+		target.isCloseToObjects = isCloseToObjects;
+		target.lessZoomedBuilder = lessZoomedBuilder;
+		target.entryByZoomFieldOfView = entryByZoomFieldOfView;
+		target.moreZoomedBuilder = moreZoomedBuilder;
+		target.exitByZoomFieldOfView = exitByZoomFieldOfView;
+	}
+	
 	public void DrawGizmo(bool overrideVisualise = false) {
 
 		if (visualise || overrideVisualise) {
@@ -244,4 +255,33 @@ public class ViewPointMeshBuilder : MonoBehaviour {
 	public bool MeshIsBuilt() {
 		return meshBuilt;
 	}
+
+	public ViewPointMeshVertex ClosestMatch(ViewPointMeshVertex vert) {
+
+		ViewPointMeshVertex bestBet = vert;
+
+		/* camPositions are all relative to the transform of the mesh builder,
+		 * so do the opposite to the vertex that we are trying to find a close
+		 * match for
+		 */
+
+		Vector3 pos = vert.transform.position - transform.position;
+
+		if (meshBuilt) {
+			float bestDistance = 10000f;
+			float dis;
+			for (int i = 0; i < levels; i++) {
+				for (int j = 0; j < columns; j++) {
+					dis = (camPositions[i,j] - pos).magnitude;
+					if (dis < bestDistance) {
+						bestDistance = dis;
+						bestBet = builtMeshVertices[i,j];
+					}
+				}
+			}
+		}
+
+		return bestBet;
+	}
+
 }

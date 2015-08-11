@@ -13,6 +13,24 @@ public class ViewPointMeshVertex : MonoBehaviour {
 	public GameObject associatedLabelParent;
 	public bool isCloseToObjects;
 
+
+	/* These values are set as if we were zooming in, but apply for the opposite job
+	 * when zooming out. 0f suggests that there is no mesh to zoom in/out to.
+	 */
+
+	public float entryByZoomFieldOfView = 0f; 
+	// this is the field of view that we will adopt when we've entered because we zoomed too much
+
+	public float exitByZoomFieldOfView = 0f;
+	// this is the field of view value to exit at
+
+	public ViewPointMeshBuilder lessZoomedBuilder;
+	// this is what we come from for entryByZoomFieldOfView
+
+	public ViewPointMeshBuilder moreZoomedBuilder;
+	// this is what we come from for exitByZoomFieldOfView
+
+
 	//public Action SelectAction
 
 	void Start() {
@@ -41,6 +59,10 @@ public class ViewPointMeshVertex : MonoBehaviour {
 		if (down != null)
 			return down;
 		return this;
+	}
+
+	public ViewPointMeshVertex ClosestMatch(ViewPointMeshBuilder builder) {
+		return builder.ClosestMatch(this);
 	}
 
 }

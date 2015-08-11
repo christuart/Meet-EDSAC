@@ -1,43 +1,49 @@
 <?xml version="1.0"?>
 <EDSAC>
+<chassisdefinition>
+	<chassistype>01</chassistype>
+	<testingpoints>1</testingpoints>
+	<valve>
+		<valvetype>SmallRed</valvetype>
+		<valvex>0.1</valvex>
+		<valvey>0.3</valvey>
+	</valve>
+	<valve>
+		<valvetype>SmallRed</valvetype>
+		<valvex>0.3</valvex>
+		<valvey>0.3</valvey>
+	</valve>
+	<valve>
+		<valvetype>SmallRed</valvetype>
+		<valvex>0.5</valvex>
+		<valvey>0.3</valvey>
+	</valve>
+	<valve>
+		<valvetype>SmallRed</valvetype>
+		<valvex>0.1</valvex>
+		<valvey>0.7</valvey>
+	</valve>
+	<valve>
+		<valvetype>SmallRed</valvetype>
+		<valvex>0.3</valvex>
+		<valvey>0.7</valvey>
+	</valve>
+	<valve>
+		<valvetype>SmallRed</valvetype>
+		<valvex>0.5</valvex>
+		<valvey>0.7</valvey>
+	</valve>
+</chassisdefinition>
 <row>
 	<rowname>Rear</rowname>
 	<rack>
 		<racknumber>1</racknumber>
 		<chassis>
 			<chassisnumber>1</chassisnumber>
-			<chassisworldlabel>Generic Chassis 1/1</chassisworldlabel>
+			<chassisworldlabeltext>Generic Chassis</chassisworldlabeltext>
+			<chassisworldlabelnumber>1/1</chassisworldlabelnumber>
 			<chassisuilabel>Generic Chassis</chassisuilabel>
-			<valve>
-				<valvetype>SmallRed</valvetype>
-				<valvex>0.1</valvex>
-				<valvey>0.3</valvey>
-			</valve>
-			<valve>
-				<valvetype>SmallRed</valvetype>
-				<valvex>0.3</valvex>
-				<valvey>0.3</valvey>
-			</valve>
-			<valve>
-				<valvetype>SmallRed</valvetype>
-				<valvex>0.5</valvex>
-				<valvey>0.3</valvey>
-			</valve>
-			<valve>
-				<valvetype>SmallRed</valvetype>
-				<valvex>0.1</valvex>
-				<valvey>0.7</valvey>
-			</valve>
-			<valve>
-				<valvetype>SmallRed</valvetype>
-				<valvex>0.3</valvex>
-				<valvey>0.7</valvey>
-			</valve>
-			<valve>
-				<valvetype>SmallRed</valvetype>
-				<valvex>0.5</valvex>
-				<valvey>0.7</valvey>
-			</valve>
+			<chassistype>01</chassistype>
 		</chassis>
 	</rack>
 </row>
