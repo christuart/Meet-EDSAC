@@ -8,7 +8,7 @@ public class EdsacXmlPopulater : MonoBehaviour {
 	private TinyXmlReader reader;
 
 	// Use this for initialization
-	void Start () {
+	public EDSAC Populate() {
 		edsac = new EDSAC();
 		reader = new TinyXmlReader(edsacXml.text);
 		string readingDebugText = "Debug output from XML population:\n\n";
@@ -130,7 +130,7 @@ public class EdsacXmlPopulater : MonoBehaviour {
 														c.chassisNumber = int.Parse(reader.content);
 														readingDebugText += "Chassis number: " + c.chassisNumber + "\n";
 														break;
-													case "chassisworldlabel":
+													case "chassisworldlabeltext":
 														c.physicalLabelNameText = reader.content;
 														readingDebugText += "Chassis label text: " + c.physicalLabelNameText + "\n";
 														break;
@@ -143,7 +143,11 @@ public class EdsacXmlPopulater : MonoBehaviour {
 														readingDebugText += "Chassis UI label: " + c.uiLabelText + "\n";
 														break;
 													case "chassistype":
-														c.chassisType = edsac.availableChassisTypes[reader.content];
+														if (edsac.availableChassisTypes.ContainsKey(reader.content)) {
+															c.chassisType = edsac.availableChassisTypes[reader.content];
+														} else {
+															c.chassisType = new EDSAC.ChassisType();
+														}
 														readingDebugText += "Chassis type: " + reader.content + "\n";
 														break;
 													}
@@ -163,10 +167,7 @@ public class EdsacXmlPopulater : MonoBehaviour {
 			}
 		}
 		Debug.Log (readingDebugText);
+		return edsac;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <EDSAC>
 <chassisdefinition>
-	<chassistype>01</chassistype>
+	<chassistype>1</chassistype>
 	<testingpoints>1</testingpoints>
 	<valve>
-		<valvetype>BigFlat</valvetype>
+		<valvetype>BigShiny</valvetype>
 		<valvex>0.34</valvex>
 		<valvey>0.006</valvey>
 	</valve>
@@ -14,17 +14,17 @@
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigShiny</valvetype>
+		<valvetype>BigFlat</valvetype>
 		<valvex>0.236</valvex>
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigShiny</valvetype>
+		<valvetype>BigFlat</valvetype>
 		<valvex>0.184</valvex>
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigShiny</valvetype>
+		<valvetype>BigFlat</valvetype>
 		<valvex>0.132</valvex>
 		<valvey>0.006</valvey>
 	</valve>
@@ -44,7 +44,7 @@
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigShiny</valvetype>
+		<valvetype>BigFlat</valvetype>
 		<valvex>-0.076</valvex>
 		<valvey>0.006</valvey>
 	</valve>
@@ -59,12 +59,12 @@
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigFlat</valvetype>
+		<valvetype>BigShiny</valvetype>
 		<valvex>-0.232</valvex>
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigFlat</valvetype>
+		<valvetype>BigShiny</valvetype>
 		<valvex>-0.284</valvex>
 		<valvey>0.055</valvey>
 	</valve>
@@ -79,7 +79,7 @@
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallBlack</valvetype>
+		<valvetype>SmallRed</valvetype>
 		<valvex>0.158</valvex>
 		<valvey>0.055</valvey>
 	</valve>
@@ -89,17 +89,17 @@
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallBlack</valvetype>
+		<valvetype>SmallCream</valvetype>
 		<valvex>0.054</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallCream</valvetype>
+		<valvetype>SmallBlack</valvetype>
 		<valvex>0.002</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallRed</valvetype>
+		<valvetype>SmallCream</valvetype>
 		<valvex>-0.05</valvex>
 		<valvey>0.055</valvey>
 	</valve>
@@ -109,357 +109,433 @@
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallRed</valvetype>
+		<valvetype>SmallCream</valvetype>
 		<valvex>-0.154</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallCream</valvetype>
+		<valvetype>SmallRed</valvetype>
 		<valvex>-0.206</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallCream</valvetype>
+		<valvetype>SmallBlack</valvetype>
 		<valvex>-0.258</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 </chassisdefinition>
 <chassisdefinition>
-	<chassistype>02</chassistype>
+	<chassistype>2</chassistype>
 	<testingpoints>4</testingpoints>
-	<valve>
-		<valvetype>BigFlat</valvetype>
-		<valvex>0.34</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigShiny</valvetype>
-		<valvex>0.288</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigShiny</valvetype>
-		<valvex>0.236</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigShiny</valvetype>
-		<valvex>0.184</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigShiny</valvetype>
-		<valvex>0.132</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigShiny</valvetype>
-		<valvex>0.08</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigShiny</valvetype>
-		<valvex>0.028</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigFlat</valvetype>
-		<valvex>-0.024</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigShiny</valvetype>
-		<valvex>-0.076</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigFlat</valvetype>
-		<valvex>-0.128</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigFlat</valvetype>
-		<valvex>-0.18</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigFlat</valvetype>
-		<valvex>-0.232</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigFlat</valvetype>
-		<valvex>-0.284</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>BigFlat</valvetype>
-		<valvex>-0.336</valvex>
-		<valvey>0.006</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallRed</valvetype>
-		<valvex>0.21</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallCream</valvetype>
-		<valvex>0.158</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallRed</valvetype>
-		<valvex>0.106</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallRed</valvetype>
-		<valvex>0.054</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallCream</valvetype>
-		<valvex>0.002</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallRed</valvetype>
-		<valvex>-0.05</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallRed</valvetype>
-		<valvex>-0.102</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallRed</valvetype>
-		<valvex>-0.154</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallCream</valvetype>
-		<valvex>-0.206</valvex>
-		<valvey>0.055</valvey>
-	</valve>
-	<valve>
-		<valvetype>SmallCream</valvetype>
-		<valvex>-0.258</valvex>
-		<valvey>0.055</valvey>
-	</valve>
 </chassisdefinition>
 <row>
 	<rowname>Rear</rowname>
 	<rack>
 		<racknumber>1</racknumber>
 		<chassis>
-			<chassisnumber>1</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>1/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>2</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>2/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>3</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>3/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>4</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>4/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>5</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>5/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>6</chassisnumber>
-			<chassisworldlabeltext>Things</chassisworldlabeltext>
-			<chassisworldlabelnumber>xy</chassisworldlabelnumber>
-			<chassisuilabel>COINASDOINASD</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>7</chassisnumber>
-			<chassisworldlabeltext>a</chassisworldlabeltext>
-			<chassisworldlabelnumber>2</chassisworldlabelnumber>
-			<chassisuilabel>asondasd</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>8</chassisnumber>
-			<chassisworldlabeltext>b</chassisworldlabeltext>
-			<chassisworldlabelnumber>1</chassisworldlabelnumber>
-			<chassisuilabel></chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>9</chassisnumber>
-			<chassisworldlabeltext>s</chassisworldlabeltext>
-			<chassisworldlabelnumber>6</chassisworldlabelnumber>
-			<chassisuilabel></chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>10</chassisnumber>
-			<chassisworldlabeltext>c</chassisworldlabeltext>
-			<chassisworldlabelnumber>16</chassisworldlabelnumber>
-			<chassisuilabel>asdna</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>11</chassisnumber>
-			<chassisworldlabeltext>sad</chassisworldlabeltext>
-			<chassisworldlabelnumber>37</chassisworldlabelnumber>
-			<chassisuilabel>sdnas</chassisuilabel>
-			<chassistype>01</chassistype>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 		<chassis>
 			<chassisnumber>12</chassisnumber>
-			<chassisworldlabeltext>g</chassisworldlabeltext>
-			<chassisworldlabelnumber>3</chassisworldlabelnumber>
-			<chassisuilabel></chassisuilabel>
-			<chassistype>02</chassistype>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 		<chassis>
-			<chassisnumber>13</chassisnumber>
-			<chassisworldlabeltext>h</chassisworldlabeltext>
-			<chassisworldlabelnumber>1</chassisworldlabelnumber>
-			<chassisuilabel>ansdna</chassisuilabel>
-			<chassistype>01</chassistype>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 		<chassis>
-			<chassisnumber>14</chassisnumber>
-			<chassisworldlabeltext>ah</chassisworldlabeltext>
-			<chassisworldlabelnumber>7</chassisworldlabelnumber>
-			<chassisuilabel>as</chassisuilabel>
-			<chassistype>02</chassistype>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Final Tank Decoder</chassisuilabel>
+			<chassistype>4</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Decoder Distributor</chassisuilabel>
+			<chassistype>6</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Decoder Logic</chassisuilabel>
+			<chassistype>5</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Final Tank Decoder</chassisuilabel>
+			<chassistype>4</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 	</rack>
 	<rack>
 		<racknumber>2</racknumber>
 		<chassis>
-			<chassisnumber>1</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>1/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>2</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>2/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>3</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>3/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>4</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>4/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>5</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>5/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>6</chassisnumber>
-			<chassisworldlabeltext>Things</chassisworldlabeltext>
-			<chassisworldlabelnumber>xy</chassisworldlabelnumber>
-			<chassisuilabel>COINASDOINASD</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>7</chassisnumber>
-			<chassisworldlabeltext>a</chassisworldlabeltext>
-			<chassisworldlabelnumber>2</chassisworldlabelnumber>
-			<chassisuilabel>asondasd</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>8</chassisnumber>
-			<chassisworldlabeltext>b</chassisworldlabeltext>
-			<chassisworldlabelnumber>1</chassisworldlabelnumber>
-			<chassisuilabel></chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>9</chassisnumber>
-			<chassisworldlabeltext>s</chassisworldlabeltext>
-			<chassisworldlabelnumber>6</chassisworldlabelnumber>
-			<chassisuilabel></chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>10</chassisnumber>
-			<chassisworldlabeltext>c</chassisworldlabeltext>
-			<chassisworldlabelnumber>16</chassisworldlabelnumber>
-			<chassisuilabel>asdna</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>11</chassisnumber>
-			<chassisworldlabeltext>sad</chassisworldlabeltext>
-			<chassisworldlabelnumber>37</chassisworldlabelnumber>
-			<chassisuilabel>sdnas</chassisuilabel>
-			<chassistype>01</chassistype>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 		<chassis>
 			<chassisnumber>12</chassisnumber>
-			<chassisworldlabeltext>g</chassisworldlabeltext>
-			<chassisworldlabelnumber>3</chassisworldlabelnumber>
-			<chassisuilabel></chassisuilabel>
-			<chassistype>02</chassistype>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 		<chassis>
-			<chassisnumber>13</chassisnumber>
-			<chassisworldlabeltext>h</chassisworldlabeltext>
-			<chassisworldlabelnumber>1</chassisworldlabelnumber>
-			<chassisuilabel>ansdna</chassisuilabel>
-			<chassistype>01</chassistype>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 		<chassis>
-			<chassisnumber>14</chassisnumber>
-			<chassisworldlabeltext>ah</chassisworldlabeltext>
-			<chassisworldlabelnumber>7</chassisworldlabelnumber>
-			<chassisuilabel>as</chassisuilabel>
-			<chassistype>02</chassistype>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Final Tank Decoder</chassisuilabel>
+			<chassistype>4</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Decoder Distributor</chassisuilabel>
+			<chassistype>6</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Decoder Logic</chassisuilabel>
+			<chassistype>5</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Final Tank Decoder</chassisuilabel>
+			<chassistype>4</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 	</rack>
 	<rack>
 		<racknumber>3</racknumber>
+		<chassis>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel X</chassisuilabel>
+			<chassistype>33</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>12</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel X and VI</chassisuilabel>
+			<chassistype>32</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Partial Product Adder</chassisuilabel>
+			<chassistype>26</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Complementer Unit</chassisuilabel>
+			<chassistype>27</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Collater Unit</chassisuilabel>
+			<chassistype>28</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Distributing Unit 3</chassisuilabel>
+			<chassistype>29</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Half Adder 2</chassisuilabel>
+			<chassistype>7</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Half Adder 1</chassisuilabel>
+			<chassistype>7</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Accumulator Tank 2 Regen</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Accumulator Tank 1 Regen</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>ASU 1</chassisuilabel>
+			<chassistype>16</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>ASU 2</chassisuilabel>
+			<chassistype>17</chassistype>
+		</chassis>
 	</rack>
 	<rack>
 		<racknumber>4</racknumber>
+		<chassis>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Multiplier Logic</chassisuilabel>
+			<chassistype>37</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>12</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Multiplier Tank Regen</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Multiplicand Shifting Unit</chassisuilabel>
+			<chassistype>36</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Multiplicand Tank Regen</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Digit Pulse Distributor Unit</chassisuilabel>
+			<chassistype>47</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel IV</chassisuilabel>
+			<chassistype>34</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>TCT Regen</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>TCT Shifting Control</chassisuilabel>
+			<chassistype>35</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel II</chassisuilabel>
+			<chassistype>52</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Accumulator Testing Unit</chassisuilabel>
+			<chassistype>49</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel VI</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel III</chassisuilabel>
+			<chassistype>53</chassistype>
+		</chassis>
 	</rack>
 	<rack>
 		<racknumber>5</racknumber>
+		<chassis>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Buffers ?</chassisuilabel>
+			<chassistype>50</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>12</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Maintenance Panel</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel VII</chassisuilabel>
+			<chassistype>57</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel I</chassisuilabel>
+			<chassistype>51</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel VIII</chassisuilabel>
+			<chassistype>58</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel V</chassisuilabel>
+			<chassistype>55</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel IX</chassisuilabel>
+			<chassistype>59</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>CCU Panel XI</chassisuilabel>
+			<chassistype>61</chassistype>
+		</chassis>
 	</rack>
 </row>
 <row>
@@ -467,124 +543,607 @@
 	<rack>
 		<racknumber>1</racknumber>
 		<chassis>
-			<chassisnumber>1</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>1/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>2</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>2/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>3</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>3/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>4</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>4/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>5</chassisnumber>
-			<chassisworldlabeltext>Memory Unit</chassisworldlabeltext>
-			<chassisworldlabelnumber>5/5</chassisworldlabelnumber>
-			<chassisuilabel>Storage Regeneration Unit</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>6</chassisnumber>
-			<chassisworldlabeltext>Things</chassisworldlabeltext>
-			<chassisworldlabelnumber>xy</chassisworldlabelnumber>
-			<chassisuilabel>COINASDOINASD</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>7</chassisnumber>
-			<chassisworldlabeltext>a</chassisworldlabeltext>
-			<chassisworldlabelnumber>2</chassisworldlabelnumber>
-			<chassisuilabel>asondasd</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>8</chassisnumber>
-			<chassisworldlabeltext>b</chassisworldlabeltext>
-			<chassisworldlabelnumber>1</chassisworldlabelnumber>
-			<chassisuilabel></chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>9</chassisnumber>
-			<chassisworldlabeltext>s</chassisworldlabeltext>
-			<chassisworldlabelnumber>6</chassisworldlabelnumber>
-			<chassisuilabel></chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>10</chassisnumber>
-			<chassisworldlabeltext>c</chassisworldlabeltext>
-			<chassisworldlabelnumber>16</chassisworldlabelnumber>
-			<chassisuilabel>asdna</chassisuilabel>
-			<chassistype>02</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>11</chassisnumber>
-			<chassisworldlabeltext>sad</chassisworldlabeltext>
-			<chassisworldlabelnumber>37</chassisworldlabelnumber>
-			<chassisuilabel>sdnas</chassisuilabel>
-			<chassistype>01</chassistype>
-		</chassis>
-		<chassis>
-			<chassisnumber>12</chassisnumber>
-			<chassisworldlabeltext>g</chassisworldlabeltext>
-			<chassisworldlabelnumber>3</chassisworldlabelnumber>
-			<chassisuilabel></chassisuilabel>
-			<chassistype>02</chassistype>
+			<chassisnumber>14</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Counter Tank Regen</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 		<chassis>
 			<chassisnumber>13</chassisnumber>
-			<chassisworldlabeltext>h</chassisworldlabeltext>
-			<chassisworldlabelnumber>1</chassisworldlabelnumber>
-			<chassisuilabel>ansdna</chassisuilabel>
-			<chassistype>01</chassistype>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Sequence Control Tank Regen</chassisuilabel>
+			<chassistype>1</chassistype>
 		</chassis>
 		<chassis>
-			<chassisnumber>14</chassisnumber>
-			<chassisworldlabeltext>ah</chassisworldlabeltext>
-			<chassisworldlabelnumber>7</chassisworldlabelnumber>
-			<chassisuilabel>as</chassisuilabel>
-			<chassistype>02</chassistype>
+			<chassisnumber>12</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Tank Regen</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Coincidence Unit 3</chassisuilabel>
+			<chassistype>13</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Counter Half Adder</chassisuilabel>
+			<chassistype>7</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>SCT Half Adder</chassisuilabel>
+			<chassistype>7</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Tank Control</chassisuilabel>
+			<chassistype>46</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Counter + SCT Control</chassisuilabel>
+			<chassistype>41</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Coincidence Unit 1</chassisuilabel>
+			<chassistype>11</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Coincidence Unit 2</chassisuilabel>
+			<chassistype>12</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Main Control Unit 1 M-1</chassisuilabel>
+			<chassistype>43</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Main Control Unit 3 M-3</chassisuilabel>
+			<chassistype>45</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Main Control Unit 2 M-2</chassisuilabel>
+			<chassistype>44</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>1</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Power Supply Unit</chassisuilabel>
+			<chassistype>38</chassistype>
 		</chassis>
 	</rack>
 	<rack>
 		<racknumber>2</racknumber>
+		<chassis>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Transfer Tank Regen</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>12</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Transfer Unit 1</chassisuilabel>
+			<chassistype>42</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Transfer Unit 2</chassisuilabel>
+			<chassistype>40</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Coder Unit Type 1 E-1</chassisuilabel>
+			<chassistype>24</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Coder Unit Type 2 E-2</chassisuilabel>
+			<chassistype>25</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Distributer Unit D-1</chassisuilabel>
+			<chassistype>21</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Secondary Decoder Type 1 C-1</chassisuilabel>
+			<chassistype>22</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Secondary Decoder Type 2 C-2</chassisuilabel>
+			<chassistype>23</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Distributer Unit D-2</chassisuilabel>
+			<chassistype>21</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Secondary Decoder Type 1 C-3</chassisuilabel>
+			<chassistype>22</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Secondary Decoder Type 1 C-4</chassisuilabel>
+			<chassistype>22</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>1</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Power Supply Unit</chassisuilabel>
+			<chassistype>38</chassistype>
+		</chassis>
 	</rack>
 	<rack>
 		<racknumber>3</racknumber>
+		<chassis>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Rack Decoder</chassisuilabel>
+			<chassistype>14</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>12</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Rack Distribution Logic</chassisuilabel>
+			<chassistype>10</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Flashing Unit Controls</chassisuilabel>
+			<chassistype>9</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Flashing Unit</chassisuilabel>
+			<chassistype>8</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Flashing Unit</chassisuilabel>
+			<chassistype>8</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Flashing Unit</chassisuilabel>
+			<chassistype>8</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Operator's Control Unit</chassisuilabel>
+			<chassistype>48</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Primary Decoder B-1</chassisuilabel>
+			<chassistype>20</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Flashing Unit Type 1 A-1</chassisuilabel>
+			<chassistype>18</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Flashing Unit Type 2 A-2</chassisuilabel>
+			<chassistype>19</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Order Flashing Unit Type 2 A-3</chassisuilabel>
+			<chassistype>19</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>1</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Power Supply Unit</chassisuilabel>
+			<chassistype>38</chassistype>
+		</chassis>
 	</rack>
 </row>
 <row>
 	<rowname>Front</rowname>
 	<rack>
 		<racknumber>1</racknumber>
+		<chassis>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>12</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Final Tank Decoder</chassisuilabel>
+			<chassistype>4</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Decoder Distributor</chassisuilabel>
+			<chassistype>6</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Decoder Logic</chassisuilabel>
+			<chassistype>5</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Final Tank Decoder</chassisuilabel>
+			<chassistype>4</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
 	</rack>
 	<rack>
 		<racknumber>2</racknumber>
+		<chassis>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>12</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Final Tank Decoder</chassisuilabel>
+			<chassistype>4</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Decoder Distributor</chassisuilabel>
+			<chassistype>6</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Tank Decoder Logic</chassisuilabel>
+			<chassistype>5</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Final Tank Decoder</chassisuilabel>
+			<chassistype>4</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Store Regeneration Unit</chassisuilabel>
+			<chassistype>1</chassistype>
+		</chassis>
 	</rack>
 	<rack>
 		<racknumber>3</racknumber>
+		<chassis>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Clock Monitor</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>12</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Clock Pulse Generator</chassisuilabel>
+			<chassistype>2</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Clock Pulse Distributor (DU1)</chassisuilabel>
+			<chassistype>30</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Digit Pulse Distributor (DU2)</chassisuilabel>
+			<chassistype>31</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Digit Pulse Generator Type 2</chassisuilabel>
+			<chassistype>15</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Digit Pulse Generator Type 2</chassisuilabel>
+			<chassistype>15</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Digit Pulse Generator Type 1</chassisuilabel>
+			<chassistype>3</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Digit Pulse Generator Type 1</chassisuilabel>
+			<chassistype>3</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Digit Pulse Generator Type 1</chassisuilabel>
+			<chassistype>3</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>3</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Digit Pulse Generator Type 1</chassisuilabel>
+			<chassistype>3</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>2</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Digit Pulse Generator Type 1</chassisuilabel>
+			<chassistype>3</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>1</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Negative PSU</chassisuilabel>
+			<chassistype>38</chassistype>
+		</chassis>
 	</rack>
 	<rack>
 		<racknumber>4</racknumber>
+		<chassis>
+			<chassisnumber>13</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Initial Orders Uniselectors</chassisuilabel>
+			<chassistype>39</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>11</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Initial Input Unit 1</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>10</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Initial Input Unit 2</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>9</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Manual Order Unit</chassisuilabel>
+			<chassistype>54</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>8</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Paper Tape Unit 1</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>7</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Paper Tape Unit 2</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>6</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Printer Unit 1</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>5</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Printer Unit 2</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
+		<chassis>
+			<chassisnumber>4</chassisnumber>
+			<chassisworldlabeltext></chassisworldlabeltext>
+			<chassisworldlabelnumber></chassisworldlabelnumber>
+			<chassisuilabel>Printer Unit 3</chassisuilabel>
+			<chassistype>??</chassistype>
+		</chassis>
 	</rack>
 </row>
 </EDSAC>

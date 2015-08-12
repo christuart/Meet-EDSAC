@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\Visuals\LabelController.cs" />
      <Compile Include="Assets\Scripts\Visuals\ZoomSettings.cs" />
      <Compile Include="Assets\Scripts\XML import\EDSAC.cs" />
+     <Compile Include="Assets\Scripts\XML import\EdsacXmlGenerator.cs" />
      <Compile Include="Assets\Scripts\XML import\EdsacXmlPopulater.cs" />
      <Compile Include="Assets\Scripts\XML import\TinyXmlReader.cs" />
      <Compile Include="Assets\Scripts\setup_rack.cs" />
@@ -107,6 +108,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderYUV.shader" />
+     <None Include="Assets\_Content\generated EDSAC.xml" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CreaseApply.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\GlobalFog.shader" />

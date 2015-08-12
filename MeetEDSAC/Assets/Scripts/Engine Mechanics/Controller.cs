@@ -18,6 +18,9 @@
  * 		Assign info content to mesh builders
  * 		Assign labels to mesh builders
  * 		Generate meshes and copypaste to Editor
+ * 		REMOVE the associated label parents from
+ *	 		mesh vertices because otherwise they
+ *			will overwrite your allocated labels
  * 
  * Connect meshes together using the zoom model
  * 
@@ -59,10 +62,12 @@ public class Controller : MonoBehaviour {
 					infoHolder.PlaceObjectInInfoUI(activeVertex.informationContent);
 				}
 			}
-			foreach (LabelController lc in GameObject.FindObjectsOfType<LabelController>())
+			foreach (LabelController lc in GameObject.FindObjectsOfType<LabelController>()) {
 				lc.Deactivate();
-			foreach (LabelController lc in activeVertex.associatedLabels)
+			}
+			foreach (LabelController lc in activeVertex.associatedLabels) {
 				lc.Activate();
+			}
 			
 			OnAfterChangeVertex();
 
