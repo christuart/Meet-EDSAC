@@ -5,6 +5,7 @@ public enum FakeGestures { LEFT_SWIPE, RIGHT_SWIPE, UP_SWIPE, DOWN_SWIPE, STRETC
 
 public class GestureInfoInterpreter : MonoBehaviour {
 
+	public MyGestureListener gestureListener;
 	public uint userId;
 
 	public FakeGestures[] gesturesBeingRead;
@@ -130,9 +131,17 @@ public class GestureInfoInterpreter : MonoBehaviour {
 		// some fakery
 		switch(gesture) {
 		case FakeGestures.LEFT_SWIPE:
-			return Input.GetKey(KeyCode.D);
+			return gestureListener.IsGestureActive(KinectGestures.Gestures.SwipeLeft);
 		case FakeGestures.RIGHT_SWIPE:
-			return Input.GetKey(KeyCode.A);
+			return gestureListener.IsGestureActive(KinectGestures.Gestures.SwipeRight);
+		case FakeGestures.UP_SWIPE:
+			return gestureListener.IsGestureActive(KinectGestures.Gestures.SwipeUp);
+		case FakeGestures.DOWN_SWIPE:
+			return gestureListener.IsGestureActive(KinectGestures.Gestures.SwipeDown);
+		case FakeGestures.STRETCH:
+			return gestureListener.IsGestureActive(KinectGestures.Gestures.ZoomIn);
+		case FakeGestures.SQUASH:
+			return gestureListener.IsGestureActive(KinectGestures.Gestures.ZoomOut);
 		default:
 			return false;
 		}
