@@ -79,7 +79,7 @@
      <Compile Include="Assets\Scripts\Engine Mechanics\InfoHolderController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InspectionPointController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InspectorController.cs" />
-     <Compile Include="Assets\Scripts\Engine Mechanics\MyGestureListener.cs" />
+     <Compile Include="Assets\Scripts\Engine Mechanics\MyKinectListener.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\SimpleGalleryController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\WorldSpaceCanvasHinge.cs" />
      <Compile Include="Assets\Scripts\Graphics\CameraFacingBillboard.cs" />
@@ -93,6 +93,7 @@
      <Compile Include="Assets\Scripts\View Point Mesh System\ViewPointMeshCameraController.cs" />
      <Compile Include="Assets\Scripts\View Point Mesh System\ViewPointMeshVertex.cs" />
      <Compile Include="Assets\Scripts\Visuals\CameraZoomController.cs" />
+     <Compile Include="Assets\Scripts\Visuals\HingeButtonController.cs" />
      <Compile Include="Assets\Scripts\Visuals\KinectFeedbackController.cs" />
      <Compile Include="Assets\Scripts\Visuals\KinectFeedbackItemController.cs" />
      <Compile Include="Assets\Scripts\Visuals\LabelAlignmentOnChassis.cs" />

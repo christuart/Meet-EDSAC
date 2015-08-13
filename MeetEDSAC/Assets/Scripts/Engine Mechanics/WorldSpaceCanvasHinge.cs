@@ -25,4 +25,7 @@ public class WorldSpaceCanvasHinge : MonoBehaviour {
 	public void MoveHingeOut() {
 		SetHinge (1.0f);
 	}
+	public void ToggleHinge() {
+		target = (target >= 0.5f) ? 0.0f : 1.0f;
+	}
 }

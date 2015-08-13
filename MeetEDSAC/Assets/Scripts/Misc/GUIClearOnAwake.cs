@@ -3,10 +3,10 @@ using System.Collections;
 
 public class GUIClearOnAwake : MonoBehaviour {
 
-	public GUIText guiText;
+	public GUIText GUITextComponent;
 
 	void Awake() {
-		if (guiText != null) guiText.text = "";
+		if (GUITextComponent != null) GUITextComponent.text = "";
 		Destroy(this);
 	}
 }

@@ -5,8 +5,41 @@ using System.Collections.Generic;
 public class KinectFeedbackController : MonoBehaviour {
 
 	public static string[] messages = new string[] {
-		"This is a message.",
-		"This aint a message." };
+		"Swipe Left",
+		"Swipe Right",
+		"Swipe Up",
+		"Swipe Down",
+		"Zoom In",
+		"Zoom Out",
+		"Grab",
+		"A maximum of two users is allowed.",
+		"Single user Kinect mode activated.",
+		"Dual user Kinect mode activated.",
+		"User 1 left. Single user mode activated for user 2.",
+		"User 2 left. Single user mode activated for user 1.",
+		"No users. Kinect mode deactivated.",
+		"Unexpected 'user left' event! Who were you..."
+	};
+
+	#region MESSAGE-IDS
+	public static Dictionary<EdsacGestures,int> gestureMessageIds = new Dictionary<EdsacGestures, int>() {
+		{EdsacGestures.LEFT_SWIPE, 0},
+		{EdsacGestures.RIGHT_SWIPE, 1},
+		{EdsacGestures.UP_SWIPE, 2},
+		{EdsacGestures.DOWN_SWIPE, 3},
+		{EdsacGestures.STRETCH, 4},
+		{EdsacGestures.SQUASH, 5},
+		{EdsacGestures.SELECT, 6}
+	};
+	public static int TOO_MANY_PLAYERS = 7;
+	public static int SINGLE_PLAYER = 8;
+	public static int TWO_PLAYERS = 9;
+	public static int PLAYER_ONE_LEFT = 10;
+	public static int PLAYER_TWO_LEFT = 11;
+	public static int LAST_PLAYER_LEFT = 12;
+	public static int UNKNOWN_PLAYER_LEFT = 13;
+	#endregion MESSAGE-IDS
+
 	public GameObject prefab;
 	public float startWidth = 500f;
 	public float height = 35f;

@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum FakeGestures { LEFT_SWIPE, RIGHT_SWIPE, UP_SWIPE, DOWN_SWIPE, STRETCH, SQUASH, SELECT };
+public enum EdsacGestures { LEFT_SWIPE, RIGHT_SWIPE, UP_SWIPE, DOWN_SWIPE, STRETCH, SQUASH, SELECT };
 
 public class GestureInfoInterpreter : MonoBehaviour {
 
-	public MyGestureListener gestureListener;
+	public MyKinectListener kinectListener;
+	public KinectFeedbackController feedbackController;
 	public uint userId;
 
-	public FakeGestures[] gesturesBeingRead;
+	public EdsacGestures[] gesturesBeingRead;
 
 	public float[] gestureContinuousTime;
 	public float[] gestureRepeatGap;
@@ -28,16 +29,16 @@ public class GestureInfoInterpreter : MonoBehaviour {
 
 	private int gesturesCount;
 	
-	public bool GetGestureTriggered(FakeGestures gesture) {
+	public bool GetGestureTriggered(EdsacGestures gesture) {
 		return gestureSwitchedOn[(int)gesture];
 	}
-	public bool GetGestureToggled(FakeGestures gesture) {
+	public bool GetGestureToggled(EdsacGestures gesture) {
 		return gestureSwitchedOn[(int)gesture] || gestureSwitchedOff[(int)gesture];
 	}
-	public bool GetGestureEnded(FakeGestures gesture) {
+	public bool GetGestureEnded(EdsacGestures gesture) {
 		return gestureSwitchedOff[(int)gesture];
 	}
-	public bool GetGestureHappening(FakeGestures gesture) {
+	public bool GetGestureHappening(EdsacGestures gesture) {
 		return gestureTogglePositive[(int)gesture];
 	}
 
@@ -51,8 +52,8 @@ public class GestureInfoInterpreter : MonoBehaviour {
 		gestureSwitchedOn = new bool[gesturesCount];
 		gestureSwitchedOff = new bool[gesturesCount];
 
-		mappedGestureContinuousTime = new float[System.Enum.GetValues (typeof(FakeGestures)).Length];
-		mappedGestureRepeatGap = new float[System.Enum.GetValues (typeof(FakeGestures)).Length];
+		mappedGestureContinuousTime = new float[System.Enum.GetValues (typeof(EdsacGestures)).Length];
+		mappedGestureRepeatGap = new float[System.Enum.GetValues (typeof(EdsacGestures)).Length];
 		
 		gestureLastOn = new float[gesturesCount];
 		gestureLastSwitchedOn = new float[gesturesCount];
@@ -87,7 +88,7 @@ public class GestureInfoInterpreter : MonoBehaviour {
 		// for now, there are just no real gestures happening EVER
 
 		for (int i=0; i < gesturesBeingRead.Length; i++) {
-			FakeGestures gesture = gesturesBeingRead[i];
+			EdsacGestures gesture = gesturesBeingRead[i];
 			// GestureData data = ReadRawGestureInfo(gesture);
 			gestureOn[i] = ReadRawGestureInfo(gesture);
 			//Debug.Log ("checking gesture #" + i);
@@ -99,49 +100,57 @@ public class GestureInfoInterpreter : MonoBehaviour {
 					//Debug.Log ("gesture wasn't previously on");
 					if (gestureRepeatGap[i] > 0) {
 						if (Time.time - gestureLastSwitchedOff[i] > gestureRepeatGap[i]) {
-							gestureSwitchedOn[i] = true;
-							gestureTogglePositive[i] = true;
-							gestureLastSwitchedOn[i] = Time.time;
+							GestureSwitchOn(i);
 						}
 					} else {
-						gestureSwitchedOn[i] = true;
-						gestureTogglePositive[i] = true;
-						gestureLastSwitchedOn[i] = Time.time;
+						GestureSwitchOn(i);
 					}
 				} else if (gestureTogglePositive[i] && gestureContinuousTime[i] > 0) {
 					//Debug.Log ("gesture was previously on and continuous repeat is activated");
 					if (Time.time - gestureLastSwitchedOn[i] > gestureContinuousTime[i]) {
 						//Debug.Log ("Continuous repeat condition met, so 'switched on'");
-						gestureSwitchedOn[i] = true;
-						gestureTogglePositive[i] = true;
-						gestureLastSwitchedOn[i] = Time.time;
+						GestureSwitchOn(i);
 					}
 				}
 			} else if (gestureTogglePositive[i]) {
 				//Debug.Log ("gesture is off, used to be on, so 'switched off'");
-				gestureSwitchedOff[i] = true;
-				gestureLastSwitchedOff[i] = Time.time;
-				gestureTogglePositive[i] = false;
+				GestureSwitchOff(i);
 			}
 		}
 
 	}
+	
+	private void GestureSwitchOn(int i) {
+		gestureSwitchedOn[i] = true;
+		gestureLastSwitchedOn[i] = Time.time;
+		GestureTogglePositive(i, true);
+		feedbackController.AddItem(KinectFeedbackController.gestureMessageIds[gesturesBeingRead[i]]);
+	}
+	private void GestureSwitchOff(int i) {
+		gestureSwitchedOff[i] = true;
+		gestureLastSwitchedOff[i] = Time.time;
+		GestureTogglePositive(i, false);
+	}
+	private void GestureTogglePositive(int i, bool positive = true) {
+		gestureTogglePositive[i] = positive;
+	}
 
-	private bool ReadRawGestureInfo(FakeGestures gesture) {
+
+	private bool ReadRawGestureInfo(EdsacGestures gesture) {
 		// some fakery
 		switch(gesture) {
-		case FakeGestures.LEFT_SWIPE:
-			return gestureListener.IsGestureActive(KinectGestures.Gestures.SwipeLeft);
-		case FakeGestures.RIGHT_SWIPE:
-			return gestureListener.IsGestureActive(KinectGestures.Gestures.SwipeRight);
-		case FakeGestures.UP_SWIPE:
-			return gestureListener.IsGestureActive(KinectGestures.Gestures.SwipeUp);
-		case FakeGestures.DOWN_SWIPE:
-			return gestureListener.IsGestureActive(KinectGestures.Gestures.SwipeDown);
-		case FakeGestures.STRETCH:
-			return gestureListener.IsGestureActive(KinectGestures.Gestures.ZoomIn);
-		case FakeGestures.SQUASH:
-			return gestureListener.IsGestureActive(KinectGestures.Gestures.ZoomOut);
+		case EdsacGestures.LEFT_SWIPE:
+			return kinectListener.IsGestureActive(KinectGestures.Gestures.SwipeLeft);
+		case EdsacGestures.RIGHT_SWIPE:
+			return kinectListener.IsGestureActive(KinectGestures.Gestures.SwipeRight);
+		case EdsacGestures.UP_SWIPE:
+			return kinectListener.IsGestureActive(KinectGestures.Gestures.SwipeUp);
+		case EdsacGestures.DOWN_SWIPE:
+			return kinectListener.IsGestureActive(KinectGestures.Gestures.SwipeDown);
+		case EdsacGestures.STRETCH:
+			return kinectListener.IsGestureActive(KinectGestures.Gestures.ZoomIn);
+		case EdsacGestures.SQUASH:
+			return kinectListener.IsGestureActive(KinectGestures.Gestures.ZoomOut);
 		default:
 			return false;
 		}
