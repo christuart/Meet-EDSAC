@@ -142,7 +142,7 @@ public class Controller : MonoBehaviour {
 
 		if (sendFace) {
 			faceTrack = FacetrackingManager.Instance;
-			engagementController.SetSingleEngagementInput (Mathf.Lerp(-1f,1f,0.5f+faceTrack.GetHeadRotation(false).eulerAngles.y/150f));
+			engagementController.SetSingleEngagementInput (Mathf.Lerp(-1f,1f,0.5f+faceTrack.GetHeadRotation(false).eulerAngles.y/60f));
 		}
 
 	}

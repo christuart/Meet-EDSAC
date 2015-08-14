@@ -82,17 +82,20 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		if (users == 2) {
 			if (userId == firstUserId) {
 				ClearUser(userId);
+				users--;
 				firstUserId = secondUserId;
 				kinectFeedback.AddItem(KinectFeedbackController.PLAYER_ONE_LEFT);
 				return;
 			} else if (userId == secondUserId) {
 				ClearUser(userId);
+				users--;
 				kinectFeedback.AddItem(KinectFeedbackController.PLAYER_TWO_LEFT);
 				return;
 			}
 		} else if (users == 1) {
 			if (userId == firstUserId) {
 				ClearUser(userId);
+				users--;
 				kinectFeedback.AddItem(KinectFeedbackController.LAST_PLAYER_LEFT);
 				return;
 			}
@@ -148,6 +151,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		// every update, reset gestures to 'not occurring', then check if that's correct
 
 		if (users > 0) {
+			Debug.Log ("Looking for first user");
 			ResetGestureStates(firstUserId);
 			// reset gestures to not occurring
 			CheckZooming(firstUserId);
@@ -157,6 +161,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		}
 		// repeat for second user
 		if (users > 1) {
+			Debug.Log ("Looking for second user");
 			ResetGestureStates(secondUserId);
 			CheckZooming(secondUserId);
 			UpdateGestureStates(secondUserId);
