@@ -40,8 +40,14 @@ public class Controller : MonoBehaviour {
 	public InfoHolderController infoHolder;
 	public InspectorController inspector;
 
+	public ScreenEngagementFeedbackController engagementController;
+
+	private FacetrackingManager faceTrack;
+
 	private ViewPointMeshVertex activeVertex;
 	private Queue vertexTargets;
+
+	public bool sendFace = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -109,6 +115,36 @@ public class Controller : MonoBehaviour {
 			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KINECT);
 			OnZoomOut();
 		}
+		if (Input.GetKeyDown(KeyCode.V)) {
+			engagementController.UseSingleEngagementRegion(true);
+			sendFace = false;
+			engagementController.SetPanelEngaged(true);
+		}
+		if (Input.GetKeyDown(KeyCode.B)) {
+			engagementController.UseSingleEngagementRegion(true);
+			sendFace = false;
+			engagementController.SetModelEngaged();
+		}
+		if (Input.GetKeyDown(KeyCode.N)) {
+			engagementController.UseSingleEngagementRegion(true);
+			sendFace = false;
+			engagementController.SetPanelEngaged(false);
+		}
+		if (Input.GetKeyDown(KeyCode.U)) {
+			engagementController.UseSingleEngagementRegion(false);
+			sendFace = false;
+			engagementController.SetNeutral();
+		}
+		if (Input.GetKeyDown(KeyCode.F)) {
+			engagementController.UseSingleEngagementRegion(true);
+			sendFace = true;
+		}
+
+		if (sendFace) {
+			faceTrack = FacetrackingManager.Instance;
+			engagementController.SetSingleEngagementInput (Mathf.Lerp(-1f,1f,0.5f+faceTrack.GetHeadRotation(false).eulerAngles.y/150f));
+		}
+
 	}
 	
 	/************************************************
@@ -152,6 +188,28 @@ public class Controller : MonoBehaviour {
 			// REMEMEMEMEMEMEBERRR ActivateVertex *QUEUES* the activation of another vertex, so activeVertex hasn't changed yet for next line
 			cameraZoom.SetZoom(nextVertex.exitByZoomFieldOfView); // rememeber, naming is set for zooming in, so zoomout must use exit when it enters
 		}
+	}
+	public void OnHingeOut(bool leftHandHinge) {
+		if (leftHandHinge) {
+			OnInfoHingeOut();
+		} else {
+			OnInspectorHingeOut();
+		}
+	}
+	public void OnInfoHingeOut() {
+	}
+	public void OnInspectorHingeOut() {
+	}
+	public void OnHingeAway(bool leftHandHinge) {
+		if (leftHandHinge) {
+			OnInfoHingeAway();
+		} else {
+			OnInspectorHingeAway();
+		}
+	}
+	public void OnInfoHingeAway() {
+	}
+	public void OnInspectorHingeAway() {
 	}
 
 	

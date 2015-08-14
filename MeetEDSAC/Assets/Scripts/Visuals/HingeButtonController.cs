@@ -3,6 +3,7 @@ using System.Collections;
 
 public class HingeButtonController : MonoBehaviour {
 
+	public Controller controller;
 	public WorldSpaceCanvasHinge hinge;
 
 	public bool hingeOut = true;
@@ -53,11 +54,13 @@ public class HingeButtonController : MonoBehaviour {
 			hinge.MoveHingeAway();
 			transform.eulerAngles = leftHandHinge ? new Vector3(0f,0f, -180f) : Vector3.zero;
 			targetRotation = leftHandHinge ? 0f : 180f;
+			controller.OnHingeAway(leftHandHinge);
 		} else {
 			hingeOut = true;
 			hinge.MoveHingeOut();
 			transform.eulerAngles = leftHandHinge ? Vector3.zero : new Vector3(0f,0f, -180f);
 			targetRotation = leftHandHinge ? 180f : 0f;
+			controller.OnHingeOut(leftHandHinge);
 		}
 	}
 }
