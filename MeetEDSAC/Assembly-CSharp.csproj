@@ -76,10 +76,10 @@
      <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
      <Compile Include="Assets\ScreenEngagementFeedbackController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\Controller.cs" />
-     <Compile Include="Assets\Scripts\Engine Mechanics\GestureInfoInterpreter.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InfoHolderController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InspectionPointController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InspectorController.cs" />
+     <Compile Include="Assets\Scripts\Engine Mechanics\KinectInfoInterpreter.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\MyKinectListener.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\SimpleGalleryController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\WorldSpaceCanvasHinge.cs" />
@@ -204,10 +204,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="OpenCvSharp">
- <HintPath>C:/Users/chris_000/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/OpenCV/OpenCvSharp.dll</HintPath>
+ <HintPath>C:/Users/cis24/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/OpenCV/OpenCvSharp.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>C:/Users/chris_000/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
+ <HintPath>C:/Users/cis24/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

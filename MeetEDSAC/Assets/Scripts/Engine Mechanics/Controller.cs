@@ -31,7 +31,7 @@ using System.Collections;
 
 public class Controller : MonoBehaviour {
 
-	public GestureInfoInterpreter firstPlayerGestures;
+	public KinectInfoInterpreter firstPlayerKinectInput;
 
 	public ViewPointMeshCameraController meshSystemCameraController;
 
@@ -79,16 +79,16 @@ public class Controller : MonoBehaviour {
 
 		}
 
-		if (Input.GetKeyDown(KeyCode.D) || firstPlayerGestures.GetGestureTriggered(EdsacGestures.LEFT_SWIPE)) {
+		if (Input.GetKeyDown(KeyCode.D) || firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.LEFT_SWIPE)) {
 			OnPanRight();
 		}
-		if (Input.GetKeyDown(KeyCode.A) || firstPlayerGestures.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
+		if (Input.GetKeyDown(KeyCode.A) || firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
 			OnPanLeft();
 		}
-		if (Input.GetKeyDown(KeyCode.W) || firstPlayerGestures.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {
+		if (Input.GetKeyDown(KeyCode.W) || firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {
 			OnPanUp();
 		}
-		if (Input.GetKeyDown(KeyCode.S) || firstPlayerGestures.GetGestureTriggered(EdsacGestures.UP_SWIPE)) {
+		if (Input.GetKeyDown(KeyCode.S) || firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.UP_SWIPE)) {
 			OnPanDown();
 		}
 		if (Input.GetKeyDown(KeyCode.Q)) {
@@ -99,7 +99,7 @@ public class Controller : MonoBehaviour {
 			cameraZoom.ZoomIn(ZoomSettings.ZoomSource.MOUSE);
 			OnZoomIn();
 		}
-		if (firstPlayerGestures.GetGestureTriggered(EdsacGestures.STRETCH)) {
+		if (firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.STRETCH)) {
 			cameraZoom.ZoomIn(ZoomSettings.ZoomSource.KINECT);
 			OnZoomIn();
 		}
@@ -111,7 +111,7 @@ public class Controller : MonoBehaviour {
 			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.MOUSE);
 			OnZoomOut();
 		}
-		if (firstPlayerGestures.GetGestureTriggered(EdsacGestures.SQUASH)) {
+		if (firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.SQUASH)) {
 			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KINECT);
 			OnZoomOut();
 		}
@@ -132,6 +132,7 @@ public class Controller : MonoBehaviour {
 		}
 		if (Input.GetKeyDown(KeyCode.U)) {
 			engagementController.UseSingleEngagementRegion(false);
+			engagementController.DontUseEngagementRegions();
 			sendFace = false;
 			engagementController.SetNeutral();
 		}
@@ -141,8 +142,10 @@ public class Controller : MonoBehaviour {
 		}
 
 		if (sendFace) {
-			faceTrack = FacetrackingManager.Instance;
-			engagementController.SetSingleEngagementInput (Mathf.Lerp(-1f,1f,0.5f+faceTrack.GetHeadRotation(false).eulerAngles.y/60f));
+			if (firstPlayerKinectInput.GetGazeDirectionAvailable()) {
+				Debug.Log (firstPlayerKinectInput.GetGazeDirection());
+				//engagementController.SetSingleEngagementInput (firstPlayerKinectInput.GetUserFaceDirection());
+			}
 		}
 
 	}
@@ -211,6 +214,10 @@ public class Controller : MonoBehaviour {
 	}
 	public void OnInspectorHingeAway() {
 	}
+	public void OnNewFirstPlayer() {
+	}
+	public void OnNewSecondPlayer() {
+	}
 
 	
 	/*****************************
@@ -218,6 +225,12 @@ public class Controller : MonoBehaviour {
 	public void ActivateVertex(ViewPointMeshVertex vert, bool openInfo = true) {
 		vertexTargets.Enqueue(vert);
 		vertexTargets.Enqueue(openInfo);
+	}
+	public void SetFirstPlayerId(long userId) {
+		firstPlayerKinectInput.SetUserId(userId);
+	}
+	public void SetSecondPlayerId(long userId) {
+		firstPlayerKinectInput.SetUserId(userId);
 	}
 
 }

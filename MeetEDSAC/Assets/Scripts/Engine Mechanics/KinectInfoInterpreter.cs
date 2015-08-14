@@ -3,11 +3,11 @@ using System.Collections;
 
 public enum EdsacGestures { LEFT_SWIPE, RIGHT_SWIPE, UP_SWIPE, DOWN_SWIPE, STRETCH, SQUASH, SELECT };
 
-public class GestureInfoInterpreter : MonoBehaviour {
+public class KinectInfoInterpreter : MonoBehaviour {
 
 	public MyKinectListener kinectListener;
 	public KinectFeedbackController feedbackController;
-	public uint userId;
+	private long userId = 0;
 
 	public EdsacGestures[] gesturesBeingRead;
 
@@ -28,6 +28,9 @@ public class GestureInfoInterpreter : MonoBehaviour {
 	private float[] gestureLastSwitchedOff;
 
 	private int gesturesCount;
+
+	private bool gazeAvailable;
+	private float gazeYaw;
 	
 	public bool GetGestureTriggered(EdsacGestures gesture) {
 		return gestureSwitchedOn[(int)gesture];
@@ -40,6 +43,12 @@ public class GestureInfoInterpreter : MonoBehaviour {
 	}
 	public bool GetGestureHappening(EdsacGestures gesture) {
 		return gestureTogglePositive[(int)gesture];
+	}
+	public bool GetGazeDirectionAvailable() {
+		return gazeAvailable;
+	}
+	public float GetGazeDirection() {
+		return gazeYaw;
 	}
 
 	void Start() {
@@ -73,6 +82,9 @@ public class GestureInfoInterpreter : MonoBehaviour {
 			mappedGestureContinuousTime[gestureId] = gestureContinuousTime[i];
 			mappedGestureRepeatGap[gestureId] = gestureRepeatGap[i];
 		}
+
+		gazeAvailable = false;
+
 	}
 
 	void Update() {
@@ -118,6 +130,11 @@ public class GestureInfoInterpreter : MonoBehaviour {
 			}
 		}
 
+		gazeAvailable = ReadFaceTrackingAvailable();
+		if (gazeAvailable) {
+			gazeYaw = GazeFromQuaternion(ReadHeadRotation());
+		}
+
 	}
 	
 	private void GestureSwitchOn(int i) {
@@ -137,22 +154,36 @@ public class GestureInfoInterpreter : MonoBehaviour {
 
 
 	private bool ReadRawGestureInfo(EdsacGestures gesture) {
-		// some fakery
 		switch(gesture) {
 		case EdsacGestures.LEFT_SWIPE:
-			return kinectListener.IsGestureActive(KinectGestures.Gestures.SwipeLeft);
+			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeLeft);
 		case EdsacGestures.RIGHT_SWIPE:
-			return kinectListener.IsGestureActive(KinectGestures.Gestures.SwipeRight);
+			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeRight);
 		case EdsacGestures.UP_SWIPE:
-			return kinectListener.IsGestureActive(KinectGestures.Gestures.SwipeUp);
+			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeUp);
 		case EdsacGestures.DOWN_SWIPE:
-			return kinectListener.IsGestureActive(KinectGestures.Gestures.SwipeDown);
+			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeDown);
 		case EdsacGestures.STRETCH:
-			return kinectListener.IsGestureActive(KinectGestures.Gestures.ZoomIn);
+			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.ZoomIn);
 		case EdsacGestures.SQUASH:
-			return kinectListener.IsGestureActive(KinectGestures.Gestures.ZoomOut);
+			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.ZoomOut);
 		default:
 			return false;
 		}
+	}
+	private bool ReadFaceTrackingAvailable() {
+		return kinectListener.IsFaceTrackingAvailable(userId);
+	}
+	private Quaternion ReadHeadRotation() {
+		return kinectListener.GetUserFaceDirection(userId);
+	}
+
+	private float GazeFromQuaternion(Quaternion headRotation) {
+		Vector3 directionVector = headRotation * Vector3.forward;
+		return Mathf.Atan2 (-directionVector.x,directionVector.z);
+	}
+
+	public void SetUserId(long _userId) {
+		userId = _userId;
 	}
 }

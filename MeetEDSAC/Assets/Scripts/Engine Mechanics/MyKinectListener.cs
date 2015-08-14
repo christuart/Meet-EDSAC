@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInterface {
 
+	public Controller mainController;
 	public KinectFeedbackController kinectFeedback;
 
 	public KinectGestures.Gestures[] gesturesToDetect = new KinectGestures.Gestures[] {
@@ -35,6 +36,9 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 	private Dictionary<long,float> lastZoom;
 	private Dictionary<long,float> currentZoomDelta;
 
+	private FacetrackingManager faceTracker;
+	private bool faceTrackingActive = false;
+
 	void Awake() {
 		zoomHistory = new Dictionary<long,Queue<float>>();
 		gestureStates = new Dictionary<long,Dictionary<KinectGestures.Gestures, bool>>();
@@ -42,6 +46,8 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		wasZooming = new Dictionary<long, bool>();
 		lastZoom = new Dictionary<long, float>();
 		currentZoomDelta = new Dictionary<long, float>();
+		faceTracker = FacetrackingManager.Instance;
+		faceTracker.enabled = false;
 	}
 
 	public void UserDetected(long userId, int userIndex)
@@ -60,10 +66,14 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 			
 			if (users == 0) {
 				firstUserId = userId;
+				mainController.SetFirstPlayerId(userId);
+				mainController.OnNewFirstPlayer();
 				users = 1;
 				kinectFeedback.AddItem(KinectFeedbackController.SINGLE_PLAYER);
 			} else if (users == 1) {
 				secondUserId = userId;
+				mainController.SetSecondPlayerId(userId);
+				mainController.OnNewSecondPlayer();
 				users = 2;
 				kinectFeedback.AddItem(KinectFeedbackController.TWO_PLAYERS);
 			}
@@ -166,6 +176,9 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 			CheckZooming(secondUserId);
 			UpdateGestureStates(secondUserId);
 		}
+
+		// now look at face tracking data
+
 		
 	}
 
@@ -215,6 +228,30 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 	}
 	public bool IsGestureActive(long userId, KinectGestures.Gestures g) {
 		return (gestureStates[userId].ContainsKey(g)) ? (gestureStates[userId])[g]: false;
+	}
+	public bool IsFaceTrackingAvailable(long userId) {
+		return faceTrackingActive && faceTracker.IsTrackingFace (userId);
+	}
+	public void ActivateFaceTracking() {
+		faceTracker.enabled = true;
+		faceTrackingActive = true;
+	}
+	public void DeactivateFaceTracking() {
+		faceTracker.enabled = false;
+		faceTrackingActive = false;
+	}
+	public Quaternion GetUserFaceDirection() {
+		return (users > 0) ? GetUserFaceDirection(firstUserId) : Quaternion.identity;
+	}
+	public Quaternion GetUserFaceDirection(long userId) {
+		if (IsFaceTrackingAvailable(userId)) {
+			Quaternion headRotation = faceTracker.GetHeadRotation(userId,false);
+			Vector3 headLookingDirection = headRotation * Vector3.forward;
+			Debug.Log (headLookingDirection);
+			//Mathf.Lerp(-1f,1f,0.5f+faceTrack.GetHeadRotation(false).eulerAngles.y/60f)
+			return Quaternion.identity;
+		}
+		return Quaternion.identity;
 	}
 	
 }

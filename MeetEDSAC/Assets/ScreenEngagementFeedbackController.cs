@@ -14,32 +14,55 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 
 	// ************************************************************ HAVEN'T USED THIS LIKE I WAS MEANT TO
 	public bool engagementRegionsModeActive = true;
-	
+
+
 	// controls for when only one user
 	public bool singleEngagementRegion = true;
 	[Range( -1, 1 )]
 	public float engagementInput = 0f;
-	public float engagementTransitionSlide = 0.15f;
+
+	// variables for smoothly sliding the input from face tracking
+	public float singleEngagementTransitionSlide = 0.15f;
 	private float singleEngagementPosition = 0f;
+
 
 	// controls for when multiple users
 	private bool modelEngaged = false;
 	private bool leftPanelEngaged = false;
 	private bool rightPanelEngaged = false;
 
+	// variables for sliding towards the engagement state
+	// requested when multiple users are impacting it
+	private float leftIntensityTarget;
+	private float rightIntensityTarget;
+	private float leftAlphaTarget;
+	private float rightAlphaTarget;
+	public float multiEngagementTransitionSlide = 0.3f;
+
 	// Use this for initialization
 	void Start () {
 		SetNeutral();
+		leftIntensityTarget = overlayForLeft.intensity;
+		rightIntensityTarget = overlayForRight.intensity;
+		leftAlphaTarget = groupForLeft.alpha;
+		rightAlphaTarget = groupForRight.alpha;
 	}
 
 	void Update() {
-		if (singleEngagementRegion) {
-			singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,engagementTransitionSlide);
-			mainCameraBlurGradual.SetBlur(Mathf.Abs (singleEngagementPosition) > 0.3f);
-			overlayForLeft.intensity = Mathf.Clamp ((singleEngagementPosition-0.1f)/0.6f,0f,1f) * overlayIntensity;
-			overlayForRight.intensity = Mathf.Clamp ((singleEngagementPosition+0.1f)/(-0.6f),0f,1f) * overlayIntensity;
-			groupForLeft.alpha = canvasAlpha + (Mathf.Clamp (-(singleEngagementPosition),0,0.6f)/0.6f * (1f-canvasAlpha));
-			groupForRight.alpha = canvasAlpha + (Mathf.Clamp (singleEngagementPosition,0,0.6f)/0.6f * (1f-canvasAlpha));
+		if (engagementRegionsModeActive) {
+			if (singleEngagementRegion) {
+				singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,singleEngagementTransitionSlide);
+				mainCameraBlurGradual.SetBlur(Mathf.Abs (singleEngagementPosition) > 0.3f);
+				overlayForLeft.intensity = Mathf.Clamp ((singleEngagementPosition-0.1f)/0.6f,0f,1f) * overlayIntensity;
+				overlayForRight.intensity = Mathf.Clamp ((singleEngagementPosition+0.1f)/(-0.6f),0f,1f) * overlayIntensity;
+				groupForLeft.alpha = canvasAlpha + (Mathf.Clamp (-(singleEngagementPosition),0,0.6f)/0.6f * (1f-canvasAlpha));
+				groupForRight.alpha = canvasAlpha + (Mathf.Clamp (singleEngagementPosition,0,0.6f)/0.6f * (1f-canvasAlpha));
+			} else {
+				overlayForLeft.intensity = Mathf.Lerp(overlayForLeft.intensity,leftIntensityTarget,multiEngagementTransitionSlide);
+				overlayForRight.intensity = Mathf.Lerp(overlayForRight.intensity,rightIntensityTarget,multiEngagementTransitionSlide);
+				groupForLeft.alpha = Mathf.Lerp(groupForLeft.alpha,leftAlphaTarget,multiEngagementTransitionSlide);
+				groupForRight.alpha = Mathf.Lerp(groupForRight.alpha,rightAlphaTarget,multiEngagementTransitionSlide);
+			}
 		}
 	}
 
@@ -74,6 +97,22 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 	}
 	public void UseSingleEngagementRegion(bool use) {
 		singleEngagementRegion = use;
+		if (use) {
+			// make sure that engagement regions are being used at all
+			engagementRegionsModeActive = true;
+		}
+		else if (engagementRegionsModeActive) {
+			// if we'll now be using the multi user mode, we don't want to immediately
+			// change the overlays and alphas (we wait for external input to do that) so
+			// we need to set the targets to the current values
+			leftIntensityTarget = overlayForLeft.intensity;
+			rightIntensityTarget = overlayForRight.intensity;
+			leftAlphaTarget = groupForLeft.alpha;
+			rightAlphaTarget = groupForRight.alpha;
+		}
+	}
+	public void DontUseEngagementRegions() {
+		engagementRegionsModeActive = false;
 	}
 
 }
