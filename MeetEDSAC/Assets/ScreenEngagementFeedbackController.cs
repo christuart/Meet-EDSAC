@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class ScreenEngagementFeedbackController : MonoBehaviour {
-	
+
+	public GUIText testInputIndicator;
+
 	public BlurGradual mainCameraBlurGradual;
 	public UnityStandardAssets.ImageEffects.ScreenOverlay overlayForLeft;
 	public UnityStandardAssets.ImageEffects.ScreenOverlay overlayForRight;
@@ -52,6 +54,7 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 		if (engagementRegionsModeActive) {
 			if (singleEngagementRegion) {
 				singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,singleEngagementTransitionSlide);
+				testInputIndicator.transform.localPosition = new Vector3 (0.5f+0.5f*singleEngagementPosition, 0.8f);
 				mainCameraBlurGradual.SetBlur(Mathf.Abs (singleEngagementPosition) > 0.3f);
 				overlayForLeft.intensity = Mathf.Clamp ((singleEngagementPosition-0.1f)/0.6f,0f,1f) * overlayIntensity;
 				overlayForRight.intensity = Mathf.Clamp ((singleEngagementPosition+0.1f)/(-0.6f),0f,1f) * overlayIntensity;

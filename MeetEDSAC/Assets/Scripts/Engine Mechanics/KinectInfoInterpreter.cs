@@ -5,9 +5,11 @@ public enum EdsacGestures { LEFT_SWIPE, RIGHT_SWIPE, UP_SWIPE, DOWN_SWIPE, STRET
 
 public class KinectInfoInterpreter : MonoBehaviour {
 
+	public GUIText asd;
+
 	public MyKinectListener kinectListener;
 	public KinectFeedbackController feedbackController;
-	private long userId = 0;
+	private long userId = -1;
 
 	public EdsacGestures[] gesturesBeingRead;
 
@@ -96,43 +98,47 @@ public class KinectInfoInterpreter : MonoBehaviour {
 		gestureSwitchedOn = new bool[gesturesCount];
 		gestureSwitchedOff = new bool[gesturesCount];
 
-		// here we will calculate the new state of gestures and store it ready to be requested by whomever
-		// for now, there are just no real gestures happening EVER
+		// This is checked every frame that a user is available, so reset to false in case no user is available
+		gazeAvailable = false;
 
-		for (int i=0; i < gesturesBeingRead.Length; i++) {
-			EdsacGestures gesture = gesturesBeingRead[i];
-			// GestureData data = ReadRawGestureInfo(gesture);
-			gestureOn[i] = ReadRawGestureInfo(gesture);
-			//Debug.Log ("checking gesture #" + i);
-			if (gestureOn[i]) {
-				//Debug.Log ("gesture is on");
-				gestureLastOn[i] = Time.time;
-				//Debug.Log (gesturePreviouslyOn[i]);
-				if (!gesturePreviouslyOn[i]) {
-					//Debug.Log ("gesture wasn't previously on");
-					if (gestureRepeatGap[i] > 0) {
-						if (Time.time - gestureLastSwitchedOff[i] > gestureRepeatGap[i]) {
-							GestureSwitchOn(i);
+		// Here we will calculate the new state of gestures and store it ready to be requested by whomever.
+		// We only want to try this if we have a genuine userId though, otherwise we're actually inactive for now
+		if (userId != -1) {
+			for (int i=0; i < gesturesBeingRead.Length; i++) {
+				EdsacGestures gesture = gesturesBeingRead [i];
+				// GestureData data = ReadRawGestureInfo(gesture);
+				gestureOn [i] = ReadRawGestureInfo (gesture);
+				//Debug.Log ("checking gesture #" + i);
+				if (gestureOn [i]) {
+					//Debug.Log ("gesture is on");
+					gestureLastOn [i] = Time.time;
+					//Debug.Log (gesturePreviouslyOn[i]);
+					if (!gesturePreviouslyOn [i]) {
+						//Debug.Log ("gesture wasn't previously on");
+						if (gestureRepeatGap [i] > 0) {
+							if (Time.time - gestureLastSwitchedOff [i] > gestureRepeatGap [i]) {
+								GestureSwitchOn (i);
+							}
+						} else {
+							GestureSwitchOn (i);
 						}
-					} else {
-						GestureSwitchOn(i);
+					} else if (gestureTogglePositive [i] && gestureContinuousTime [i] > 0) {
+						//Debug.Log ("gesture was previously on and continuous repeat is activated");
+						if (Time.time - gestureLastSwitchedOn [i] > gestureContinuousTime [i]) {
+							//Debug.Log ("Continuous repeat condition met, so 'switched on'");
+							GestureSwitchOn (i);
+						}
 					}
-				} else if (gestureTogglePositive[i] && gestureContinuousTime[i] > 0) {
-					//Debug.Log ("gesture was previously on and continuous repeat is activated");
-					if (Time.time - gestureLastSwitchedOn[i] > gestureContinuousTime[i]) {
-						//Debug.Log ("Continuous repeat condition met, so 'switched on'");
-						GestureSwitchOn(i);
-					}
+				} else if (gestureTogglePositive [i]) {
+					//Debug.Log ("gesture is off, used to be on, so 'switched off'");
+					GestureSwitchOff (i);
 				}
-			} else if (gestureTogglePositive[i]) {
-				//Debug.Log ("gesture is off, used to be on, so 'switched off'");
-				GestureSwitchOff(i);
 			}
-		}
 
-		gazeAvailable = ReadFaceTrackingAvailable();
-		if (gazeAvailable) {
-			gazeYaw = GazeFromQuaternion(ReadHeadRotation());
+			gazeAvailable = ReadFaceTrackingAvailable ();
+			if (gazeAvailable) {
+				gazeYaw = GazeFromQuaternion (ReadHeadRotation ());
+			}
 		}
 
 	}
@@ -180,7 +186,8 @@ public class KinectInfoInterpreter : MonoBehaviour {
 
 	private float GazeFromQuaternion(Quaternion headRotation) {
 		Vector3 directionVector = headRotation * Vector3.forward;
-		return Mathf.Atan2 (-directionVector.x,directionVector.z);
+		asd.text = System.String.Format("({0:0.000},{1:0.000})", directionVector.x, directionVector.z);
+		return Mathf.Atan2 (directionVector.x, directionVector.z);
 	}
 
 	public void SetUserId(long _userId) {

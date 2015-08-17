@@ -30,8 +30,9 @@ using UnityEngine;
 using System.Collections;
 
 public class Controller : MonoBehaviour {
-
-	public KinectInfoInterpreter firstPlayerKinectInput;
+	
+	public KinectInfoInterpreter firstPlayerKinectInfo;
+	public KinectInfoInterpreter secondPlayerKinectInfo;
 
 	public ViewPointMeshCameraController meshSystemCameraController;
 
@@ -79,16 +80,16 @@ public class Controller : MonoBehaviour {
 
 		}
 
-		if (Input.GetKeyDown(KeyCode.D) || firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.LEFT_SWIPE)) {
+		if (Input.GetKeyDown(KeyCode.D) || firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE)) {
 			OnPanRight();
 		}
-		if (Input.GetKeyDown(KeyCode.A) || firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
+		if (Input.GetKeyDown(KeyCode.A) || firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
 			OnPanLeft();
 		}
-		if (Input.GetKeyDown(KeyCode.W) || firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {
+		if (Input.GetKeyDown(KeyCode.W) || firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {
 			OnPanUp();
 		}
-		if (Input.GetKeyDown(KeyCode.S) || firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.UP_SWIPE)) {
+		if (Input.GetKeyDown(KeyCode.S) || firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.UP_SWIPE)) {
 			OnPanDown();
 		}
 		if (Input.GetKeyDown(KeyCode.Q)) {
@@ -99,7 +100,7 @@ public class Controller : MonoBehaviour {
 			cameraZoom.ZoomIn(ZoomSettings.ZoomSource.MOUSE);
 			OnZoomIn();
 		}
-		if (firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.STRETCH)) {
+		if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.STRETCH)) {
 			cameraZoom.ZoomIn(ZoomSettings.ZoomSource.KINECT);
 			OnZoomIn();
 		}
@@ -111,7 +112,7 @@ public class Controller : MonoBehaviour {
 			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.MOUSE);
 			OnZoomOut();
 		}
-		if (firstPlayerKinectInput.GetGestureTriggered(EdsacGestures.SQUASH)) {
+		if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.SQUASH)) {
 			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KINECT);
 			OnZoomOut();
 		}
@@ -142,9 +143,11 @@ public class Controller : MonoBehaviour {
 		}
 
 		if (sendFace) {
-			if (firstPlayerKinectInput.GetGazeDirectionAvailable()) {
-				Debug.Log (firstPlayerKinectInput.GetGazeDirection());
-				//engagementController.SetSingleEngagementInput (firstPlayerKinectInput.GetUserFaceDirection());
+			if (firstPlayerKinectInfo.GetGazeDirectionAvailable()) {
+				//Debug.Log (firstPlayerKinectInfo.GetGazeDirection());
+				engagementController.SetSingleEngagementInput (    Mathf.Clamp(firstPlayerKinectInfo.GetGazeDirection() / (Mathf.PI/4f),-1f,1f)    );
+				//Mathf.Lerp(-1f,1f,0.5f+faceTrack.GetHeadRotation(false).eulerAngles.y/60f)
+				//engagementController.SetSingleEngagementInput (firstPlayerKinectInfo.GetUserFaceDirection());
 			}
 		}
 
@@ -227,10 +230,16 @@ public class Controller : MonoBehaviour {
 		vertexTargets.Enqueue(openInfo);
 	}
 	public void SetFirstPlayerId(long userId) {
-		firstPlayerKinectInput.SetUserId(userId);
+		firstPlayerKinectInfo.SetUserId(userId);
 	}
 	public void SetSecondPlayerId(long userId) {
-		firstPlayerKinectInput.SetUserId(userId);
+		secondPlayerKinectInfo.SetUserId(userId);
+	}
+	public void ClearFirstPlayer() {
+		firstPlayerKinectInfo.SetUserId (-1);
+	}
+	public void ClearSecondPlayer() {
+		secondPlayerKinectInfo.SetUserId (-1);
 	}
 
 }

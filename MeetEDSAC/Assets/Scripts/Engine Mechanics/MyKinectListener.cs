@@ -36,8 +36,8 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 	private Dictionary<long,float> lastZoom;
 	private Dictionary<long,float> currentZoomDelta;
 
+	private Dictionary<long,bool> faceTrackingAvailable;
 	private FacetrackingManager faceTracker;
-	private bool faceTrackingActive = false;
 
 	void Awake() {
 		zoomHistory = new Dictionary<long,Queue<float>>();
@@ -46,8 +46,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		wasZooming = new Dictionary<long, bool>();
 		lastZoom = new Dictionary<long, float>();
 		currentZoomDelta = new Dictionary<long, float>();
-		faceTracker = FacetrackingManager.Instance;
-		faceTracker.enabled = false;
+		faceTrackingAvailable = new Dictionary<long, bool> ();
 	}
 
 	public void UserDetected(long userId, int userIndex)
@@ -84,6 +83,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 			wasZooming.Add(userId,false);
 			lastZoom.Add(userId,0f);
 			currentZoomDelta.Add(userId,0f);
+			faceTrackingAvailable.Add (userId,false);
 
 		}
 	}
@@ -91,20 +91,23 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 	public void UserLost(long userId, int userIndex) {
 		if (users == 2) {
 			if (userId == firstUserId) {
-				ClearUser(userId);
+				mainController.ClearFirstPlayer();
+				ClearUserFromDictionaries(userId);
 				users--;
 				firstUserId = secondUserId;
 				kinectFeedback.AddItem(KinectFeedbackController.PLAYER_ONE_LEFT);
 				return;
 			} else if (userId == secondUserId) {
-				ClearUser(userId);
+				mainController.ClearSecondPlayer();
+				ClearUserFromDictionaries(userId);
 				users--;
 				kinectFeedback.AddItem(KinectFeedbackController.PLAYER_TWO_LEFT);
 				return;
 			}
 		} else if (users == 1) {
 			if (userId == firstUserId) {
-				ClearUser(userId);
+				ClearUserFromDictionaries(userId);
+				mainController.ClearFirstPlayer();
 				users--;
 				kinectFeedback.AddItem(KinectFeedbackController.LAST_PLAYER_LEFT);
 				return;
@@ -161,23 +164,22 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		// every update, reset gestures to 'not occurring', then check if that's correct
 
 		if (users > 0) {
-			Debug.Log ("Looking for first user");
 			ResetGestureStates(firstUserId);
 			// reset gestures to not occurring
 			CheckZooming(firstUserId);
 			// check if zoom is happening, in or out
 			UpdateGestureStates(firstUserId);
 			// check if other gestures are happening
+			CheckFaceTrackingAvailability(firstUserId);
+			// check if face tracking is available
 		}
 		// repeat for second user
 		if (users > 1) {
-			Debug.Log ("Looking for second user");
 			ResetGestureStates(secondUserId);
 			CheckZooming(secondUserId);
 			UpdateGestureStates(secondUserId);
+			CheckFaceTrackingAvailability(secondUserId);
 		}
-
-		// now look at face tracking data
 
 		
 	}
@@ -212,15 +214,22 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		//	zoomHistory.Clear();
 		//}
 		currentZoomDelta[userId] = 0f;
+		// This line makes it look as if currentZoomDelta is always 0f, but that's because it's updated outside of the Update loops
+		// It gets set when GestureInProgress is called by KinectManager
+	}
+	private void CheckFaceTrackingAvailability(long userId) {
+		faceTracker = FacetrackingManager.Instance;
+		faceTrackingAvailable [userId] = faceTracker.IsTrackingFace (userId);
 	}
 
-	private void ClearUser(long userId) {
+	private void ClearUserFromDictionaries(long userId) {
 		gestureStates.Remove(userId);
 		activeGestures.Remove(userId);
 		zoomHistory.Remove(userId);
 		wasZooming.Remove(userId);
 		lastZoom.Remove(userId);
 		currentZoomDelta.Remove(userId);
+		faceTrackingAvailable.Remove(userId);
 	}
 	
 	public bool IsGestureActive(KinectGestures.Gestures g) {
@@ -230,26 +239,14 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		return (gestureStates[userId].ContainsKey(g)) ? (gestureStates[userId])[g]: false;
 	}
 	public bool IsFaceTrackingAvailable(long userId) {
-		return faceTrackingActive && faceTracker.IsTrackingFace (userId);
-	}
-	public void ActivateFaceTracking() {
-		faceTracker.enabled = true;
-		faceTrackingActive = true;
-	}
-	public void DeactivateFaceTracking() {
-		faceTracker.enabled = false;
-		faceTrackingActive = false;
+		return faceTracker.IsTrackingFace (userId);
 	}
 	public Quaternion GetUserFaceDirection() {
 		return (users > 0) ? GetUserFaceDirection(firstUserId) : Quaternion.identity;
 	}
 	public Quaternion GetUserFaceDirection(long userId) {
 		if (IsFaceTrackingAvailable(userId)) {
-			Quaternion headRotation = faceTracker.GetHeadRotation(userId,false);
-			Vector3 headLookingDirection = headRotation * Vector3.forward;
-			Debug.Log (headLookingDirection);
-			//Mathf.Lerp(-1f,1f,0.5f+faceTrack.GetHeadRotation(false).eulerAngles.y/60f)
-			return Quaternion.identity;
+			return faceTracker.GetHeadRotation(userId,false);
 		}
 		return Quaternion.identity;
 	}
