@@ -43,12 +43,23 @@ public class Controller : MonoBehaviour {
 
 	public ScreenEngagementFeedbackController engagementController;
 
+	public MouseDragController mouseDrag;
+
+	public HingeButtonController infoController;
+	public HingeButtonController inspectorController;
+
 	private FacetrackingManager faceTrack;
 
 	private ViewPointMeshVertex activeVertex;
 	private Queue vertexTargets;
 
-	public bool sendFace = false;
+	public bool debugModes = false;
+	public bool useKeyboard = true;
+	public bool useKinect = true;
+	public bool useFace = false;
+	public bool useMouse = true;
+
+	public GameObject debugOnlyGUI;
 
 	// Use this for initialization
 	void Awake () {
@@ -79,70 +90,149 @@ public class Controller : MonoBehaviour {
 			OnAfterChangeVertex();
 
 		}
+		if (useKeyboard) {
+			if (Input.GetKeyDown(KeyCode.D)) {
+				OnPanRight();
+			}
+			if (Input.GetKeyDown(KeyCode.A)) {
+				OnPanLeft();
+			}
+			if (Input.GetKeyDown(KeyCode.W)) {
+				OnPanUp();
+			}
+			if (Input.GetKeyDown(KeyCode.S)) {
+				OnPanDown();
+			}
+			if (Input.GetKeyDown(KeyCode.E)) {
+				cameraZoom.ZoomIn(ZoomSettings.ZoomSource.KEYBOARD);
+				OnZoomIn();
+			}
+			if (Input.GetKeyDown(KeyCode.Q)) {
+				cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KEYBOARD);
+				OnZoomOut();
+			}
+		}
+		if (useKinect) {
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					OnPanRight();
+				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
+					if (infoController.hingeOut) infoController.ToggleHinge();
+				} else if (engagementController.IsOnlyRightPanelEngaged()) {
+					if (!inspectorController.hingeOut) inspectorController.ToggleHinge();
+				}
+			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					OnPanLeft();
+				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
+					if (infoController.hingeOut) infoController.ToggleHinge();
+				} else if (engagementController.IsOnlyRightPanelEngaged()) {
+					if (!inspectorController.hingeOut) inspectorController.ToggleHinge();
+				}
+			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					OnPanUp();
+				}
+			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.UP_SWIPE)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					OnPanDown();
+				}
+			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.STRETCH)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					cameraZoom.ZoomIn(ZoomSettings.ZoomSource.KINECT);
+					OnZoomIn();
+				}
+			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.SQUASH)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KINECT);
+					OnZoomOut();
+				}
+			}
+		}
+		if (useMouse) {
+			if (engagementController.modelEngaged) {
 
-		if (Input.GetKeyDown(KeyCode.D) || firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE)) {
-			OnPanRight();
+				if (Input.mouseScrollDelta.y > 0) {
+					cameraZoom.ZoomIn(ZoomSettings.ZoomSource.MOUSE);
+					OnZoomIn();
+				}
+				if (Input.mouseScrollDelta.y < 0) {
+					cameraZoom.ZoomOut(ZoomSettings.ZoomSource.MOUSE);
+					OnZoomOut();
+				}
+				mouseDrag.canDrag = true;
+				if (mouseDrag.GetDraggingLeft()) {
+					OnPanRight();
+				} else if (mouseDrag.GetDraggingRight()) {
+					OnPanLeft();
+				} else if (mouseDrag.GetDraggingUp()) {
+					OnPanDown();
+				} else if (mouseDrag.GetDraggingDown()) {
+					OnPanUp();
+				}
+			} else {
+				mouseDrag.canDrag = false;
+			}
+			if (!Input.GetMouseButton(2)) {
+				engagementController.SetSingleEngagementInput (    Mathf.Clamp(Input.mousePosition.x / (Screen.width/2f)-1f,-1f,1f)    );
+			}
 		}
-		if (Input.GetKeyDown(KeyCode.A) || firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
-			OnPanLeft();
+		if (Input.GetKeyDown(KeyCode.F3)) {
+			EnableDebugModes(!debugModes);
 		}
-		if (Input.GetKeyDown(KeyCode.W) || firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {
-			OnPanUp();
-		}
-		if (Input.GetKeyDown(KeyCode.S) || firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.UP_SWIPE)) {
-			OnPanDown();
-		}
-		if (Input.GetKeyDown(KeyCode.Q)) {
-			cameraZoom.ZoomIn(ZoomSettings.ZoomSource.KEYBOARD);
-			OnZoomIn();
-		}
-		if (Input.mouseScrollDelta.y > 0) {
-			cameraZoom.ZoomIn(ZoomSettings.ZoomSource.MOUSE);
-			OnZoomIn();
-		}
-		if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.STRETCH)) {
-			cameraZoom.ZoomIn(ZoomSettings.ZoomSource.KINECT);
-			OnZoomIn();
-		}
-		if (Input.GetKeyDown(KeyCode.E)) {
-			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KEYBOARD);
-			OnZoomOut();
-		}
-		if (Input.mouseScrollDelta.y < 0) {
-			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.MOUSE);
-			OnZoomOut();
-		}
-		if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.SQUASH)) {
-			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KINECT);
-			OnZoomOut();
-		}
-		if (Input.GetKeyDown(KeyCode.V)) {
-			engagementController.UseSingleEngagementRegion(true);
-			sendFace = false;
-			engagementController.SetPanelEngaged(true);
-		}
-		if (Input.GetKeyDown(KeyCode.B)) {
-			engagementController.UseSingleEngagementRegion(true);
-			sendFace = false;
-			engagementController.SetModelEngaged();
-		}
-		if (Input.GetKeyDown(KeyCode.N)) {
-			engagementController.UseSingleEngagementRegion(true);
-			sendFace = false;
-			engagementController.SetPanelEngaged(false);
-		}
-		if (Input.GetKeyDown(KeyCode.U)) {
-			engagementController.UseSingleEngagementRegion(false);
-			engagementController.DontUseEngagementRegions();
-			sendFace = false;
-			engagementController.SetNeutral();
-		}
-		if (Input.GetKeyDown(KeyCode.F)) {
-			engagementController.UseSingleEngagementRegion(true);
-			sendFace = true;
+		if (debugModes) {
+			if (Input.GetKeyDown(KeyCode.V)) {
+				engagementController.UseSingleEngagementRegion(true);
+				useFace = false;
+				useMouse = false;
+				engagementController.SetPanelEngaged(true);
+			}
+			if (Input.GetKeyDown(KeyCode.B)) {
+				engagementController.UseSingleEngagementRegion(true);
+				useFace = false;
+				useMouse = false;
+				engagementController.SetModelEngaged();
+			}
+			if (Input.GetKeyDown(KeyCode.N)) {
+				engagementController.UseSingleEngagementRegion(true);
+				useFace = false;
+				useMouse = false;
+				engagementController.SetPanelEngaged(false);
+			}
+			if (Input.GetKeyDown(KeyCode.U)) {
+				engagementController.UseSingleEngagementRegion(false);
+				engagementController.DontUseEngagementRegions();
+				useFace = false;
+				useMouse = false;
+				engagementController.SetNeutral();
+			}
+			if (Input.GetKeyDown(KeyCode.F)) {
+				engagementController.UseSingleEngagementRegion(true);
+				useFace = true;
+				useMouse = false;
+			}
+			if (Input.GetKeyDown(KeyCode.M)) {
+				engagementController.UseSingleEngagementRegion(true);
+				useMouse = true;
+			}
+			if (Input.GetKeyDown (KeyCode.Alpha1)) {
+				firstPlayerKinectInfo.UseNumpad(!firstPlayerKinectInfo.useNumpad);
+			}
+			if (Input.GetKeyDown (KeyCode.Alpha2)) {
+				secondPlayerKinectInfo.UseNumpad(!secondPlayerKinectInfo.useNumpad);
+			}
+			if (Input.GetKeyDown (KeyCode.O)) {
+				debugOnlyGUI.SetActive(!debugOnlyGUI.activeSelf);
+			}
+
 		}
 
-		if (sendFace) {
+		if (useFace) {
 			if (firstPlayerKinectInfo.GetGazeDirectionAvailable()) {
 				//Debug.Log (firstPlayerKinectInfo.GetGazeDirection());
 				engagementController.SetSingleEngagementInput (    Mathf.Clamp(firstPlayerKinectInfo.GetGazeDirection() / (Mathf.PI/4f),-1f,1f)    );
@@ -150,7 +240,7 @@ public class Controller : MonoBehaviour {
 				//engagementController.SetSingleEngagementInput (firstPlayerKinectInfo.GetUserFaceDirection());
 			}
 		}
-
+		
 	}
 	
 	/************************************************
@@ -203,8 +293,16 @@ public class Controller : MonoBehaviour {
 		}
 	}
 	public void OnInfoHingeOut() {
+		engagementController.MarkPanelOut(true, true);
+		if (!infoController.hingeOut) {
+			infoController.ToggleHinge();
+		}
 	}
 	public void OnInspectorHingeOut() {
+		engagementController.MarkPanelOut(false,true);
+		if (!inspectorController.hingeOut) {
+			inspectorController.ToggleHinge();
+		}
 	}
 	public void OnHingeAway(bool leftHandHinge) {
 		if (leftHandHinge) {
@@ -214,8 +312,16 @@ public class Controller : MonoBehaviour {
 		}
 	}
 	public void OnInfoHingeAway() {
+		engagementController.MarkPanelOut(true, false);
+		if (infoController.hingeOut) {
+			infoController.ToggleHinge();
+		}
 	}
 	public void OnInspectorHingeAway() {
+		engagementController.MarkPanelOut(false,false);
+		if (inspectorController.hingeOut) {
+			inspectorController.ToggleHinge();
+		}
 	}
 	public void OnNewFirstPlayer() {
 	}
@@ -240,6 +346,20 @@ public class Controller : MonoBehaviour {
 	}
 	public void ClearSecondPlayer() {
 		secondPlayerKinectInfo.SetUserId (-1);
+	}
+
+	private void EnableDebugModes(bool enable) {
+		KinectFeedbackController f = GameObject.FindObjectOfType<KinectFeedbackController>();
+		debugModes = enable;
+		if (enable) {
+			f.AddItem(KinectFeedbackController.DEBUG_ON);
+		} else {
+			f.AddItem(KinectFeedbackController.DEBUG_OFF);
+			useFace = false;
+			useMouse = false;
+			firstPlayerKinectInfo.UseNumpad(false);
+			secondPlayerKinectInfo.UseNumpad(false);
+		}
 	}
 
 }

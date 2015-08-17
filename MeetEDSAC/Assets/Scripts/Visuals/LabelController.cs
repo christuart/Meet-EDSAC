@@ -25,6 +25,7 @@ public class LabelController : MonoBehaviour {
 	public float topY;
 	public Vector2 initialPosMin;
 	public Vector2 initialPosMax;
+	public float desiredWidth;
 
 	public bool localisedLabel = false;
 	public bool keepWithinScreen = false;
@@ -41,11 +42,22 @@ public class LabelController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		panels = GetComponentsInChildren<Image>();
 		texts = GetComponentsInChildren<Text>();
+		
+		float maxTextWidth = 0f;
+		foreach (Text t in texts)
+			maxTextWidth = Mathf.Max (maxTextWidth, t.preferredWidth);
+		if (maxTextWidth == 0f) maxTextWidth = 124f;
+		desiredWidth = maxTextWidth + 25f;
+		// the desired padding is 25f
+
 		initialPosMin = nameTag.offsetMin;
-		initialPosMax = nameTag.offsetMax;
+		initialPosMax = new Vector2(nameTag.offsetMin.x + desiredWidth, nameTag.offsetMax.y);
+
 	}
+
 	
 	// Update is called once per frame
 	void Update () {

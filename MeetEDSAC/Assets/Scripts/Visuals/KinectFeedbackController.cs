@@ -18,7 +18,9 @@ public class KinectFeedbackController : MonoBehaviour {
 		"User 1 left. Single user mode activated for user 2.",
 		"User 2 left. Single user mode activated for user 1.",
 		"No users. Kinect mode deactivated.",
-		"Unexpected 'user left' event! Who were you..."
+		"Unexpected 'user left' event! Who were you...",
+		"Debug mode activated.",
+		"Debug mode deactivated."
 	};
 
 	#region MESSAGE-IDS
@@ -38,6 +40,8 @@ public class KinectFeedbackController : MonoBehaviour {
 	public static int PLAYER_TWO_LEFT = 11;
 	public static int LAST_PLAYER_LEFT = 12;
 	public static int UNKNOWN_PLAYER_LEFT = 13;
+	public static int DEBUG_ON = 14;
+	public static int DEBUG_OFF = 15;
 	#endregion MESSAGE-IDS
 
 	public GameObject prefab;

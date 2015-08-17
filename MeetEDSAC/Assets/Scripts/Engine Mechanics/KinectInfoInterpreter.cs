@@ -33,6 +33,8 @@ public class KinectInfoInterpreter : MonoBehaviour {
 
 	private bool gazeAvailable;
 	private float gazeYaw;
+
+	public bool useNumpad = false;
 	
 	public bool GetGestureTriggered(EdsacGestures gesture) {
 		return gestureSwitchedOn[(int)gesture];
@@ -162,17 +164,41 @@ public class KinectInfoInterpreter : MonoBehaviour {
 	private bool ReadRawGestureInfo(EdsacGestures gesture) {
 		switch(gesture) {
 		case EdsacGestures.LEFT_SWIPE:
-			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeLeft);
+			if (useNumpad) {
+				return (useNumpad && Input.GetKey(KeyCode.Keypad4));
+			} else {
+				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeLeft);
+			}
 		case EdsacGestures.RIGHT_SWIPE:
-			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeRight);
+			if (useNumpad) {
+				return (useNumpad && Input.GetKey(KeyCode.Keypad6));
+			} else {
+				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeRight);
+			}
 		case EdsacGestures.UP_SWIPE:
-			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeUp);
+			if (useNumpad) {
+				return (useNumpad && Input.GetKey(KeyCode.Keypad8));
+			} else {
+				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeUp);
+			}
 		case EdsacGestures.DOWN_SWIPE:
-			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeDown);
+			if (useNumpad) {
+				return (useNumpad && Input.GetKey(KeyCode.Keypad2));
+			} else {
+				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeDown);
+			}
 		case EdsacGestures.STRETCH:
-			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.ZoomIn);
+			if (useNumpad) {
+				return (useNumpad && Input.GetKey(KeyCode.KeypadPlus));
+			} else {
+				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.ZoomIn);
+			}
 		case EdsacGestures.SQUASH:
-			return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.ZoomOut);
+			if (useNumpad) {
+				return (useNumpad && Input.GetKey(KeyCode.KeypadMinus));
+			} else {
+				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.ZoomOut);
+			}
 		default:
 			return false;
 		}
@@ -193,4 +219,15 @@ public class KinectInfoInterpreter : MonoBehaviour {
 	public void SetUserId(long _userId) {
 		userId = _userId;
 	}
+
+	public void UseNumpad(bool use) {
+		if (use) {
+			useNumpad = true;
+			if (userId == -1) userId = -2;
+		} else {
+			useNumpad = false;
+			if (userId == -2) userId = -1;
+		}
+	}
+
 }

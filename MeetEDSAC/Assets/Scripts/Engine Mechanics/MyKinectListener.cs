@@ -239,7 +239,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		return (gestureStates[userId].ContainsKey(g)) ? (gestureStates[userId])[g]: false;
 	}
 	public bool IsFaceTrackingAvailable(long userId) {
-		return faceTracker.IsTrackingFace (userId);
+		return (userId == firstUserId || userId == secondUserId) && faceTracker.IsTrackingFace (userId);
 	}
 	public Quaternion GetUserFaceDirection() {
 		return (users > 0) ? GetUserFaceDirection(firstUserId) : Quaternion.identity;

@@ -23,12 +23,6 @@ public class HingeButtonController : MonoBehaviour {
 	private float targetRotation = 0f;
 		
 	void Start() {
-		if (hingeOut) {
-			hinge.MoveHingeOut();
-		} else {
-			hinge.MoveHingeAway();
-		}
-
 		ToggleHinge();
 		ToggleHinge();
 		// this makes sure it is being drawn correctly for the starting condition
@@ -36,7 +30,7 @@ public class HingeButtonController : MonoBehaviour {
 
 	void Update() {
 
-		targetX = (leftHandHinge ? -1 : 1) * (hingeOut ? buttonPositionWhenOut : buttonPositionWhenIn);
+		targetX = (leftHandHinge ? -1 : 1) * Screen.width * (hingeOut ? buttonPositionWhenOut : buttonPositionWhenIn);
 		targetScale = hingeOut ? new Vector3(buttonScaleWhenOut,buttonScaleWhenOut,buttonScaleWhenOut) : new Vector3(buttonScaleWhenIn,buttonScaleWhenIn,buttonScaleWhenIn);
 		if (Mathf.Abs(transform.localPosition.x-targetX) > moveSlideThresh) {
 			transform.localPosition = new Vector3 (Mathf.MoveTowards (transform.localPosition.x,targetX,move),transform.localPosition.y,transform.localPosition.z);
@@ -51,12 +45,22 @@ public class HingeButtonController : MonoBehaviour {
 	public void ToggleHinge() {
 		if (hingeOut) {
 			hingeOut = false;
+			if (leftHandHinge) {
+				controller.OnInfoHingeAway(); 
+			}else { 
+				controller.OnInspectorHingeAway(); 
+			}
 			hinge.MoveHingeAway();
 			transform.eulerAngles = leftHandHinge ? new Vector3(0f,0f, -180f) : Vector3.zero;
 			targetRotation = leftHandHinge ? 0f : 180f;
 			controller.OnHingeAway(leftHandHinge);
 		} else {
 			hingeOut = true;
+			if (leftHandHinge) { 
+				controller.OnInfoHingeOut(); 
+			} else {
+				controller.OnInspectorHingeOut(); 
+			}
 			hinge.MoveHingeOut();
 			transform.eulerAngles = leftHandHinge ? Vector3.zero : new Vector3(0f,0f, -180f);
 			targetRotation = leftHandHinge ? 180f : 0f;
