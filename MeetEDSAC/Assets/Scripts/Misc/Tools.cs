@@ -111,4 +111,7 @@ public abstract class Tools : MonoBehaviour {
 			(minusPos+min+dZ+dX+dY).magnitude,
 			(minusPos+min+dZ+dY).magnitude });
 	}
+	public static Vector2 ViewportToCameraPoint(Camera cam, Vector2 viewportPoint) {
+		return (Vector2)cam.ViewportToScreenPoint(viewportPoint) - new Vector2(cam.rect.x * Screen.width, cam.rect.y * Screen.height);
+	}
 }

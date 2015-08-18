@@ -6,6 +6,7 @@ public class MenuSceneController : MonoBehaviour {
 
 	public Toggle kinectSensorToggle;
 	public Toggle kinectFaceTrackingToggle;
+	public LoadingController loader;
 
 	// Use this for initialization
 	void Start () {
@@ -28,5 +29,9 @@ public class MenuSceneController : MonoBehaviour {
 			kinectFaceTrackingToggle.isOn = false;
 			kinectFaceTrackingToggle.interactable = false;
 		}
+	}
+
+	public void OnLoadEDSACButtonPressed() {
+		loader.gameObject.SetActive(true);
 	}
 }

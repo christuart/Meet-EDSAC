@@ -67,8 +67,8 @@ public class LabelController : MonoBehaviour {
 		}
 		if (active) {
 			Vector4 minMaxViewport = Tools.ViewportFromBounds(targetForLabel.bounds.min,targetForLabel.bounds.max,viewCamera);
-			Vector2 min = viewCamera.ViewportToScreenPoint(new Vector2(minMaxViewport.x,minMaxViewport.y));
-			Vector2 max = viewCamera.ViewportToScreenPoint(new Vector2(minMaxViewport.z,minMaxViewport.w));
+			Vector2 min = Tools.ViewportToCameraPoint(viewCamera,new Vector2(minMaxViewport.x,minMaxViewport.y));
+			Vector2 max = Tools.ViewportToCameraPoint(viewCamera,new Vector2(minMaxViewport.z,minMaxViewport.w));
 			
 			nameTag.offsetMin = initialPosMin;
 			nameTag.offsetMax = initialPosMax;
@@ -129,6 +129,15 @@ public class LabelController : MonoBehaviour {
 				alpha *= Mathf.Pow (Vector3.Dot (viewCamera.transform.forward,(targetForLabel.transform.position-viewCamera.transform.position).normalized),normalInfluence);
 			}
 			alpha = Mathf.Pow(alpha,power);
+			float excess = Mathf.Abs (label.offsetMax.x-label.offsetMin.x) / Screen.width - 1f;
+			if (excess > 0f)
+				alpha -= excess;
+			excess = Mathf.Abs (label.offsetMax.y-label.offsetMin.y) / Screen.height - 1.6f;
+			if (excess > 0f)
+				alpha -= excess;
+			float mininess = -1.2f - excess; // == 0.4f - excess - 1.6f // == 0.4f - Mathf.Abs (label.offsetMax.y-label.offsetMin.y) / Screen.height
+			if (mininess > 0f)
+				alpha /= (1f-mininess);
 			foreach (Image i in panels) {
 				i.color = new Color(i.color.r,i.color.g,i.color.b,alpha);
 			}

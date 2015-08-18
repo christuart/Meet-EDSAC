@@ -40,6 +40,8 @@ public class EdsacXmlGenerator : MonoBehaviour {
 	public GameObject prefabValveSmallCream;
 	public GameObject prefabValveSmallRed;
 
+	public GameObject prefabWithRectTransform;
+
 	// for placing the chassises
 	private float chassis_start_y = -0.983f;
 	private float chassis_offset_z = 0.003f;
@@ -99,6 +101,19 @@ public class EdsacXmlGenerator : MonoBehaviour {
 		foreach (EDSAC.Rack ra in ro.racks) {
 			if (ra.rackNumber <= theseRacks.Length && ra.rackNumber > 0) {
 				GameObject prefabRack = theseRacks[ra.rackNumber-1];
+				GameObject rackLabelsHolder = Instantiate(prefabWithRectTransform) as GameObject;
+				rackLabelsHolder.transform.SetParent(labelsHolder.transform,false);
+				switch(ro.name) {
+				case EDSAC.RowName.REAR:
+					rackLabelsHolder.transform.name = "R" + ra.rackNumber;
+					break;
+				case EDSAC.RowName.MIDDLE:
+					rackLabelsHolder.transform.name = "M" + ra.rackNumber;
+					break;
+				case EDSAC.RowName.FRONT:
+					rackLabelsHolder.transform.name = "F" + ra.rackNumber;
+					break;
+				}
 				foreach (EDSAC.Chassis ch in ra.chassis) {
 					int i = ch.chassisNumber-1;
 					if (i >= 0 && i < 14) {
@@ -120,8 +135,8 @@ public class EdsacXmlGenerator : MonoBehaviour {
 						}
 
 						GameObject uiLabel = Instantiate (prefabUILabel) as GameObject;
-						uiLabel.transform.SetParent(labelsHolder.transform);
-						uiLabel.transform.localScale = new Vector3(1f,1f,1f);
+						uiLabel.transform.SetParent(rackLabelsHolder.transform);
+						uiLabel.transform.localScale = new Vector3(.8f,.8f,1f);
 						uiLabel.transform.name = ch.uiLabelText + " Label";
 						GameObject uiLabelTarget = Instantiate(prefabUILabelTarget) as GameObject;
 						uiLabelTarget.transform.SetParent(labelTargetsHolder.transform);

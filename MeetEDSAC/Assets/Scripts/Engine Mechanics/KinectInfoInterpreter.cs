@@ -5,7 +5,7 @@ public enum EdsacGestures { LEFT_SWIPE, RIGHT_SWIPE, UP_SWIPE, DOWN_SWIPE, STRET
 
 public class KinectInfoInterpreter : MonoBehaviour {
 
-	public GUIText asd;
+	public GUIText gazeVectorText;
 
 	public MyKinectListener kinectListener;
 	public KinectFeedbackController feedbackController;
@@ -212,7 +212,7 @@ public class KinectInfoInterpreter : MonoBehaviour {
 
 	private float GazeFromQuaternion(Quaternion headRotation) {
 		Vector3 directionVector = headRotation * Vector3.forward;
-		asd.text = System.String.Format("({0:0.000},{1:0.000})", directionVector.x, directionVector.z);
+		gazeVectorText.text = System.String.Format("({0:0.000},{1:0.000})", directionVector.x, directionVector.z);
 		return Mathf.Atan2 (directionVector.x, directionVector.z);
 	}
 

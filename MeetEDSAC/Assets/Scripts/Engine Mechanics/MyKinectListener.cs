@@ -15,6 +15,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 																KinectGestures.Gestures.ZoomIn,
 																KinectGestures.Gestures.ZoomOut };
 
+	private KinectManager kinectManager;
 	private long firstUserId;
 	private long secondUserId;
 	private int users = 0;
@@ -163,6 +164,8 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		
 		// every update, reset gestures to 'not occurring', then check if that's correct
 
+		kinectManager = KinectManager.Instance;
+
 		if (users > 0) {
 			ResetGestureStates(firstUserId);
 			// reset gestures to not occurring
@@ -205,10 +208,12 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 			zoomSum += thisZoom;
 			zoomHistory[userId].Enqueue(thisZoom);
 		}
-		if (zoomSum > zoomThreshold) {
-			(gestureStates[userId])[KinectGestures.Gestures.ZoomIn] = true;
-		} else if (zoomSum < -zoomThreshold) {
-			(gestureStates[userId])[KinectGestures.Gestures.ZoomOut] = true;
+		if (kinectManager.GetLeftHandState(userId) == KinectInterop.HandState.Closed && kinectManager.GetRightHandState(userId) == KinectInterop.HandState.Closed) {
+			if (zoomSum > zoomThreshold) {
+				(gestureStates[userId])[KinectGestures.Gestures.ZoomIn] = true;
+			} else if (2f * zoomSum < -zoomThreshold) {
+				(gestureStates[userId])[KinectGestures.Gestures.ZoomOut] = true;
+			}
 		}
 		//} else {
 		//	zoomHistory.Clear();

@@ -86,7 +86,6 @@ public class Controller : MonoBehaviour {
 		}
 		if (useKeyboard) {
 			if (Input.GetKeyDown(KeyCode.D)) {
-				Debug.Log ("DDDD");
 				OnPanRight();
 			}
 			if (Input.GetKeyDown(KeyCode.A)) {

@@ -76,6 +76,9 @@ public class EDSAC {
 		rows.Add (RowName.REAR, new Row());
 		rows.Add (RowName.MIDDLE, new Row());
 		rows.Add (RowName.FRONT, new Row());
+		rows[RowName.REAR].name = RowName.REAR;
+		rows[RowName.MIDDLE].name = RowName.MIDDLE;
+		rows[RowName.FRONT].name = RowName.FRONT;
 
 	}
 
