@@ -57,7 +57,7 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 	void Update() {
 		if (engagementRegionsModeActive) {
 			if (singleEngagementRegion) {
-				singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,singleEngagementTransitionSlide);
+				singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,singleEngagementTransitionSlide*60f*Time.deltaTime);
 				testInputIndicator.transform.localPosition = new Vector3 (0.5f+0.5f*singleEngagementPosition, 0.8f);
 				mainCameraBlurGradual.SetBlur( (singleEngagementPosition < LeftPanelEngagamentDeflectionTrigger()) || (singleEngagementPosition > RightPanelEngagamentDeflectionTrigger()));
 				overlayForLeft.intensity = Mathf.Clamp ((singleEngagementPosition-0.1f)/0.6f,0f,1f) * overlayIntensity;
@@ -72,10 +72,10 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 					MarkOnlyRightPanelEngaged();
 				}
 			} else {
-				overlayForLeft.intensity = Mathf.Lerp(overlayForLeft.intensity,leftIntensityTarget,multiEngagementTransitionSlide);
-				overlayForRight.intensity = Mathf.Lerp(overlayForRight.intensity,rightIntensityTarget,multiEngagementTransitionSlide);
-				groupForLeft.alpha = Mathf.Lerp(groupForLeft.alpha,leftAlphaTarget,multiEngagementTransitionSlide);
-				groupForRight.alpha = Mathf.Lerp(groupForRight.alpha,rightAlphaTarget,multiEngagementTransitionSlide);
+				overlayForLeft.intensity = Mathf.Lerp(overlayForLeft.intensity,leftIntensityTarget,multiEngagementTransitionSlide*60f*Time.deltaTime);
+				overlayForRight.intensity = Mathf.Lerp(overlayForRight.intensity,rightIntensityTarget,multiEngagementTransitionSlide*60f*Time.deltaTime);
+				groupForLeft.alpha = Mathf.Lerp(groupForLeft.alpha,leftAlphaTarget,multiEngagementTransitionSlide*60f*Time.deltaTime);
+				groupForRight.alpha = Mathf.Lerp(groupForRight.alpha,rightAlphaTarget,multiEngagementTransitionSlide*60f*Time.deltaTime);
 			}
 		}
 	}

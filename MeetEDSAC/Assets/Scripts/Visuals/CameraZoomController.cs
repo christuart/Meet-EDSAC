@@ -16,7 +16,7 @@ public class CameraZoomController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Mathf.Abs (target-cam.fieldOfView) > zoomSettings.zoomThresh) {
-			cam.fieldOfView = Mathf.Lerp (cam.fieldOfView,target,zoomSettings.zoomSlide);
+			cam.fieldOfView = Mathf.Lerp (cam.fieldOfView,target,zoomSettings.zoomSlide*60f*Time.deltaTime);
 		}
 	}
 

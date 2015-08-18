@@ -31,7 +31,7 @@ public class InspectionPointController : MonoBehaviour {
 		if (Mathf.Abs (group.alpha - alphaTarget) < alphaThresh) {
 			group.alpha = alphaTarget;
 		} else {
-			group.alpha = Mathf.Lerp (group.alpha,alphaTarget,alphaSlide);
+			group.alpha = Mathf.Lerp (group.alpha,alphaTarget,alphaSlide*60f*Time.deltaTime);
 		}
 		if (!hovering) {
 			float timeSince = Time.time - pointerLeftAt;

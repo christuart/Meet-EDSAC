@@ -12,7 +12,7 @@ public class WorldSpaceCanvasHinge : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-		extension = Mathf.Lerp (extension,Mathf.Clamp01(target),slide);
+		extension = Mathf.Lerp (extension,Mathf.Clamp01(target),slide*60f*Time.deltaTime);
 		transform.eulerAngles = new Vector3(0,Mathf.Lerp (hideAngle,displayAngle,extension),0);
 	}
 	

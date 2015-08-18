@@ -126,9 +126,9 @@ public class Controller : MonoBehaviour {
 				if (engagementController.IsOnlyModelEngaged()) {
 					OnPanLeft();
 				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
-					if (infoController.hingeOut) infoController.ToggleHinge();
+					if (!infoController.hingeOut) infoController.ToggleHinge();
 				} else if (engagementController.IsOnlyRightPanelEngaged()) {
-					if (!inspectorController.hingeOut) inspectorController.ToggleHinge();
+					if (inspectorController.hingeOut) inspectorController.ToggleHinge();
 				}
 			}
 			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {

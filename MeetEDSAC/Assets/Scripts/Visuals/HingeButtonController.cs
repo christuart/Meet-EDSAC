@@ -33,12 +33,12 @@ public class HingeButtonController : MonoBehaviour {
 		targetX = (leftHandHinge ? -1 : 1) * Screen.width * (hingeOut ? buttonPositionWhenOut : buttonPositionWhenIn);
 		targetScale = hingeOut ? new Vector3(buttonScaleWhenOut,buttonScaleWhenOut,buttonScaleWhenOut) : new Vector3(buttonScaleWhenIn,buttonScaleWhenIn,buttonScaleWhenIn);
 		if (Mathf.Abs(transform.localPosition.x-targetX) > moveSlideThresh) {
-			transform.localPosition = new Vector3 (Mathf.MoveTowards (transform.localPosition.x,targetX,move),transform.localPosition.y,transform.localPosition.z);
+			transform.localPosition = new Vector3 (Mathf.MoveTowards (transform.localPosition.x,targetX,move*60f*Time.deltaTime),transform.localPosition.y,transform.localPosition.z);
 		} else {
-			transform.localPosition = new Vector3 (Mathf.Lerp (transform.localPosition.x,targetX,slide),transform.localPosition.y,transform.localPosition.z);
+			transform.localPosition = new Vector3 (Mathf.Lerp (transform.localPosition.x,targetX,slide*60f*Time.deltaTime),transform.localPosition.y,transform.localPosition.z);
 			}
-		transform.localScale = Vector3.Lerp (transform.localScale,targetScale,slide);
-		transform.eulerAngles = new Vector3(0f,0f,Mathf.Lerp (transform.eulerAngles.z,targetRotation,slide));
+		transform.localScale = Vector3.Lerp (transform.localScale,targetScale,slide*60f*Time.deltaTime);
+		transform.eulerAngles = new Vector3(0f,0f,Mathf.Lerp (transform.eulerAngles.z,targetRotation,slide*60f*Time.deltaTime));
 
 	}
 

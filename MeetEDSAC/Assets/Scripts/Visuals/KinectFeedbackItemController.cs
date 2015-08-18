@@ -40,14 +40,14 @@ public class KinectFeedbackItemController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		rectTransform.localPosition = new Vector2(0f, Mathf.Lerp (rectTransform.localPosition.y, yTarget, slide));
-		rectTransform.sizeDelta = Vector2.Lerp (rectTransform.sizeDelta, new Vector2(widthTarget, heightTarget), slide);
+		rectTransform.localPosition = new Vector2(0f, Mathf.Lerp (rectTransform.localPosition.y, yTarget, slide*60f*Time.deltaTime));
+		rectTransform.sizeDelta = Vector2.Lerp (rectTransform.sizeDelta, new Vector2(widthTarget, heightTarget), slide*60f*Time.deltaTime);
 		if (!dying) {
 			if (Time.time-bornTime > lifeTime)
 				Die();
 		} else {
 			if (group.alpha > 0.05) {
-				group.alpha = Mathf.Lerp (group.alpha,0,slide);
+				group.alpha = Mathf.Lerp (group.alpha,0,slide*60f*Time.deltaTime);
 			} else {
 				feedbackController.RemoveItem(stackPosition);
 				Destroy (gameObject);
