@@ -1,20 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Visuals\ScreenEngagementFeedbackController.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FrameRateManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="129" Column="11" />
-      <File FileName="Assets\MouseDragController.cs" Line="74" Column="24" />
-      <File FileName="Assets\HingePanelDoubleClickController.cs" Line="14" Column="12" />
-      <File FileName="Assets\Scripts\Visuals\HingeButtonController.cs" Line="41" Column="120" />
-      <File FileName="Assets\Scripts\Engine Mechanics\KinectInfoInterpreter.cs" Line="198" Column="61" />
-      <File FileName="Assets\Scripts\Engine Mechanics\MyKinectListener.cs" Line="242" Column="62" />
-      <File FileName="Assets\Scripts\Engine Mechanics\InspectionPointController.cs" Line="34" Column="64" />
-      <File FileName="Assets\Scripts\Engine Mechanics\InspectorController.cs" Line="28" Column="125" />
-      <File FileName="Assets\Scripts\Engine Mechanics\WorldSpaceCanvasHinge.cs" Line="16" Column="85" />
-      <File FileName="Assets\Scripts\View Point Mesh System\ViewPointMeshCameraController.cs" Line="37" Column="126" />
-      <File FileName="Assets\Scripts\Visuals\CameraZoomController.cs" Line="19" Column="98" />
-      <File FileName="Assets\Scripts\Visuals\KinectFeedbackItemController.cs" Line="44" Column="37" />
-      <File FileName="Assets\Scripts\Visuals\ScreenEngagementFeedbackController.cs" Line="78" Column="124" />
+      <File FileName="Assets\FrameRateManager.cs" Line="13" Column="34" />
+      <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="353" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -30,11 +30,11 @@ public class ViewPointMeshCameraController : MonoBehaviour {
 
 	void Update () {
 		if ((transform.position-targetPosition).magnitude > slideThresh) {
-			transform.position = Vector3.Lerp(transform.position,targetPosition,slideRate*60f*Time.deltaTime);
-			transform.rotation = Quaternion.Slerp(transform.rotation,targetRotation,slideRate*60f*Time.deltaTime);
+			transform.position = Vector3.Lerp(transform.position,targetPosition,slideRate*20f*Time.deltaTime);
+			transform.rotation = Quaternion.Slerp(transform.rotation,targetRotation,slideRate*20f*Time.deltaTime);
 		}
 		if ((depthOfFieldScript.focalLength-targetDepthOfField) > slideThresh) {
-			depthOfFieldScript.focalLength = Mathf.Lerp(depthOfFieldScript.focalLength,targetDepthOfField,slideRate*60f*Time.deltaTime);
+			depthOfFieldScript.focalLength = Mathf.Lerp(depthOfFieldScript.focalLength,targetDepthOfField,slideRate*20f*Time.deltaTime);
 		}
 	}
 

@@ -25,7 +25,7 @@ public class InspectorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		canvasRectTransform.sizeDelta = Vector2.Lerp (canvasRectTransform.sizeDelta,targetSizeDelta,heightSlide*60f*Time.deltaTime);
+		canvasRectTransform.sizeDelta = Vector2.Lerp (canvasRectTransform.sizeDelta,targetSizeDelta,heightSlide*20f*Time.deltaTime);
 	}
 
 	public void SetImage(Sprite target) {

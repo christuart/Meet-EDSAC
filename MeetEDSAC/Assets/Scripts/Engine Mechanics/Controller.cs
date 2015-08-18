@@ -28,6 +28,7 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Controller : MonoBehaviour {
 	
@@ -53,6 +54,8 @@ public class Controller : MonoBehaviour {
 	private ViewPointMeshVertex activeVertex;
 	private Queue vertexTargets;
 
+	private List<LabelController> activeLabels;
+
 	public bool debugModes = false;
 	public bool useKeyboard = true;
 	public bool useKinect = true;
@@ -61,37 +64,29 @@ public class Controller : MonoBehaviour {
 
 	public GameObject debugOnlyGUI;
 
+	private bool updating = false;
+
 	// Use this for initialization
 	void Awake () {
 		vertexTargets = new Queue();
+		activeLabels = new List<LabelController> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		while (vertexTargets.Count > 1) {
-			
-			OnBeforeChangeVertex();
+		updating = true;
 
-			activeVertex = (ViewPointMeshVertex)vertexTargets.Dequeue();
-			meshSystemCameraController.GoToVertex(activeVertex);
-			if ((bool)vertexTargets.Dequeue()) {
-				if (activeVertex.informationContent != InformationContent.NONE) {
-					infoHolder.PlaceObjectInInfoUI(activeVertex.informationContent);
-				}
-			}
-			foreach (LabelController lc in GameObject.FindObjectsOfType<LabelController>()) {
-				lc.Deactivate();
-			}
-			foreach (LabelController lc in activeVertex.associatedLabels) {
-				lc.Activate();
-			}
-			
-			OnAfterChangeVertex();
+		while (vertexTargets.Count > 1) {
+
+			ViewPointMeshVertex v = (ViewPointMeshVertex)vertexTargets.Dequeue();
+			bool b = (bool)vertexTargets.Dequeue();
+			ActivateVertexNow(v,b);
 
 		}
 		if (useKeyboard) {
 			if (Input.GetKeyDown(KeyCode.D)) {
+				Debug.Log ("DDDD");
 				OnPanRight();
 			}
 			if (Input.GetKeyDown(KeyCode.A)) {
@@ -218,6 +213,7 @@ public class Controller : MonoBehaviour {
 			}
 			if (Input.GetKeyDown(KeyCode.M)) {
 				engagementController.UseSingleEngagementRegion(true);
+				useFace = false;
 				useMouse = true;
 			}
 			if (Input.GetKeyDown (KeyCode.Alpha1)) {
@@ -332,8 +328,34 @@ public class Controller : MonoBehaviour {
 	/*****************************
 	// PUBLIC GAME FUNCTIONS	*/
 	public void ActivateVertex(ViewPointMeshVertex vert, bool openInfo = true) {
-		vertexTargets.Enqueue(vert);
-		vertexTargets.Enqueue(openInfo);
+		if (!updating) {
+			vertexTargets.Enqueue (vert);
+			vertexTargets.Enqueue (openInfo);
+		} else {
+			ActivateVertexNow(vert,openInfo);
+		}
+	}
+	private void ActivateVertexNow(ViewPointMeshVertex vert, bool openInfo) {
+		OnBeforeChangeVertex();
+		activeVertex = vert;
+		meshSystemCameraController.GoToVertex(activeVertex);
+		if (openInfo) {
+			if (activeVertex.informationContent != InformationContent.NONE) {
+				infoHolder.PlaceObjectInInfoUI(activeVertex.informationContent);
+			}
+		}
+		ActivateAssociatedLabels();
+		OnAfterChangeVertex();
+	}
+	public void ActivateAssociatedLabels() {
+		while (activeLabels.Count > 0) {
+			activeLabels[0].Deactivate();
+			activeLabels.RemoveAt (0);
+		}
+		foreach (LabelController lc in activeVertex.associatedLabels) {
+			lc.Activate();
+			activeLabels.Add(lc);
+		}
 	}
 	public void SetFirstPlayerId(long userId) {
 		firstPlayerKinectInfo.SetUserId(userId);
