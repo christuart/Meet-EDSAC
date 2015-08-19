@@ -61,7 +61,8 @@ public class Controller : MonoBehaviour {
 	public bool useKinect = true;
 	public bool useFace = false;
 	public bool useMouse = true;
-
+	
+	public GameObject kinectUserInfo;
 	public GameObject debugOnlyGUI;
 
 	private bool updating = false;
@@ -70,6 +71,8 @@ public class Controller : MonoBehaviour {
 	void Awake () {
 		vertexTargets = new Queue();
 		activeLabels = new List<LabelController> ();
+//		foreach (LabelController lc in FindObjectsOfType<LabelController>())
+//			lc.Deactivate();
 	}
 	
 	// Update is called once per frame
@@ -259,8 +262,22 @@ public class Controller : MonoBehaviour {
 		ActivateVertex(activeVertex.Down ());
 	}
 	public void OnBeforeChangeVertex() {
+		if (activeVertex != null && activeVertex.associatedInspectionPoints != null) {
+			foreach (InspectionPointController ipc in activeVertex.associatedInspectionPoints) {
+				ipc.gameObject.layer = 0; // Default
+				foreach (Transform child in ipc.transform)
+					child.gameObject.layer = 0;
+			}
+		}
 	}
 	public void OnAfterChangeVertex() {
+		if (activeVertex != null && activeVertex.associatedInspectionPoints != null) {
+			foreach (InspectionPointController ipc in activeVertex.associatedInspectionPoints) {
+				ipc.gameObject.layer = 16; // Inspection Point Markers Detail
+				foreach (Transform child in ipc.transform)
+					child.gameObject.layer = 16;
+			}
+		}
 	}
 	public void OnZoomIn() {
 		if (cameraZoom.GetZoom() <= activeVertex.exitByZoomFieldOfView) {
@@ -367,6 +384,9 @@ public class Controller : MonoBehaviour {
 	}
 	public void ClearSecondPlayer() {
 		secondPlayerKinectInfo.SetUserId (-1);
+	}
+	public void DecideWhetherKinectDebugShows() {
+		kinectUserInfo.SetActive (useKinect);
 	}
 
 	private void EnableDebugModes(bool enable) {

@@ -79,6 +79,8 @@
      <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
      <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
      <Compile Include="Assets\LoadingController.cs" />
+     <Compile Include="Assets\LoadingPanelFadeOutController.cs" />
+     <Compile Include="Assets\MenuVideoController.cs" />
      <Compile Include="Assets\MouseDragController.cs" />
      <Compile Include="Assets\Persistent.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\Controller.cs" />
@@ -113,6 +115,7 @@
      <Compile Include="Assets\Scripts\XML\EdsacXmlPopulater.cs" />
      <Compile Include="Assets\Scripts\XML\TinyXmlReader.cs" />
      <Compile Include="Assets\Scripts\setup_rack.cs" />
+     <Compile Include="Assets\VideoTextureController.cs" />
      <None Include="Assets\Resources\BlurShader.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />

@@ -36,4 +36,10 @@ public class ViewPointMesh : MonoBehaviour {
 		foreach (ViewPointMeshBuilder builder in GetComponentsInChildren<ViewPointMeshBuilder>())
 			builder.DrawGizmo(showAllBuilderGizmos);
 	}
+
+	void Update() {
+		foreach (ViewPointMeshVertex v in GetComponentsInChildren<ViewPointMeshVertex>())
+			v.RepopulateAssociatedLabels();
+		enabled = false;
+	}
 }

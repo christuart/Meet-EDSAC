@@ -10,6 +10,7 @@ public class ViewPointMeshVertex : MonoBehaviour {
 
 	public InformationContent informationContent = InformationContent.NONE;
 	public LabelController[] associatedLabels;
+	public InspectionPointController[] associatedInspectionPoints;
 	public GameObject associatedLabelParent;
 	public bool isCloseToObjects;
 
@@ -34,8 +35,7 @@ public class ViewPointMeshVertex : MonoBehaviour {
 	//public Action SelectAction
 
 	void Start() {
-		if (associatedLabelParent != null)
-			associatedLabels = associatedLabelParent.GetComponentsInChildren<LabelController>();
+		RepopulateAssociatedLabels();
 		foreach (LabelController lc in associatedLabels)
 			lc.Deactivate();
 	}
@@ -64,5 +64,11 @@ public class ViewPointMeshVertex : MonoBehaviour {
 	public ViewPointMeshVertex ClosestMatch(ViewPointMeshBuilder builder) {
 		return builder.ClosestMatch(this);
 	}
+
+	public void RepopulateAssociatedLabels() {
+		if (associatedLabelParent != null)
+			associatedLabels = associatedLabelParent.GetComponentsInChildren<LabelController>();
+	}
+
 
 }

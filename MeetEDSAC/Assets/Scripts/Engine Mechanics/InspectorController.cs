@@ -3,9 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class InspectorController : MonoBehaviour {
+	
+	public Image photoImage;
+	public VideoTextureController videoController;
+	public Sprite startImage;
 
 	private RectTransform rectTransform;
-	private Image image;
 	private Canvas canvas;
 	private RectTransform canvasRectTransform;
 
@@ -16,11 +19,11 @@ public class InspectorController : MonoBehaviour {
 	void Start () {
 		
 		rectTransform = GetComponent<RectTransform>();
-		image = GetComponent<Image>();
 		canvas = GetComponentInParent<Canvas>();
 		canvasRectTransform = canvas.GetComponent<RectTransform>();
 
-		ResizeToImage();
+		if (startImage != null)
+			SetImage(startImage);
 	}
 	
 	// Update is called once per frame
@@ -29,13 +32,27 @@ public class InspectorController : MonoBehaviour {
 	}
 
 	public void SetImage(Sprite target) {
-		image.sprite = target;
+		videoController.gameObject.SetActive(false);
+		photoImage.gameObject.SetActive(true);
+		photoImage.sprite = target;
 		ResizeToImage();
 	}
-
+	public void SetVideo(Videos target, bool play = true) {
+		videoController.gameObject.SetActive(true);
+		photoImage.gameObject.SetActive(false);
+		videoController.SetVideo(target,play);
+		ResizeToVideo();
+	}
+	
 	public void ResizeToImage() {
-		float spriteHeight = rectTransform.rect.width * image.sprite.rect.height / image.sprite.rect.width;
-		
+		float spriteHeight = rectTransform.rect.width * photoImage.sprite.rect.height / photoImage.sprite.rect.width;
+		Resize(spriteHeight);
+	}
+	public void ResizeToVideo() {
+		float spriteHeight = rectTransform.rect.width * videoController.textureTarget.mainTexture.height / videoController.textureTarget.mainTexture.width;
+		Resize(spriteHeight);
+	}
+	public void Resize(float spriteHeight) {
 		targetSizeDelta = canvasRectTransform.sizeDelta;
 		targetSizeDelta.y -= rectTransform.rect.height - spriteHeight;
 	}

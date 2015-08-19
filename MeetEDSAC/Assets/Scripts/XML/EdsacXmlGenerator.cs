@@ -153,7 +153,12 @@ public class EdsacXmlGenerator : MonoBehaviour {
 						labelController.normalInfluence = labelNormalInfluence;
 						labelController.power = labelPower;
 
-						uiLabel.GetComponentInChildren<Text>().text = ch.uiLabelText;
+						Text uiLabelText = uiLabel.GetComponentInChildren<Text>();
+						uiLabelText.text = ch.uiLabelText;
+						while (uiLabelText.preferredWidth > 200f && uiLabelText.fontSize > 10)
+							uiLabelText.fontSize--;
+						((RectTransform)uiLabelText.transform).sizeDelta = new Vector2(uiLabelText.preferredWidth, 30f);
+
 						uiLabelTarget.GetComponent<LabelAlignmentOnChassis>().chassis = chassis.transform;
 
 						if (testingPoints.ContainsKey(ch.chassisType.testingPoints)) {

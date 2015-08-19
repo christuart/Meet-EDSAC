@@ -30,9 +30,11 @@ public class ViewPointMeshBuilder : MonoBehaviour {
 	public float exitByZoomFieldOfView = 0f;
 
 	public InformationContent informationContent;
-
+	
 	public LabelController[] associatedLabels;
 	public GameObject associatedLabelParent;
+
+	public InspectionPointController[] associatedInspectionPoints;
 
 	private bool meshBuilt = false;
 	
@@ -117,6 +119,7 @@ public class ViewPointMeshBuilder : MonoBehaviour {
 
 	public void SetVertexVariables(ViewPointMeshVertex target) {
 		if (associatedLabels != null) target.associatedLabels = associatedLabels;
+		if (associatedInspectionPoints != null) target.associatedInspectionPoints = associatedInspectionPoints;
 		if (associatedLabelParent != null) target.associatedLabelParent = associatedLabelParent;
 		target.informationContent = informationContent;
 		target.isCloseToObjects = isCloseToObjects;
