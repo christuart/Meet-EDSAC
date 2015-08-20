@@ -68,7 +68,7 @@ public class LabelController : MonoBehaviour {
 		}
 		if (active) {
 
-			Vector4 minMaxViewport = Tools.ViewportFromBounds(targetForLabel.bounds.min,targetForLabel.bounds.max,viewCamera);
+			Vector4 minMaxViewport = Tools.ViewportFromRenderer(targetForLabel,viewCamera);
 			Vector2 min = Tools.ViewportToCameraPoint(viewCamera,new Vector2(minMaxViewport.x,minMaxViewport.y));
 			Vector2 max = Tools.ViewportToCameraPoint(viewCamera,new Vector2(minMaxViewport.z,minMaxViewport.w));
 			// min and max are the bottom left and top right corners of the object

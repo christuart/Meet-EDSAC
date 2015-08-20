@@ -43,7 +43,10 @@ public abstract class Tools : MonoBehaviour {
 		}
 		return new Color32(r,g,b,a);
 	}
-	
+
+	public static Vector4 ViewportFromRenderer(Renderer _r, Camera _c) {
+		return ViewportFromBounds(_r.bounds.min,_r.bounds.max, _c);
+	}
 	public static Vector4 ViewportFromBounds(Vector3 min, Vector3 max, Camera mainCam) {
 		
 		float minXFound;

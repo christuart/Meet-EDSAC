@@ -36,7 +36,7 @@ public class HingeButtonController : MonoBehaviour {
 			transform.localPosition = new Vector3 (Mathf.MoveTowards (transform.localPosition.x,targetX,move*20f*Time.deltaTime),transform.localPosition.y,transform.localPosition.z);
 		} else {
 			transform.localPosition = new Vector3 (Mathf.Lerp (transform.localPosition.x,targetX,slide*20f*Time.deltaTime),transform.localPosition.y,transform.localPosition.z);
-			}
+		}
 		transform.localScale = Vector3.Lerp (transform.localScale,targetScale,slide*20f*Time.deltaTime);
 		transform.eulerAngles = new Vector3(0f,0f,Mathf.Lerp (transform.eulerAngles.z,targetRotation,slide*20f*Time.deltaTime));
 

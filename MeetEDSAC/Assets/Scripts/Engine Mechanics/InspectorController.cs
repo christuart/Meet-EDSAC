@@ -32,6 +32,7 @@ public class InspectorController : MonoBehaviour {
 	}
 
 	public void SetImage(Sprite target) {
+		videoController.Stop();
 		videoController.gameObject.SetActive(false);
 		photoImage.gameObject.SetActive(true);
 		photoImage.sprite = target;
@@ -42,6 +43,13 @@ public class InspectorController : MonoBehaviour {
 		photoImage.gameObject.SetActive(false);
 		videoController.SetVideo(target,play);
 		ResizeToVideo();
+	}
+	public void PauseVideo() {
+		if (videoController.IsPlaying()) {
+			videoController.Pause();
+		} else {
+			videoController.Play();
+		}
 	}
 	
 	public void ResizeToImage() {

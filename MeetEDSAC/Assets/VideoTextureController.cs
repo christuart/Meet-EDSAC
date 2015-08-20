@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public enum Videos { TAPE_READ };
+public enum Videos { 	TAPE_READ = 0,
+						EDSAC_FILM = 1 };
 
 public class VideoTextureController : MonoBehaviour {
 
@@ -12,22 +13,79 @@ public class VideoTextureController : MonoBehaviour {
 	public RawImage textureTarget;
 	public AudioSource audioTarget;
 
+	private bool mute;
+
 	// Use this for initialization
 	void Start () {
 		if (videos.Length > 0 && videoAudio.Length > 0) {
-			textureTarget.texture = videos[0];
-			audioTarget.clip = videoAudio[0];
-			((MovieTexture)textureTarget.mainTexture).Play();
-			audioTarget.Play ();	
+			SetVideo (0,true);
+		}
+	}
+	
+	public void SetVideo(Videos target, bool play = true) {
+		SetVideo ((int)target,play);
+	}
+	public void SetVideo(int target, bool play = true) {
+		Stop();
+		textureTarget.texture = videos[target];
+		audioTarget.clip = videoAudio[target];
+		if (play) 
+			Play();
+	}
+
+	public void Play() {
+		if (textureTarget.mainTexture != null) {
+			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) {
+				((MovieTexture)textureTarget.mainTexture).Play();
+				audioTarget.Play ();	
+			}
+		}
+	}
+		
+	public void Stop() {
+		if (textureTarget.mainTexture != null) {
+			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) {
+				((MovieTexture)textureTarget.mainTexture).Stop();
+			}
+		}
+		if (audioTarget != null) audioTarget.Stop();
+	}
+
+	public void Pause() {
+		if (textureTarget.mainTexture != null) {
+			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) ((MovieTexture)textureTarget.mainTexture).Pause();
+			audioTarget.Pause ();
 		}
 	}
 
-	public void SetVideo(Videos target, bool play = true) {
-		textureTarget.texture = videos[(int)target];
-		audioTarget.clip = videoAudio[(int)target];
-		if (play) {
-			((MovieTexture)textureTarget.mainTexture).Play();
-			audioTarget.Play ();	
+	public bool IsPlaying() {
+		if (textureTarget.mainTexture != null) {
+			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) {
+				return ((MovieTexture)textureTarget.mainTexture).isPlaying;
+			}
 		}
+		return false;
+	}
+	
+	public IEnumerator Mute() {
+		mute = true;
+		for (float v = audioTarget.volume; v > 0f; v -= 0.1f) {
+			if (!mute) yield break;
+			if (audioTarget.volume < v) yield break;
+			audioTarget.volume = v;
+			yield return null;
+		}
+		audioTarget.volume = 0f;
+	}
+	
+	public IEnumerator Unmute() {
+		mute = false;
+		for (float v = audioTarget.volume; v < 1f; v += 0.1f) {
+			if (mute) yield break;
+			if (audioTarget.volume > v) yield break;
+			audioTarget.volume = v;
+			yield return null;
+		}
+		audioTarget.volume = 1f;
 	}
 }

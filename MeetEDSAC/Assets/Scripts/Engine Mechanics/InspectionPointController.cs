@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class InspectionPointController : MonoBehaviour {
 
@@ -13,7 +14,9 @@ public class InspectionPointController : MonoBehaviour {
 
 	public float maxAlpha = .4f;
 
-	public string onClick;
+	public Sprite imageContent;
+	public bool isVideo;
+	public Videos videoContent;
 	
 	private float alphaTarget;
 	private float pointerLeftAt = 0f;
@@ -57,6 +60,15 @@ public class InspectionPointController : MonoBehaviour {
 		GetComponent<Animator>().SetTrigger("HoverExit");
 	}
 	public void Choose() {
-		Debug.Log ("Activated a message! \"" + onClick + "\"");
+		InspectorController inspectorController = GameObject.FindObjectOfType<InspectorController>();
+		if (isVideo) {
+			if (inspectorController.videoController.textureTarget.mainTexture == inspectorController.videoController.videos[(int)videoContent]) {
+				inspectorController.PauseVideo();
+			} else {
+				inspectorController.SetVideo (videoContent,true);
+			}
+		} else {
+			inspectorController.SetImage(imageContent);
+		}
 	}
 }

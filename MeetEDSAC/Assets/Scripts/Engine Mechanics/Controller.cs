@@ -250,16 +250,32 @@ public class Controller : MonoBehaviour {
 	// out elsewhere. Sorry not sorry.				*/
 
 	public void OnPanLeft() {
-		ActivateVertex(activeVertex.Left ());
+		if (activeVertex.Left() != activeVertex) {
+			ActivateVertex(activeVertex.Left ());
+		} else {
+			StartCoroutine(meshSystemCameraController.Nudge(ViewPointMeshCameraController.NudgeDirection.LEFT));
+		}
 	}
 	public void OnPanRight() {
-		ActivateVertex(activeVertex.Right ());
+		if (activeVertex.Right() != activeVertex) {
+			ActivateVertex(activeVertex.Right ());
+		} else {
+			StartCoroutine(meshSystemCameraController.Nudge(ViewPointMeshCameraController.NudgeDirection.RIGHT));
+		}
 	}
 	public void OnPanUp() {
-		ActivateVertex(activeVertex.Up ());
+		if (activeVertex.Up() != activeVertex) {
+			ActivateVertex(activeVertex.Up ());
+		} else {
+			StartCoroutine(meshSystemCameraController.Nudge(ViewPointMeshCameraController.NudgeDirection.UP));
+		}
 	}
 	public void OnPanDown() {
-		ActivateVertex(activeVertex.Down ());
+		if (activeVertex.Down() != activeVertex) {
+			ActivateVertex(activeVertex.Down ());
+		} else {
+			StartCoroutine(meshSystemCameraController.Nudge(ViewPointMeshCameraController.NudgeDirection.DOWN));
+		}
 	}
 	public void OnBeforeChangeVertex() {
 		if (activeVertex != null && activeVertex.associatedInspectionPoints != null) {
@@ -315,6 +331,7 @@ public class Controller : MonoBehaviour {
 		if (!inspectorController.hingeOut) {
 			inspectorController.ToggleHinge();
 		}
+		StartCoroutine(inspector.videoController.Unmute());
 	}
 	public void OnHingeAway(bool leftHandHinge) {
 		if (leftHandHinge) {
@@ -334,6 +351,7 @@ public class Controller : MonoBehaviour {
 		if (inspectorController.hingeOut) {
 			inspectorController.ToggleHinge();
 		}
+		StartCoroutine(inspector.videoController.Mute());
 	}
 	public void OnNewFirstPlayer() {
 	}

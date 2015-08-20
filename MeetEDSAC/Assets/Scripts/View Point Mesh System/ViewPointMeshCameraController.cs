@@ -19,6 +19,11 @@ public class ViewPointMeshCameraController : MonoBehaviour {
 	private Vector3 targetPosition;
 	private Quaternion targetRotation;
 
+	public bool nudging = false;
+	public Vector3 nudge;
+	public enum NudgeDirection { LEFT,RIGHT,UP,DOWN,NONE };
+	private NudgeDirection nudgeDirection = NudgeDirection.NONE;
+
 	public UnityStandardAssets.ImageEffects.DepthOfField depthOfFieldScript;
 
 	void Start() {
@@ -29,8 +34,8 @@ public class ViewPointMeshCameraController : MonoBehaviour {
 	}
 
 	void Update () {
-		if ((transform.position-targetPosition).magnitude > slideThresh) {
-			transform.position = Vector3.Lerp(transform.position,targetPosition,slideRate*20f*Time.deltaTime);
+		if (nudging || (transform.position-targetPosition).magnitude > slideThresh) {
+			transform.position = Vector3.Lerp(transform.position,targetPosition+nudge,slideRate*20f*Time.deltaTime);
 			transform.rotation = Quaternion.Slerp(transform.rotation,targetRotation,slideRate*20f*Time.deltaTime);
 		}
 		if ((depthOfFieldScript.focalLength-targetDepthOfField) > slideThresh) {
@@ -43,6 +48,50 @@ public class ViewPointMeshCameraController : MonoBehaviour {
 		targetPosition = target.transform.position;
 		targetRotation = target.transform.rotation;
 		targetDepthOfField = target.isCloseToObjects ? closeDepthOfField : farDepthOfField;
+	}
+	
+	public IEnumerator Nudge(NudgeDirection _nudgeDirection) {
+
+		// if we're already nudging left, don't add another over the top
+		if (nudgeDirection == _nudgeDirection || _nudgeDirection == NudgeDirection.NONE)
+			yield break;
+
+		// start nudging left
+		nudgeDirection = _nudgeDirection;
+		nudging = true;
+		Vector3 nudgeVector = Vector3.zero;
+		switch (nudgeDirection) {
+		case NudgeDirection.LEFT:
+			nudgeVector = Vector3.left;
+			break;
+		case NudgeDirection.RIGHT:
+			nudgeVector = Vector3.right;
+			break;
+		case NudgeDirection.UP:
+			nudgeVector = Vector3.up;
+			break;
+		case NudgeDirection.DOWN:
+			nudgeVector = Vector3.down;
+			break;
+		}
+		nudgeVector = .1f * (targetRotation * nudgeVector);
+
+		for (float i = 0.2f; i < 1f; i+=0.2f) {
+			// make sure nobody else has nudged us another way
+			if (nudgeDirection == _nudgeDirection) {
+				nudge = nudgeVector * (Mathf.Sin (Mathf.PI * i));
+				yield return null;
+			} else {
+				// if a different direction has started, stop this one
+				yield break;
+			}
+		}
+
+		// if we get here uninterrupted, finish the nudging so another left could start
+		nudgeDirection = NudgeDirection.NONE;
+		nudging = false;
+		nudge = Vector3.zero;
+
 	}
 
 }
