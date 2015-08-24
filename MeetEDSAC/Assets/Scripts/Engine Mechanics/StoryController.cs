@@ -9,6 +9,7 @@ public class StoryController : MonoBehaviour {
 	public enum StoryMode { DISABLED, STOPPED, PLAYING, PAUSED };
 
 	public StoryMode storyMode;
+	public GameObject storyModeIndicator;
 	private ViewPointMeshVertex normalModeVertex;
 	public int activeWaypointIndex;
 	public StoryWaypoint activeWaypoint;
@@ -37,6 +38,7 @@ public class StoryController : MonoBehaviour {
 		storyVertexHolder = new GameObject();
 		storyVertex = storyVertexHolder.AddComponent<StoryViewpointSystemVertex>();
 		animationPosition = new Vector3();
+		storyModeIndicator.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -64,6 +66,7 @@ public class StoryController : MonoBehaviour {
 		normalModeVertex = controller.activeVertex;
 		foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
 			ipc.Hide();
+		storyModeIndicator.SetActive (true);
 		storyMode = StoryMode.STOPPED;
 		activeWaypointIndex = -1;
 		EnterNextWaypoint();
@@ -72,6 +75,7 @@ public class StoryController : MonoBehaviour {
 		controller.ActivateVertex (normalModeVertex);
 		foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
 			ipc.Unhide();
+		storyModeIndicator.SetActive (false);
 		storyMode = StoryMode.DISABLED;
 	}
 		
