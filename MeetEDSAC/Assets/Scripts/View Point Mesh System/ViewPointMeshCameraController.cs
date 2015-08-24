@@ -10,6 +10,8 @@ public class ViewPointMeshCameraController : MonoBehaviour {
 	public float slideRate = 0.3f;
 	public float slideThresh = 0.02f;
 
+	public float maxSpeed = 1f;
+
 	public ViewPointMeshVertex vert;
 
 	public float closeDepthOfField = 1.77f;
@@ -18,6 +20,7 @@ public class ViewPointMeshCameraController : MonoBehaviour {
 	
 	private Vector3 targetPosition;
 	private Quaternion targetRotation;
+	private Vector3 lastPosition;
 
 	public bool nudging = false;
 	public Vector3 nudge;
@@ -25,6 +28,8 @@ public class ViewPointMeshCameraController : MonoBehaviour {
 	private NudgeDirection nudgeDirection = NudgeDirection.NONE;
 
 	public UnityStandardAssets.ImageEffects.DepthOfField depthOfFieldScript;
+
+	public bool continuousTarget;
 
 	void Start() {
 		targetDepthOfField = depthOfFieldScript.focalLength;
@@ -34,9 +39,22 @@ public class ViewPointMeshCameraController : MonoBehaviour {
 	}
 
 	void Update () {
+		if (continuousTarget) {
+			targetPosition = vert.transform.position;
+		}
 		if (nudging || (transform.position-targetPosition).magnitude > slideThresh) {
+
 			transform.position = Vector3.Lerp(transform.position,targetPosition+nudge,slideRate*20f*Time.deltaTime);
-			transform.rotation = Quaternion.Slerp(transform.rotation,targetRotation,slideRate*20f*Time.deltaTime);
+
+			float speedRatio = ((transform.position+nudge-lastPosition).magnitude/Time.deltaTime)/maxSpeed;
+			if (speedRatio > 1f)
+				transform.position = lastPosition + (transform.position+nudge-lastPosition) / speedRatio;
+
+			float slerpT = ((targetPosition+nudge-lastPosition) == Vector3.zero) ? .5f :(transform.position-lastPosition).magnitude / (targetPosition+nudge-lastPosition).magnitude;
+			transform.rotation = Quaternion.Slerp(transform.rotation,targetRotation,slerpT);
+
+			lastPosition = transform.position;
+
 		}
 		if ((depthOfFieldScript.focalLength-targetDepthOfField) > slideThresh) {
 			depthOfFieldScript.focalLength = Mathf.Lerp(depthOfFieldScript.focalLength,targetDepthOfField,slideRate*20f*Time.deltaTime);

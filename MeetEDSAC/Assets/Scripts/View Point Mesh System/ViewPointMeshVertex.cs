@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class ViewPointMeshVertex : MonoBehaviour {
+	
+	public bool viewInSceneView;
 
 	public ViewPointMeshVertex left;
 	public ViewPointMeshVertex right;
@@ -36,26 +39,28 @@ public class ViewPointMeshVertex : MonoBehaviour {
 
 	void Start() {
 		RepopulateAssociatedLabels();
-		foreach (LabelController lc in associatedLabels)
-			lc.Deactivate();
+		if (associatedLabels != null) {
+			foreach (LabelController lc in associatedLabels)
+				lc.Deactivate();
+		}
 	}
 	
-	public ViewPointMeshVertex Left() {
+	public virtual ViewPointMeshVertex Left() {
 		if (left != null)
 			return left;
 		return this;
 	}
-	public ViewPointMeshVertex Right() {
+	public virtual ViewPointMeshVertex Right() {
 		if (right != null)
 			return right;
 		return this;
 	}
-	public ViewPointMeshVertex Up() {
+	public virtual ViewPointMeshVertex Up() {
 		if (up != null)
 			return up;
 		return this;
 	}
-	public ViewPointMeshVertex Down() {
+	public virtual ViewPointMeshVertex Down() {
 		if (down != null)
 			return down;
 		return this;
@@ -70,5 +75,11 @@ public class ViewPointMeshVertex : MonoBehaviour {
 			associatedLabels = associatedLabelParent.GetComponentsInChildren<LabelController>();
 	}
 
-
+	void OnDrawGizmos() {
+		if (viewInSceneView) {
+			SceneView.lastActiveSceneView.pivot = transform.position;
+			SceneView.lastActiveSceneView.rotation = transform.rotation;
+			SceneView.lastActiveSceneView.Repaint();
+		}
+	}
 }

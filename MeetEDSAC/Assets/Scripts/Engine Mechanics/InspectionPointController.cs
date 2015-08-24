@@ -17,11 +17,12 @@ public class InspectionPointController : MonoBehaviour {
 	public Sprite imageContent;
 	public bool isVideo;
 	public Videos videoContent;
-	
+		
 	private float alphaTarget;
 	private float pointerLeftAt = 0f;
 
 	private bool hovering = false;
+	private bool hidden = false;
 
 	// Use this for initialization
 	void Start () {
@@ -49,15 +50,19 @@ public class InspectionPointController : MonoBehaviour {
 	}
 	
 	public void HoverEnter() {
-		alphaTarget = maxAlpha;
-		hovering = true;
-		GetComponent<Animator>().SetTrigger("HoverEnter");
+		if (!hidden) {
+			alphaTarget = maxAlpha;
+			hovering = true;
+			GetComponent<Animator>().SetTrigger("HoverEnter");
+		}
 	}
 	public void HoverLeave() {
-		alphaTarget = maxAlpha;
-		hovering = false;
-		pointerLeftAt = Time.time;
-		GetComponent<Animator>().SetTrigger("HoverExit");
+		if (!hidden) {
+			alphaTarget = maxAlpha;
+			hovering = false;
+			pointerLeftAt = Time.time;
+			GetComponent<Animator>().SetTrigger("HoverExit");
+		}
 	}
 	public void Choose() {
 		InspectorController inspectorController = GameObject.FindObjectOfType<InspectorController>();
@@ -71,4 +76,17 @@ public class InspectionPointController : MonoBehaviour {
 			inspectorController.SetImage(imageContent);
 		}
 	}
+	public void Hide() {
+		if (hovering) {
+			GetComponent<Animator>().SetTrigger("HoverExit");
+		}
+		hidden = true;
+		GetComponent<ParticleSystem>().enableEmission = false;
+		HoverLeave();
+	}
+	public void Unhide() {
+		hidden = false;
+		GetComponent<ParticleSystem>().enableEmission = true;
+	}
+
 }

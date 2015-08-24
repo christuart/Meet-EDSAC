@@ -48,10 +48,12 @@ public class Controller : MonoBehaviour {
 
 	public HingeButtonController infoController;
 	public HingeButtonController inspectorController;
+	
+	public StoryController storyController;
 
 	private FacetrackingManager faceTrack;
 
-	private ViewPointMeshVertex activeVertex;
+	public ViewPointMeshVertex activeVertex;
 	private Queue vertexTargets;
 
 	private List<LabelController> activeLabels;
@@ -250,30 +252,39 @@ public class Controller : MonoBehaviour {
 	// out elsewhere. Sorry not sorry.				*/
 
 	public void OnPanLeft() {
-		if (activeVertex.Left() != activeVertex) {
+		if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
+			storyController.EnterPreviousWaypoint();
+		} else if (activeVertex.Left() != activeVertex) {
 			ActivateVertex(activeVertex.Left ());
-		} else {
+		} else if (storyController.storyMode == StoryController.StoryMode.DISABLED){
 			StartCoroutine(meshSystemCameraController.Nudge(ViewPointMeshCameraController.NudgeDirection.LEFT));
 		}
 	}
 	public void OnPanRight() {
-		if (activeVertex.Right() != activeVertex) {
+		Debug.Log ("yo");
+		if (storyController.storyMode == StoryController.StoryMode.PLAYING) {			
+			storyController.EnterNextWaypoint();
+		} else if (activeVertex.Right() != activeVertex) {
 			ActivateVertex(activeVertex.Right ());
-		} else {
+		} else if (storyController.storyMode == StoryController.StoryMode.DISABLED){
 			StartCoroutine(meshSystemCameraController.Nudge(ViewPointMeshCameraController.NudgeDirection.RIGHT));
 		}
 	}
 	public void OnPanUp() {
-		if (activeVertex.Up() != activeVertex) {
+		if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
+
+		} else if (activeVertex.Up() != activeVertex) {
 			ActivateVertex(activeVertex.Up ());
-		} else {
+		} else if (storyController.storyMode == StoryController.StoryMode.DISABLED){
 			StartCoroutine(meshSystemCameraController.Nudge(ViewPointMeshCameraController.NudgeDirection.UP));
 		}
 	}
 	public void OnPanDown() {
-		if (activeVertex.Down() != activeVertex) {
+		if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
+			
+		} else if (activeVertex.Down() != activeVertex) {
 			ActivateVertex(activeVertex.Down ());
-		} else {
+		} else if (storyController.storyMode == StoryController.StoryMode.DISABLED){
 			StartCoroutine(meshSystemCameraController.Nudge(ViewPointMeshCameraController.NudgeDirection.DOWN));
 		}
 	}
@@ -300,7 +311,6 @@ public class Controller : MonoBehaviour {
 			Debug.Log (activeVertex.moreZoomedBuilder.name);
 			ViewPointMeshVertex nextVertex = activeVertex.ClosestMatch (activeVertex.moreZoomedBuilder);
 			ActivateVertex(nextVertex);
-			// REMEMEMEMEMEMEBERRR ActivateVertex *QUEUES* the activation of another vertex, so activeVertex hasn't changed yet for next line
 			cameraZoom.SetZoom(nextVertex.entryByZoomFieldOfView);
 		}
 	}
@@ -309,7 +319,6 @@ public class Controller : MonoBehaviour {
 			Debug.Log (activeVertex.lessZoomedBuilder.name);
 			ViewPointMeshVertex nextVertex = activeVertex.ClosestMatch (activeVertex.lessZoomedBuilder);
 			ActivateVertex(nextVertex);
-			// REMEMEMEMEMEMEBERRR ActivateVertex *QUEUES* the activation of another vertex, so activeVertex hasn't changed yet for next line
 			cameraZoom.SetZoom(nextVertex.exitByZoomFieldOfView); // rememeber, naming is set for zooming in, so zoomout must use exit when it enters
 		}
 	}
@@ -375,7 +384,7 @@ public class Controller : MonoBehaviour {
 		meshSystemCameraController.GoToVertex(activeVertex);
 		if (openInfo) {
 			if (activeVertex.informationContent != InformationContent.NONE) {
-				infoHolder.PlaceObjectInInfoUI(activeVertex.informationContent);
+				ActivateInformationContent(activeVertex.informationContent);
 			}
 		}
 		ActivateAssociatedLabels();
@@ -386,10 +395,18 @@ public class Controller : MonoBehaviour {
 			activeLabels[0].Deactivate();
 			activeLabels.RemoveAt (0);
 		}
-		foreach (LabelController lc in activeVertex.associatedLabels) {
-			lc.Activate();
-			activeLabels.Add(lc);
+		if (activeVertex.associatedLabels != null) {
+			foreach (LabelController lc in activeVertex.associatedLabels) {
+				lc.Activate();
+				activeLabels.Add(lc);
+			}
 		}
+	}
+	public void ActivateInformationContent(InformationContent _info) {
+		infoHolder.PlaceObjectInInfoUI(_info);
+	}
+	public void ActivateInformationContent(StoryContent _story) {
+		infoHolder.PlaceObjectInInfoUI((InformationContent)(int)_story);
 	}
 	public void SetFirstPlayerId(long userId) {
 		firstPlayerKinectInfo.SetUserId(userId);
@@ -405,6 +422,12 @@ public class Controller : MonoBehaviour {
 	}
 	public void DecideWhetherKinectDebugShows() {
 		kinectUserInfo.SetActive (useKinect);
+	}
+	public void SetCameraZoom(float target) {
+		cameraZoom.SetZoom(target);
+	}
+	public void StartTour() {
+		storyController.EngageStoryMode();
 	}
 
 	private void EnableDebugModes(bool enable) {

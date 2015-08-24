@@ -54,7 +54,11 @@ public class AspectRatioFixer : MonoBehaviour {
 	}
 
 	void OnDrawGizmos() {
-		if (Time.realtimeSinceStartup < lastUpdate || Time.realtimeSinceStartup-lastUpdate > .10f) {
+		if (Time.realtimeSinceStartup < lastUpdate) {
+			
+			lastUpdate = Time.realtimeSinceStartup;
+
+		} else if (Time.realtimeSinceStartup-lastUpdate > .10f) {
 
 			lastUpdate = Time.realtimeSinceStartup;
 
