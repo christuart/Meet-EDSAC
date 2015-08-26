@@ -1,8 +1,19 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Engine Mechanics\StoryController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\WireRenderer.cs">
     <Files>
-      <File FileName="Assets\Scripts\Engine Mechanics\StoryController.cs" Line="87" Column="4" />
+      <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="278" Column="3" />
+      <File FileName="Assets\Scripts\Engine Mechanics\InfoHolderController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\InspectorController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\StoryViewpointSystemVertex.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\StoryController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\StoryWaypoint.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\XML\EdsacXmlGenerator.cs" Line="247" Column="48" />
+      <File FileName="Assets\Scripts\Engine Mechanics\VideoTextureController.cs" Line="40" Column="54" />
+      <File FileName="Assets\WireBuilder.cs" Line="15" Column="40" />
+      <File FileName="Assets\Scripts\Misc\Tools.cs" Line="120" Column="15" />
+      <File FileName="Assets\WireRenderer.cs" Line="22" Column="3" />
+      <File FileName="Assets\Shaders\WireShader.shader" Line="16" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

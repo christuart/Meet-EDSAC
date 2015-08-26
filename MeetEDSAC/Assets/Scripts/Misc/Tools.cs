@@ -117,4 +117,7 @@ public abstract class Tools : MonoBehaviour {
 	public static Vector2 ViewportToCameraPoint(Camera cam, Vector2 viewportPoint) {
 		return (Vector2)cam.ViewportToScreenPoint(viewportPoint) - new Vector2(cam.rect.x * Screen.width, cam.rect.y * Screen.height);
 	}
+	public static float Cosh(float x) {
+		return 0.5f * (Mathf.Exp(x)+Mathf.Exp(-x));
+	}
 }

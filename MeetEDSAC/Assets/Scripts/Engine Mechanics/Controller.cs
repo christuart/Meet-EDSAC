@@ -46,6 +46,8 @@ public class Controller : MonoBehaviour {
 
 	public MouseDragController mouseDrag;
 
+	public KinectInspectionPointChooser kinectInspectionPointChooser;
+
 	public HingeButtonController infoController;
 	public HingeButtonController inspectorController;
 	
@@ -75,6 +77,20 @@ public class Controller : MonoBehaviour {
 		activeLabels = new List<LabelController> ();
 //		foreach (LabelController lc in FindObjectsOfType<LabelController>())
 //			lc.Deactivate();
+	}
+
+	void Start () {
+		if (useKinect) {
+			foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
+				ipc.Hide();
+			kinectInspectionPointChooser.EnableKinectInspectionPointLabel(true);
+			if (activeVertex != null && storyController.storyMode == StoryController.StoryMode.DISABLED) {
+				kinectInspectionPointChooser.FindNewInspectionPoint(activeVertex.transform.position,activeVertex.transform.rotation);
+			} else if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
+				kinectInspectionPointChooser.chosenInspectionPoint = storyController.inspectionContent;
+			}
+			kinectInspectionPointChooser.ActivateChosenInspectionPointForKinect();
+		}
 	}
 	
 	// Update is called once per frame
@@ -261,7 +277,6 @@ public class Controller : MonoBehaviour {
 		}
 	}
 	public void OnPanRight() {
-		Debug.Log ("yo");
 		if (storyController.storyMode == StoryController.StoryMode.PLAYING) {			
 			storyController.EnterNextWaypoint();
 		} else if (activeVertex.Right() != activeVertex) {
@@ -298,11 +313,16 @@ public class Controller : MonoBehaviour {
 		}
 	}
 	public void OnAfterChangeVertex() {
-		if (activeVertex != null && activeVertex.associatedInspectionPoints != null) {
-			foreach (InspectionPointController ipc in activeVertex.associatedInspectionPoints) {
-				ipc.gameObject.layer = 16; // Inspection Point Markers Detail
-				foreach (Transform child in ipc.transform)
-					child.gameObject.layer = 16;
+		if (activeVertex != null) {
+			if (useKinect) {
+				kinectInspectionPointChooser.FindNewInspectionPoint(activeVertex.transform.position,activeVertex.transform.rotation);
+				kinectInspectionPointChooser.ActivateChosenInspectionPointForKinect();
+			} else if (activeVertex.associatedInspectionPoints != null) {
+				foreach (InspectionPointController ipc in activeVertex.associatedInspectionPoints) {
+					ipc.gameObject.layer = 16; // Inspection Point Markers Detail
+					foreach (Transform child in ipc.transform)
+						child.gameObject.layer = 16;
+				}
 			}
 		}
 	}

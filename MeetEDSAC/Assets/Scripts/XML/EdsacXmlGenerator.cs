@@ -58,6 +58,8 @@ public class EdsacXmlGenerator : MonoBehaviour {
 	private EDSAC edsac;
 	private Dictionary<EDSAC.TestingPointsType,GameObject> testingPoints;
 	private Dictionary<EDSAC.ValveType,GameObject> valves;
+
+	GameObject wireHolder;
 	
 	// Use this for initialization	
 	void Awake () {
@@ -90,6 +92,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 		if (edsac.rows.ContainsKey(EDSAC.RowName.FRONT)) {
 			FillRow(frontRacks, edsac.rows[EDSAC.RowName.FRONT]);
 		}
+		FillWires();
 
 		Destroy(this);
 	}
@@ -186,6 +189,158 @@ public class EdsacXmlGenerator : MonoBehaviour {
 					}
 				}
 			}
+		}
+	}
+
+	public void FillWires() {
+
+		wireHolder = new GameObject();
+		wireHolder.transform.SetParent(transform,true);
+		wireHolder.name = "(wires)";
+
+		AddRowWires(rearRacks);
+		AddRowWires(middleRacks);
+		AddRowWires(frontRacks);
+		AddInterRowWires(new GameObject[][] { rearRacks,middleRacks,frontRacks });
+
+	}
+
+	public void AddRowWires(GameObject[] racks) {
+
+		GameObject w; // will be used to hold wires in many places
+
+		// Add wires leading to overhead wire transfer
+		foreach (GameObject rack in racks) {
+
+			w = new GameObject();
+			w.name = "(" + rack.transform.parent.name + " upwards wires)"; // "(R1 upwards wires)"
+			w.transform.SetParent (wireHolder.transform,true);
+
+			// make between 4 and 10 wires
+			for (int i = Random.Range (0,7); i < 10; i++) {
+				WireBuilder wb = w.AddComponent<WireBuilder>();
+				wb.overrideWithRandom = false;
+				wb.outwardDistance = 0.02f;
+				wb.downwardDistance = 0.05f;
+				wb.start = rack.transform.parent.position + new Vector3(-0.4f,2.4f,.22f);
+
+				wb.end = wb.start + new Vector3(.2f * (Mathf.Pow (Random.Range (1f,2f),2f)-.8f),0f,-.15f); 
+				int chassisNumber = Random.Range (0,rack.transform.childCount);
+				wb.end.y = rack.transform.GetChild (chassisNumber).position.y + .12f;
+			}
+		}
+
+		// Add wires between chassis
+		w = new GameObject();
+		w.name = "(chassis to chassis wires)";
+		w.transform.SetParent (wireHolder.transform,true);
+		for (int r = 0; r < racks.Length; r++) {
+			GameObject rack = racks[r];
+			foreach (Transform chassisTransform in rack.transform) {
+				// make between 2 and 3 wires
+				for (int i = 2-Mathf.FloorToInt (Mathf.Pow (Random.value,1.5f) * 2); i < 3; i++) {
+					float distanceAllowedDecider = Random.value;
+					GameObject targetRack;
+					if (distanceAllowedDecider < .05) {
+						// allow any rack
+						targetRack = racks[Random.Range(0,racks.Length)];
+					} else if (distanceAllowedDecider < 0.3) {
+						// allow up to 2 racks away
+						targetRack = racks[Random.Range(Mathf.Max (0,r-2),Mathf.Min (racks.Length,r+3))]; // remember, .Range(min,max) is always less than max, so add 3 not 2
+					} else {
+						// allow only 1 rack away
+
+						targetRack = racks[Random.Range(Mathf.Max (0,r-1),Mathf.Min (racks.Length,r+2))]; // remember, .Range(min,max) is always less than max, so add 2 not 1
+					}
+					Transform targetChassis = targetRack.transform.GetChild(Random.Range (0,targetRack.transform.childCount));
+					WireBuilder wb = w.AddComponent<WireBuilder>();
+					wb.start = chassisTransform.position + new Vector3(Random.Range (-.38f,.38f),.075f,.082f);
+					wb.end = targetChassis.position + new Vector3(Random.Range (-.38f,.38f),.075f,.082f);
+					wb.overrideWithRandom = false;
+					wb.outwardDistance = Random.Range (.18f,.19f);
+					wb.downwardDistance = Random.Range (.1f,.3f);
+				}
+			}
+		}
+
+		// Add wires on the chassis
+		w = new GameObject();
+		w.name = "(back of chassis wires)";
+		w.transform.SetParent (wireHolder.transform,true);
+		foreach (GameObject rack in racks) {
+			foreach (Transform chassisTransform in rack.transform) {
+				for (int i = 6; i < 31; i+=2) {
+					if (Random.value < 0.8f) {
+						WireBuilder wb = w.AddComponent<WireBuilder>();
+						wb.start = chassisTransform.position + new Vector3(Mathf.Lerp (-.38f,.38f,i/31f),.058f,.023f);
+						wb.end = wb.start + new Vector3(0f,-.08f,0f);
+						wb.overrideWithRandom = false;
+						wb.outwardDistance = .015f;
+						wb.downwardDistance = 0f;
+						wb.setLooks = true;
+						wb.colour = Color.black;
+						wb.width = .0075f;
+						wb = w.AddComponent<WireBuilder>();
+						wb.start = chassisTransform.position + new Vector3(Mathf.Lerp (-.38f,.38f,(i+1)/31f),.058f,.023f);
+						wb.end = wb.start + new Vector3(0f,-.07f,0f);
+						wb.overrideWithRandom = false;
+						wb.outwardDistance = .015f;
+						wb.downwardDistance = 0f;
+						wb.setLooks = true;
+						wb.colour = new Color(.25f,.08f,.08f);
+						wb.width = .0075f;
+					}
+				}
+			}
+		}
+
+		// Add wires between racks
+		w = new GameObject();
+		w.name = "(back of chassis wires)";
+		w.transform.SetParent (wireHolder.transform,true);
+		for (int i = 0; i < racks.Length - 1; i ++) {
+			
+			// make between 3 and 6 wires
+			for (int j = Random.Range (0,4); j < 6; j++) {
+				WireBuilder wb = w.AddComponent<WireBuilder>();
+				wb.overrideWithRandom = false;
+				wb.outwardDistance = 0f;
+				wb.downwardDistance = Random.Range (0.04f,0.1f);
+				wb.start = racks[i].transform.parent.position + new Vector3(-0.4f,2.4f,.22f);
+				wb.end = racks[i+1].transform.parent.position + new Vector3(-0.4f,2.4f,.22f);
+			}
+		}
+	}
+
+	public void AddInterRowWires(GameObject[][] rows) {
+		// Add wires between racks
+		GameObject w = new GameObject();
+		w.name = "(overhead wires)";
+		w.transform.SetParent (wireHolder.transform,true);
+		for (int i = 0; i < rows.Length - 1; i ++) {
+			
+			// make 8 wires
+			for (int j = 0; j < 8; j++) {
+				WireBuilder wb = w.AddComponent<WireBuilder>();
+				wb.overrideWithRandom = false;
+				wb.outwardDistance = Random.Range (-0.01f,0.01f);
+				wb.downwardDistance = Random.Range (0.04f,0.3f);
+				wb.start = rows[i][0].transform.parent.position + new Vector3(0f,2.4f,.22f);
+				wb.end = rows[i+1][0].transform.parent.position + new Vector3(0f,2.4f,.22f);
+				wb.start.x = -.4f;
+				wb.end.x = -.4f;
+			}
+		}
+		// make 8 wires
+		for (int j = 0; j < 8; j++) {
+			WireBuilder wb = w.AddComponent<WireBuilder>();
+			wb.overrideWithRandom = false;
+			wb.outwardDistance = Random.Range (-0.01f,0.01f);
+			wb.downwardDistance = Random.Range (0.04f,0.3f);
+			wb.start = rows[0][0].transform.parent.position + new Vector3(0f,2.4f,.22f);
+			wb.end = rows[rows.Length-1][0].transform.parent.position + new Vector3(0f,2.4f,.22f);
+			wb.start.x = -2.4f;
+			wb.end.x = -2.4f;
 		}
 	}
 }

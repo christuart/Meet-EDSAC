@@ -152,7 +152,8 @@ public class StoryController : MonoBehaviour {
 	
 	public bool IsAtLastWaypoint() {
 		return activeWaypointIndex == waypoints.Length-1;
-	}public bool IsAtFirstWaypoint() {
+	}
+	public bool IsAtFirstWaypoint() {
 		return activeWaypointIndex == 0;
 	}
 	
@@ -178,6 +179,9 @@ public class StoryController : MonoBehaviour {
 				if (waypointIsAnimated) {
 					animationKeys = w.cameraAnimation.Keys.ToArray ();
 					animationValues = w.cameraAnimation.Values.ToArray ();
+					animationRotations = new Vector3[w.cameraRotationAnimation.Count];
+					for (int i = 0; i < w.cameraRotationAnimation.Count; i++)
+						animationRotations[i] = w.cameraRotationAnimation.Values[i].eulerAngles;
 				}
 				loopAnimation = w.loopAnimation;
 				if (waypointMarker != null) {
@@ -202,6 +206,7 @@ public class StoryController : MonoBehaviour {
 	public bool waypointIsAnimated;
 	public float[] animationKeys;
 	public Vector3[] animationValues;
+	public Vector3[] animationRotations;
 	public bool loopAnimation;
 	public bool updateWaypointToVisualisation;
 	public bool revertVisualisationToWaypoint;
@@ -233,7 +238,7 @@ public class StoryController : MonoBehaviour {
 					w.cameraPosition = waypointMarker.transform.position;
 					w.cameraRotation = waypointMarker.transform.rotation;
 					w.cameraFieldOfView = visualisationFieldOfView;
-					w.SetAnimation(animationKeys,animationValues);
+					w.SetAnimation(animationKeys,animationValues,animationRotations);
 					w.PopulateAnimation();
 					w.loopAnimation = loopAnimation;
 					List<StoryWaypoint> waypointsList = waypoints.ToList();
@@ -282,6 +287,7 @@ public class StoryController : MonoBehaviour {
 					waypointIsAnimated = false;
 					animationKeys = new float[0];
 					animationValues = new Vector3[0];
+					animationRotations = new Vector3[0];
 					loopAnimation = true;
 				}
 			}

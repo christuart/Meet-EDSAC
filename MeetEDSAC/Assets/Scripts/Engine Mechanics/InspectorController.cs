@@ -46,8 +46,11 @@ public class InspectorController : MonoBehaviour {
 	}
 	public void PauseVideo() {
 		if (videoController.IsPlaying()) {
+			//Debug.Log ("Step aaa7: It was playing so pause it.");
 			videoController.Pause();
 		} else {
+			//Debug.Log ("Step baa7: It was paused so play it.");
+			videoController.gameObject.SetActive(true);
 			videoController.Play();
 		}
 	}
