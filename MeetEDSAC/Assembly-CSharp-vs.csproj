@@ -122,6 +122,7 @@
      <Compile Include="Assets\Scripts\XML\EdsacXmlPopulater.cs" />
      <Compile Include="Assets\Scripts\XML\TinyXmlReader.cs" />
      <Compile Include="Assets\Scripts\setup_rack.cs" />
+     <Compile Include="Assets\StoryTitleController.cs" />
      <Compile Include="Assets\WireBuilder.cs" />
      <Compile Include="Assets\WireRenderer.cs" />
      <None Include="Assets\Resources\BlurShader.shader" />

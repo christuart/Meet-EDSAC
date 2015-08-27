@@ -31,12 +31,14 @@ public class StoryController : MonoBehaviour {
 	private float lastAnimationLoopStart = 0f;
 	private float nextAnimationKeyframeStart;
 	private Vector3 animationPosition;
+	private Quaternion animationRotation;
 	private int lastAnimationKeyframe;
 
 	void Awake () {
 		storyVertexHolder = new GameObject();
 		storyVertex = storyVertexHolder.AddComponent<StoryViewpointSystemVertex>();
 		animationPosition = new Vector3();
+		animationRotation = new Quaternion();
 		storyModeIndicator.SetActive (false);
 	}
 	
@@ -51,6 +53,7 @@ public class StoryController : MonoBehaviour {
 					float remainingTime = nextAnimationKeyframeStart - Time.time;
 					float totalTime = activeWaypoint.cameraAnimation.Keys[lastAnimationKeyframe+1] - activeWaypoint.cameraAnimation.Keys[lastAnimationKeyframe];
 					animationPosition = Vector3.Lerp (activeWaypoint.cameraAnimation.Values[lastAnimationKeyframe+1],activeWaypoint.cameraAnimation.Values[lastAnimationKeyframe],remainingTime/totalTime);
+					animationRotation = Quaternion.Slerp(activeWaypoint.cameraRotationAnimation.Values[lastAnimationKeyframe+1],activeWaypoint.cameraRotationAnimation.Values[lastAnimationKeyframe],remainingTime/totalTime);
 				}
 				// then get the interpolated animation position
 											// lerp from the next to the previous keyframes
@@ -124,8 +127,10 @@ public class StoryController : MonoBehaviour {
 	}
 	public void UpdateStoryVertex() {
 		storyVertex.transform.position = activeWaypoint.cameraPosition + animationPosition;
-		storyVertex.transform.rotation = activeWaypoint.cameraRotation;
+		storyVertex.transform.rotation = animationRotation * activeWaypoint.cameraRotation;
 		controller.SetCameraZoom(activeWaypoint.cameraFieldOfView);
+		storyVertex.associatedLabels = new LabelController[activeWaypoint.associatedLabels.Length];
+		activeWaypoint.associatedLabels.CopyTo (storyVertex.associatedLabels,0);
 		if (activeWaypoint.storyContent != StoryContent.NONE)
 			storyVertex.informationContent = (InformationContent)(int)activeWaypoint.storyContent;
 	}

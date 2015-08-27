@@ -69,13 +69,13 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 				mainController.SetFirstPlayerId(userId);
 				mainController.OnNewFirstPlayer();
 				users = 1;
-				kinectFeedback.AddItem(KinectFeedbackController.SINGLE_PLAYER);
+				if (mainController.useKinect) kinectFeedback.AddItem(KinectFeedbackController.SINGLE_PLAYER);
 			} else if (users == 1) {
 				secondUserId = userId;
 				mainController.SetSecondPlayerId(userId);
 				mainController.OnNewSecondPlayer();
 				users = 2;
-				kinectFeedback.AddItem(KinectFeedbackController.TWO_PLAYERS);
+				if (mainController.useKinect) kinectFeedback.AddItem(KinectFeedbackController.TWO_PLAYERS);
 			}
 			
 			gestureStates.Add(userId,userGestureStates);
@@ -96,13 +96,13 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 				ClearUserFromDictionaries(userId);
 				users--;
 				firstUserId = secondUserId;
-				kinectFeedback.AddItem(KinectFeedbackController.PLAYER_ONE_LEFT);
+				if (mainController.useKinect) kinectFeedback.AddItem(KinectFeedbackController.PLAYER_ONE_LEFT);
 				return;
 			} else if (userId == secondUserId) {
 				mainController.ClearSecondPlayer();
 				ClearUserFromDictionaries(userId);
 				users--;
-				kinectFeedback.AddItem(KinectFeedbackController.PLAYER_TWO_LEFT);
+				if (mainController.useKinect) kinectFeedback.AddItem(KinectFeedbackController.PLAYER_TWO_LEFT);
 				return;
 			}
 		} else if (users == 1) {
@@ -110,7 +110,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 				ClearUserFromDictionaries(userId);
 				mainController.ClearFirstPlayer();
 				users--;
-				kinectFeedback.AddItem(KinectFeedbackController.LAST_PLAYER_LEFT);
+				if (mainController.useKinect) kinectFeedback.AddItem(KinectFeedbackController.LAST_PLAYER_LEFT);
 				return;
 			}
 		}

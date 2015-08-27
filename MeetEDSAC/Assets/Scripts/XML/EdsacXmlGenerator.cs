@@ -178,18 +178,71 @@ public class EdsacXmlGenerator : MonoBehaviour {
 							tp.transform.localScale = new Vector3 (1f, 1f, 1f);
 							tp.transform.localPosition = new Vector3 (0f, testing_pt_offset_y, testing_pt_offset_z);
 						}
-						foreach (EDSAC.Valve v in ch.chassisType.valves) {
-							if (valves.ContainsKey(v.valveType)) {
-								GameObject valveChosen = valves[v.valveType];
+						if (ch.chassisType.valves.Count > 0) {
+							foreach (EDSAC.Valve v in ch.chassisType.valves) {
+								if (valves.ContainsKey(v.valveType)) {
+									GameObject valveChosen = valves[v.valveType];
+									GameObject valve = Instantiate(valveChosen) as GameObject;
+									
+									valve.transform.parent = chassis.transform;
+									valve.transform.localScale = new Vector3 (1f, 1f, 1f);
+									valve.transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
+									valve.transform.localPosition = new Vector3 (
+										v.x,
+										valve_offset_y,
+										v.y);
+								}
+							}
+						} else {
+							// make it up!
+
+							// probabilities of randomly skipping bits
+							float prob_valve = 0.9f;
+							
+							// for placing the two rows of valves
+							float valve_start_x = 0.34f;
+							float valve_delta_x = 0.052f;
+							float valve_offset_y = -0.0019f;
+							float valve_back_row_z = 0.006f;
+							float valve_front_row_z = 0.055f;
+
+							int bigValvesCount = 2;
+							EDSAC.ValveType[] bigValves = new EDSAC.ValveType[] { EDSAC.ValveType.BIG_FLAT, EDSAC.ValveType.BIG_SHINY };
+							EDSAC.ValveType[] smallValves = new EDSAC.ValveType[] { EDSAC.ValveType.SMALL_BLACK, EDSAC.ValveType.SMALL_CREAM, EDSAC.ValveType.SMALL_RED };
+							int smallValvesCount = 3;
+							int idx;
+							// for each chassis, make big valves
+							for (int j = 0; j < 14; j++) {
+								
+								idx = (int) (Random.value * bigValvesCount);
+								GameObject valveChosen = valves[bigValves[idx]];
 								GameObject valve = Instantiate(valveChosen) as GameObject;
 								
 								valve.transform.parent = chassis.transform;
-								valve.transform.localScale = new Vector3 (1f, 1f, 1f);
-								valve.transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
+								valve.transform.localScale = new Vector3 (1, 1, 1);
+								valve.transform.rotation *= Quaternion.Euler(0, 180, 0);
 								valve.transform.localPosition = new Vector3 (
-									v.x,
+									valve_start_x-valve_delta_x*j,
 									valve_offset_y,
-									v.y);
+									(j==1 || j==12) ? valve_front_row_z : valve_back_row_z);
+							}
+							
+							// for each chassis, make small valves
+							for (int j = 0; j < 9; j++) {
+								
+								if (Random.value > prob_valve) continue;
+								
+								idx = (int) (Random.value * smallValvesCount);
+								GameObject valveChosen = valves[smallValves[idx]];
+								GameObject valve = Instantiate(valveChosen) as GameObject;
+								
+								valve.transform.parent = chassis.transform;
+								valve.transform.localScale = new Vector3 (1, 1, 1);
+								valve.transform.rotation *= Quaternion.Euler(0, 180, 0);
+								valve.transform.localPosition = new Vector3 (
+									valve_start_x-valve_delta_x*(j+2.5f),
+									valve_offset_y,
+									valve_front_row_z);
 							}
 						}
 					}
@@ -294,7 +347,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 			foreach (Transform chassisTransform in rack.transform) {
 				for (int i = 6; i < 31; i+=2) {
 					if (Random.value < 0.8f) {
-						/* Old way of making wires, seems to add lots of time to render transparent
+						/* Old way of making wires, seems to add lots of time to render transparent */
 						WireBuilder wb = w.AddComponent<WireBuilder>();
 						wb.start = chassisTransform.position + new Vector3(Mathf.Lerp (-.38f,.38f,i/31f),.058f,.023f);
 						wb.end = wb.start + new Vector3(0f,-.08f,0f);
@@ -313,13 +366,15 @@ public class EdsacXmlGenerator : MonoBehaviour {
 						wb.setLooks = true;
 						wb.colour = new Color(.25f,.08f,.08f);
 						wb.width = .0075f;
-						*/
+						/**/
+						/* New way * /
 						GameObject wp = Instantiate(prefabBlackWire);
 						wp.transform.SetParent (w.transform);
 						wp.transform.position = chassisTransform.position + new Vector3(Mathf.Lerp (-.38f,.38f,i/31f),.0155f,.038f);
 						wp = Instantiate (prefabRedWire);
 						wp.transform.SetParent (w.transform);
 						wp.transform.position = chassisTransform.position + new Vector3(Mathf.Lerp (-.38f,.38f,(i+1)/31f),.023f,.038f);
+						/**/
 					}
 				}
 			}

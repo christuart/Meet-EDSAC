@@ -4,6 +4,23 @@ using System.Collections.Generic;
 
 public enum StoryContent {
 	ONE = InformationContent.STORY_ONE,
+	TWO = InformationContent.STORY_TWO,
+	THREE = InformationContent.STORY_THREE,
+	FOUR = InformationContent.STORY_FOUR,
+	FIVE = InformationContent.STORY_FIVE,
+	SIX = InformationContent.STORY_SIX,
+	SEVEN = InformationContent.STORY_SEVEN,
+	EIGHT = InformationContent.STORY_EIGHT,
+	NINE = InformationContent.STORY_NINE,
+	TEN = InformationContent.STORY_TEN,
+	ELEVEN = InformationContent.STORY_ELEVEN,
+	TWELVE = InformationContent.STORY_TWELVE,
+	THIRTEEN = InformationContent.STORY_THIRTEEN,
+	FOURTEEN = InformationContent.STORY_FOURTEEN,
+	FIFTEEN = InformationContent.STORY_FIFTEEN,
+	SIXTEEN = InformationContent.STORY_SIXTEEN,
+	SEVENTEEN = InformationContent.STORY_SEVENTEEN,
+	EIGHTEEN = InformationContent.STORY_EIGHTEEN,
 	NONE = InformationContent.NONE
 };
 
