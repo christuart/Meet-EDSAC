@@ -7,6 +7,9 @@ public class EdsacXmlGenerator : MonoBehaviour {
 
 	public EdsacXmlPopulater populater;
 
+	public bool makeWires;
+	public Shader wiresShader;
+
 	public GameObject[] rearRacks;
 	public GameObject[] middleRacks;
 	public GameObject[] frontRacks;
@@ -41,6 +44,9 @@ public class EdsacXmlGenerator : MonoBehaviour {
 	public GameObject prefabValveSmallRed;
 
 	public GameObject prefabWithRectTransform;
+
+	public GameObject prefabBlackWire;
+	public GameObject prefabRedWire;
 
 	// for placing the chassises
 	private float chassis_start_y = -0.983f;
@@ -193,16 +199,16 @@ public class EdsacXmlGenerator : MonoBehaviour {
 	}
 
 	public void FillWires() {
+		if (makeWires) {
+			wireHolder = new GameObject();
+			wireHolder.transform.SetParent(transform,true);
+			wireHolder.name = "(wires)";
 
-		wireHolder = new GameObject();
-		wireHolder.transform.SetParent(transform,true);
-		wireHolder.name = "(wires)";
-
-		AddRowWires(rearRacks);
-		AddRowWires(middleRacks);
-		AddRowWires(frontRacks);
-		AddInterRowWires(new GameObject[][] { rearRacks,middleRacks,frontRacks });
-
+			AddRowWires(rearRacks);
+			AddRowWires(middleRacks);
+			AddRowWires(frontRacks);
+			AddInterRowWires(new GameObject[][] { rearRacks,middleRacks,frontRacks });
+		}
 	}
 
 	public void AddRowWires(GameObject[] racks) {
@@ -226,7 +232,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 
 				wb.end = wb.start + new Vector3(.2f * (Mathf.Pow (Random.Range (1f,2f),2f)-.8f),0f,-.15f); 
 				int chassisNumber = Random.Range (0,rack.transform.childCount);
-				wb.end.y = rack.transform.GetChild (chassisNumber).position.y + .12f;
+				wb.end.y = rack.transform.GetChild (chassisNumber).position.y + .068f;
 			}
 		}
 
@@ -236,7 +242,8 @@ public class EdsacXmlGenerator : MonoBehaviour {
 		w.transform.SetParent (wireHolder.transform,true);
 		for (int r = 0; r < racks.Length; r++) {
 			GameObject rack = racks[r];
-			foreach (Transform chassisTransform in rack.transform) {
+			for (int c = 0; c < rack.transform.childCount; c++) {
+				Transform chassisTransform = rack.transform.GetChild (c);
 				// make between 2 and 3 wires
 				for (int i = 2-Mathf.FloorToInt (Mathf.Pow (Random.value,1.5f) * 2); i < 3; i++) {
 					float distanceAllowedDecider = Random.value;
@@ -249,16 +256,32 @@ public class EdsacXmlGenerator : MonoBehaviour {
 						targetRack = racks[Random.Range(Mathf.Max (0,r-2),Mathf.Min (racks.Length,r+3))]; // remember, .Range(min,max) is always less than max, so add 3 not 2
 					} else {
 						// allow only 1 rack away
-
+						
 						targetRack = racks[Random.Range(Mathf.Max (0,r-1),Mathf.Min (racks.Length,r+2))]; // remember, .Range(min,max) is always less than max, so add 2 not 1
 					}
 					Transform targetChassis = targetRack.transform.GetChild(Random.Range (0,targetRack.transform.childCount));
 					WireBuilder wb = w.AddComponent<WireBuilder>();
-					wb.start = chassisTransform.position + new Vector3(Random.Range (-.38f,.38f),.075f,.082f);
-					wb.end = targetChassis.position + new Vector3(Random.Range (-.38f,.38f),.075f,.082f);
+					wb.start = chassisTransform.position + new Vector3(Random.Range (-.38f,.38f),.068f,.082f);
+					wb.end = targetChassis.position + new Vector3(Random.Range (-.38f,.38f),.068f,.082f);
 					wb.overrideWithRandom = false;
 					wb.outwardDistance = Random.Range (.18f,.19f);
 					wb.downwardDistance = Random.Range (.1f,.3f);
+				}
+				// now make some small wires to the chassis below/above too
+				if (c < rack.transform.childCount-1) {
+					for (int i = Random.Range (0,3); i < 3; i++) {
+						Transform targetChassis = rack.transform.GetChild (c+1);
+						WireBuilder wb = w.AddComponent<WireBuilder>();
+						float x = Random.Range (-.38f,.38f);
+						wb.start = chassisTransform.position + new Vector3(x,.068f,.082f);
+						wb.end = targetChassis.position + new Vector3(x,.068f,.082f);
+						wb.overrideWithRandom = false;
+						wb.outwardDistance = .015f;
+						wb.downwardDistance = 0f;
+						wb.setLooks = true;
+						wb.colour = new Color(.2f,.08f,.08f);
+						wb.width = .005f;
+					}
 				}
 			}
 		}
@@ -271,6 +294,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 			foreach (Transform chassisTransform in rack.transform) {
 				for (int i = 6; i < 31; i+=2) {
 					if (Random.value < 0.8f) {
+						/* Old way of making wires, seems to add lots of time to render transparent
 						WireBuilder wb = w.AddComponent<WireBuilder>();
 						wb.start = chassisTransform.position + new Vector3(Mathf.Lerp (-.38f,.38f,i/31f),.058f,.023f);
 						wb.end = wb.start + new Vector3(0f,-.08f,0f);
@@ -289,6 +313,13 @@ public class EdsacXmlGenerator : MonoBehaviour {
 						wb.setLooks = true;
 						wb.colour = new Color(.25f,.08f,.08f);
 						wb.width = .0075f;
+						*/
+						GameObject wp = Instantiate(prefabBlackWire);
+						wp.transform.SetParent (w.transform);
+						wp.transform.position = chassisTransform.position + new Vector3(Mathf.Lerp (-.38f,.38f,i/31f),.0155f,.038f);
+						wp = Instantiate (prefabRedWire);
+						wp.transform.SetParent (w.transform);
+						wp.transform.position = chassisTransform.position + new Vector3(Mathf.Lerp (-.38f,.38f,(i+1)/31f),.023f,.038f);
 					}
 				}
 			}
@@ -319,7 +350,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 		w.transform.SetParent (wireHolder.transform,true);
 		for (int i = 0; i < rows.Length - 1; i ++) {
 			
-			// make 8 wires
+			// make 8 wires in the middle between all rows
 			for (int j = 0; j < 8; j++) {
 				WireBuilder wb = w.AddComponent<WireBuilder>();
 				wb.overrideWithRandom = false;
@@ -331,7 +362,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 				wb.end.x = -.4f;
 			}
 		}
-		// make 8 wires
+		// make 8 wires at the end between front and back rows
 		for (int j = 0; j < 8; j++) {
 			WireBuilder wb = w.AddComponent<WireBuilder>();
 			wb.overrideWithRandom = false;

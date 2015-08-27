@@ -8,8 +8,8 @@ public class WireRenderer : MonoBehaviour {
 	public int divisions = 40;
 	public float divisionsFactor = 0.06f;
 	
-	Vector3 start;
-	Vector3 across;
+	public Vector3 start;
+	public Vector3 across;
 	Vector3 down;
 	Vector3 back;
 	static float acosh2 = 1.3169578969248167086f;

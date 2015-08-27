@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class ViewPointMeshVertex : MonoBehaviour {
 	
@@ -75,6 +77,7 @@ public class ViewPointMeshVertex : MonoBehaviour {
 			associatedLabels = associatedLabelParent.GetComponentsInChildren<LabelController>();
 	}
 
+#if UNITY_EDITOR
 	void OnDrawGizmos() {
 		if (viewInSceneView) {
 			SceneView.lastActiveSceneView.pivot = transform.position;
@@ -82,4 +85,6 @@ public class ViewPointMeshVertex : MonoBehaviour {
 			SceneView.lastActiveSceneView.Repaint();
 		}
 	}
+#endif
+
 }

@@ -95,6 +95,7 @@
      <Compile Include="Assets\Scripts\Graphics\CameraFacingBillboard.cs" />
      <Compile Include="Assets\Scripts\Graphics\CameraSettingsMirror.cs" />
      <Compile Include="Assets\Scripts\Graphics\FrameRateManager.cs" />
+     <Compile Include="Assets\Scripts\Graphics\LineRendererCulling.cs" />
      <Compile Include="Assets\Scripts\Misc\GUIClearOnAwake.cs" />
      <Compile Include="Assets\Scripts\Misc\Persistent.cs" />
      <Compile Include="Assets\Scripts\Misc\SetMaterialNotInstance.cs" />

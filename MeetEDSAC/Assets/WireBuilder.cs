@@ -32,6 +32,7 @@ public class WireBuilder : MonoBehaviour {
 		w.SetWire(start,end,outwardDistance,downwardDistance);
 		if (setLooks) w.SetLooks(colour,width);
 		w.BuildWire();
+		g.AddComponent<LineRendererCulling>();
 		Destroy (this);
 	}
 

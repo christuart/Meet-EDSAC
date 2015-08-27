@@ -48,6 +48,7 @@ public class StoryWaypoint : MonoBehaviour {
 
 	public void PopulateAnimation() {
 		cameraAnimation = new SortedList<float, Vector3>();
+		cameraRotationAnimation = new SortedList<float, Quaternion>();
 		for (int i=0; i < animationKeys.Length && i < animationValues.Length && i < animationRotations.Length; i++) {
 			cameraAnimation.Add (animationKeys[i],animationValues[i]);
 			Quaternion thisRotation = new Quaternion();

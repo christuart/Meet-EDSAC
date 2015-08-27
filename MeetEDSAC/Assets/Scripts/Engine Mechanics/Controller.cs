@@ -324,6 +324,9 @@ public class Controller : MonoBehaviour {
 						child.gameObject.layer = 16;
 				}
 			}
+			foreach (LineRendererCulling lrc in MonoBehaviour.FindObjectsOfType<LineRendererCulling>()) {
+				lrc.UpdateLineRenderers(activeVertex.transform);
+			}
 		}
 	}
 	public void OnZoomIn() {
