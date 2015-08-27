@@ -33,7 +33,6 @@ public class KinectInfoInterpreter : MonoBehaviour {
 
 	private bool gazeAvailable;
 	private float gazeYaw;
-	public GameObject gazeIndicator;
 
 	public bool useNumpad = false;
 	
@@ -141,7 +140,6 @@ public class KinectInfoInterpreter : MonoBehaviour {
 			gazeAvailable = ReadFaceTrackingAvailable ();
 			if (gazeAvailable) {
 				gazeYaw = GazeFromQuaternion (ReadHeadRotation ());
-				if (gazeIndicator != null) gazeIndicator.transform.eulerAngles = new Vector3(0f,180f,gazeYaw*60f);
 			}
 		}
 
@@ -151,7 +149,7 @@ public class KinectInfoInterpreter : MonoBehaviour {
 		gestureSwitchedOn[i] = true;
 		gestureLastSwitchedOn[i] = Time.time;
 		GestureTogglePositive(i, true);
-		if (kinectListener.mainController.useKinect) feedbackController.AddItem(KinectFeedbackController.gestureMessageIds[gesturesBeingRead[i]]);
+		feedbackController.AddItem(KinectFeedbackController.gestureMessageIds[gesturesBeingRead[i]]);
 	}
 	private void GestureSwitchOff(int i) {
 		gestureSwitchedOff[i] = true;
@@ -214,7 +212,7 @@ public class KinectInfoInterpreter : MonoBehaviour {
 
 	private float GazeFromQuaternion(Quaternion headRotation) {
 		Vector3 directionVector = headRotation * Vector3.forward;
-		if (gazeVectorText != null) gazeVectorText.text = System.String.Format("({0:0.000},{1:0.000})", directionVector.x, directionVector.z);
+		gazeVectorText.text = System.String.Format("({0:0.000},{1:0.000})", directionVector.x, directionVector.z);
 		return Mathf.Atan2 (directionVector.x, directionVector.z);
 	}
 

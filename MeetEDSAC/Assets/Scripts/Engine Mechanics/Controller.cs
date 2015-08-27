@@ -77,7 +77,6 @@ public class Controller : MonoBehaviour {
 		activeLabels = new List<LabelController> ();
 //		foreach (LabelController lc in FindObjectsOfType<LabelController>())
 //			lc.Deactivate();
-		Application.targetFrameRate = 60;
 	}
 
 	void Start () {
