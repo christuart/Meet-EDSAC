@@ -1,0 +1,647 @@
+fileFormatVersion: 2
+guid: 8cec99bed8454e0409a368d2eae9feef
+timeCreated: 1440777314
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: ATA_Rack_Case_-_12_Space
+    100002: Component_50
+    100004: Component_50 1
+    100006: Component_50 2
+    100008: Component_50 3
+    100010: Component_50 4
+    100012: Component_50 5
+    100014: Component_50 6
+    100016: Component_50 7
+    100018: Component_59
+    100020: Component_59 1
+    100022: Component_60
+    100024: Component_60 1
+    100026: Component_60 10
+    100028: Component_60 11
+    100030: Component_60 12
+    100032: Component_60 13
+    100034: Component_60 14
+    100036: Component_60 15
+    100038: Component_60 16
+    100040: Component_60 17
+    100042: Component_60 18
+    100044: Component_60 19
+    100046: Component_60 2
+    100048: Component_60 20
+    100050: Component_60 21
+    100052: Component_60 22
+    100054: Component_60 23
+    100056: Component_60 24
+    100058: Component_60 25
+    100060: Component_60 26
+    100062: Component_60 27
+    100064: Component_60 28
+    100066: Component_60 29
+    100068: Component_60 3
+    100070: Component_60 30
+    100072: Component_60 31
+    100074: Component_60 32
+    100076: Component_60 33
+    100078: Component_60 34
+    100080: Component_60 35
+    100082: Component_60 36
+    100084: Component_60 37
+    100086: Component_60 38
+    100088: Component_60 39
+    100090: Component_60 4
+    100092: Component_60 40
+    100094: Component_60 41
+    100096: Component_60 42
+    100098: Component_60 43
+    100100: Component_60 44
+    100102: Component_60 45
+    100104: Component_60 46
+    100106: Component_60 47
+    100108: Component_60 5
+    100110: Component_60 6
+    100112: Component_60 7
+    100114: Component_60 8
+    100116: Component_60 9
+    100118: fan_effects_large_1
+    100120: Furman_P2400_IT
+    100122: Group_15
+    100124: Group_15 1
+    100126: Group_15 2
+    100128: Group_15 3
+    100130: ID169
+    100132: ID182
+    100134: ID190
+    100136: ID198
+    100138: ID208
+    100140: ID216
+    100142: ID234
+    100144: ID234 1
+    100146: ID321
+    100148: ID329
+    100150: ID34
+    100152: ID34 1
+    100154: ID34 2
+    100156: ID34 3
+    100158: ID42
+    100160: ID42 1
+    100162: ID42 2
+    100164: ID42 3
+    100166: ID48
+    100168: ID48 1
+    100170: ID48 2
+    100172: ID48 3
+    100174: ID54
+    100176: ID54 1
+    100178: ID54 2
+    100180: ID54 3
+    100182: image_0
+    100184: image_0 1
+    100186: image_1
+    100188: image_1 1
+    100190: image_2
+    100192: image_3
+    100194: image_4
+    100196: image_5
+    100198: instance_0
+    100200: instance_1
+    100202: instance_10
+    100204: instance_10 1
+    100206: instance_11
+    100208: instance_11 1
+    100210: instance_12
+    100212: instance_12 1
+    100214: instance_13
+    100216: instance_13 1
+    100218: instance_14
+    100220: instance_14 1
+    100222: instance_15
+    100224: instance_15 1
+    100226: instance_16
+    100228: instance_16 1
+    100230: instance_17
+    100232: instance_17 1
+    100234: instance_18
+    100236: instance_18 1
+    100238: instance_19
+    100240: instance_19 1
+    100242: instance_2
+    100244: instance_20
+    100246: instance_20 1
+    100248: instance_21
+    100250: instance_21 1
+    100252: instance_22
+    100254: instance_22 1
+    100256: instance_23
+    100258: instance_23 1
+    100260: instance_24
+    100262: instance_24 1
+    100264: instance_25
+    100266: instance_25 1
+    100268: instance_26
+    100270: instance_26 1
+    100272: instance_27
+    100274: instance_27 1
+    100276: instance_28
+    100278: instance_28 1
+    100280: instance_29
+    100282: instance_29 1
+    100284: instance_3
+    100286: instance_3 1
+    100288: instance_3 2
+    100290: instance_3 3
+    100292: instance_30
+    100294: instance_30 1
+    100296: instance_31
+    100298: instance_31 1
+    100300: instance_32
+    100302: instance_32 1
+    100304: instance_33
+    100306: instance_34
+    100308: instance_35
+    100310: instance_36
+    100312: instance_37
+    100314: instance_4
+    100316: instance_4 1
+    100318: instance_4 2
+    100320: instance_4 3
+    100322: instance_5
+    100324: instance_6
+    100326: instance_7
+    100328: instance_8
+    100330: instance_9
+    100332: instance_9 1
+    100334: //RootNode
+    100336: Yamaha_DCU5D
+    100338: Yamaha_PW800
+    100340: Yamaha_PW800 1
+    400000: ATA_Rack_Case_-_12_Space
+    400002: Component_50
+    400004: Component_50 1
+    400006: Component_50 2
+    400008: Component_50 3
+    400010: Component_50 4
+    400012: Component_50 5
+    400014: Component_50 6
+    400016: Component_50 7
+    400018: Component_59
+    400020: Component_59 1
+    400022: Component_60
+    400024: Component_60 1
+    400026: Component_60 10
+    400028: Component_60 11
+    400030: Component_60 12
+    400032: Component_60 13
+    400034: Component_60 14
+    400036: Component_60 15
+    400038: Component_60 16
+    400040: Component_60 17
+    400042: Component_60 18
+    400044: Component_60 19
+    400046: Component_60 2
+    400048: Component_60 20
+    400050: Component_60 21
+    400052: Component_60 22
+    400054: Component_60 23
+    400056: Component_60 24
+    400058: Component_60 25
+    400060: Component_60 26
+    400062: Component_60 27
+    400064: Component_60 28
+    400066: Component_60 29
+    400068: Component_60 3
+    400070: Component_60 30
+    400072: Component_60 31
+    400074: Component_60 32
+    400076: Component_60 33
+    400078: Component_60 34
+    400080: Component_60 35
+    400082: Component_60 36
+    400084: Component_60 37
+    400086: Component_60 38
+    400088: Component_60 39
+    400090: Component_60 4
+    400092: Component_60 40
+    400094: Component_60 41
+    400096: Component_60 42
+    400098: Component_60 43
+    400100: Component_60 44
+    400102: Component_60 45
+    400104: Component_60 46
+    400106: Component_60 47
+    400108: Component_60 5
+    400110: Component_60 6
+    400112: Component_60 7
+    400114: Component_60 8
+    400116: Component_60 9
+    400118: fan_effects_large_1
+    400120: Furman_P2400_IT
+    400122: Group_15
+    400124: Group_15 1
+    400126: Group_15 2
+    400128: Group_15 3
+    400130: ID169
+    400132: ID182
+    400134: ID190
+    400136: ID198
+    400138: ID208
+    400140: ID216
+    400142: ID234
+    400144: ID234 1
+    400146: ID321
+    400148: ID329
+    400150: ID34
+    400152: ID34 1
+    400154: ID34 2
+    400156: ID34 3
+    400158: ID42
+    400160: ID42 1
+    400162: ID42 2
+    400164: ID42 3
+    400166: ID48
+    400168: ID48 1
+    400170: ID48 2
+    400172: ID48 3
+    400174: ID54
+    400176: ID54 1
+    400178: ID54 2
+    400180: ID54 3
+    400182: image_0
+    400184: image_0 1
+    400186: image_1
+    400188: image_1 1
+    400190: image_2
+    400192: image_3
+    400194: image_4
+    400196: image_5
+    400198: instance_0
+    400200: instance_1
+    400202: instance_10
+    400204: instance_10 1
+    400206: instance_11
+    400208: instance_11 1
+    400210: instance_12
+    400212: instance_12 1
+    400214: instance_13
+    400216: instance_13 1
+    400218: instance_14
+    400220: instance_14 1
+    400222: instance_15
+    400224: instance_15 1
+    400226: instance_16
+    400228: instance_16 1
+    400230: instance_17
+    400232: instance_17 1
+    400234: instance_18
+    400236: instance_18 1
+    400238: instance_19
+    400240: instance_19 1
+    400242: instance_2
+    400244: instance_20
+    400246: instance_20 1
+    400248: instance_21
+    400250: instance_21 1
+    400252: instance_22
+    400254: instance_22 1
+    400256: instance_23
+    400258: instance_23 1
+    400260: instance_24
+    400262: instance_24 1
+    400264: instance_25
+    400266: instance_25 1
+    400268: instance_26
+    400270: instance_26 1
+    400272: instance_27
+    400274: instance_27 1
+    400276: instance_28
+    400278: instance_28 1
+    400280: instance_29
+    400282: instance_29 1
+    400284: instance_3
+    400286: instance_3 1
+    400288: instance_3 2
+    400290: instance_3 3
+    400292: instance_30
+    400294: instance_30 1
+    400296: instance_31
+    400298: instance_31 1
+    400300: instance_32
+    400302: instance_32 1
+    400304: instance_33
+    400306: instance_34
+    400308: instance_35
+    400310: instance_36
+    400312: instance_37
+    400314: instance_4
+    400316: instance_4 1
+    400318: instance_4 2
+    400320: instance_4 3
+    400322: instance_5
+    400324: instance_6
+    400326: instance_7
+    400328: instance_8
+    400330: instance_9
+    400332: instance_9 1
+    400334: //RootNode
+    400336: Yamaha_DCU5D
+    400338: Yamaha_PW800
+    400340: Yamaha_PW800 1
+    2300000: ATA_Rack_Case_-_12_Space
+    2300002: Component_50
+    2300004: Component_50 1
+    2300006: Component_50 2
+    2300008: Component_50 3
+    2300010: Component_50 4
+    2300012: Component_50 5
+    2300014: Component_50 6
+    2300016: Component_50 7
+    2300018: Component_59
+    2300020: Component_59 1
+    2300022: Component_60
+    2300024: Component_60 1
+    2300026: Component_60 10
+    2300028: Component_60 11
+    2300030: Component_60 12
+    2300032: Component_60 13
+    2300034: Component_60 14
+    2300036: Component_60 15
+    2300038: Component_60 16
+    2300040: Component_60 17
+    2300042: Component_60 18
+    2300044: Component_60 19
+    2300046: Component_60 2
+    2300048: Component_60 20
+    2300050: Component_60 21
+    2300052: Component_60 22
+    2300054: Component_60 23
+    2300056: Component_60 24
+    2300058: Component_60 25
+    2300060: Component_60 26
+    2300062: Component_60 27
+    2300064: Component_60 28
+    2300066: Component_60 29
+    2300068: Component_60 3
+    2300070: Component_60 30
+    2300072: Component_60 31
+    2300074: Component_60 32
+    2300076: Component_60 33
+    2300078: Component_60 34
+    2300080: Component_60 35
+    2300082: Component_60 36
+    2300084: Component_60 37
+    2300086: Component_60 38
+    2300088: Component_60 39
+    2300090: Component_60 4
+    2300092: Component_60 40
+    2300094: Component_60 41
+    2300096: Component_60 42
+    2300098: Component_60 43
+    2300100: Component_60 44
+    2300102: Component_60 45
+    2300104: Component_60 46
+    2300106: Component_60 47
+    2300108: Component_60 5
+    2300110: Component_60 6
+    2300112: Component_60 7
+    2300114: Component_60 8
+    2300116: Component_60 9
+    2300118: fan_effects_large_1
+    2300120: Furman_P2400_IT
+    2300122: Group_15
+    2300124: Group_15 1
+    2300126: Group_15 2
+    2300128: Group_15 3
+    2300130: ID169
+    2300132: ID182
+    2300134: ID190
+    2300136: ID198
+    2300138: ID208
+    2300140: ID216
+    2300142: ID234
+    2300144: ID234 1
+    2300146: ID321
+    2300148: ID329
+    2300150: ID34
+    2300152: ID34 1
+    2300154: ID34 2
+    2300156: ID34 3
+    2300158: ID42
+    2300160: ID42 1
+    2300162: ID42 2
+    2300164: ID42 3
+    2300166: ID48
+    2300168: ID48 1
+    2300170: ID48 2
+    2300172: ID48 3
+    2300174: ID54
+    2300176: ID54 1
+    2300178: ID54 2
+    2300180: ID54 3
+    2300182: image_0
+    2300184: image_0 1
+    2300186: image_1
+    2300188: image_1 1
+    2300190: image_2
+    2300192: image_3
+    2300194: image_4
+    2300196: image_5
+    2300198: Yamaha_DCU5D
+    2300200: Yamaha_PW800
+    2300202: Yamaha_PW800 1
+    3300000: ATA_Rack_Case_-_12_Space
+    3300002: Component_50
+    3300004: Component_50 1
+    3300006: Component_50 2
+    3300008: Component_50 3
+    3300010: Component_50 4
+    3300012: Component_50 5
+    3300014: Component_50 6
+    3300016: Component_50 7
+    3300018: Component_59
+    3300020: Component_59 1
+    3300022: Component_60
+    3300024: Component_60 1
+    3300026: Component_60 10
+    3300028: Component_60 11
+    3300030: Component_60 12
+    3300032: Component_60 13
+    3300034: Component_60 14
+    3300036: Component_60 15
+    3300038: Component_60 16
+    3300040: Component_60 17
+    3300042: Component_60 18
+    3300044: Component_60 19
+    3300046: Component_60 2
+    3300048: Component_60 20
+    3300050: Component_60 21
+    3300052: Component_60 22
+    3300054: Component_60 23
+    3300056: Component_60 24
+    3300058: Component_60 25
+    3300060: Component_60 26
+    3300062: Component_60 27
+    3300064: Component_60 28
+    3300066: Component_60 29
+    3300068: Component_60 3
+    3300070: Component_60 30
+    3300072: Component_60 31
+    3300074: Component_60 32
+    3300076: Component_60 33
+    3300078: Component_60 34
+    3300080: Component_60 35
+    3300082: Component_60 36
+    3300084: Component_60 37
+    3300086: Component_60 38
+    3300088: Component_60 39
+    3300090: Component_60 4
+    3300092: Component_60 40
+    3300094: Component_60 41
+    3300096: Component_60 42
+    3300098: Component_60 43
+    3300100: Component_60 44
+    3300102: Component_60 45
+    3300104: Component_60 46
+    3300106: Component_60 47
+    3300108: Component_60 5
+    3300110: Component_60 6
+    3300112: Component_60 7
+    3300114: Component_60 8
+    3300116: Component_60 9
+    3300118: fan_effects_large_1
+    3300120: Furman_P2400_IT
+    3300122: Group_15
+    3300124: Group_15 1
+    3300126: Group_15 2
+    3300128: Group_15 3
+    3300130: ID169
+    3300132: ID182
+    3300134: ID190
+    3300136: ID198
+    3300138: ID208
+    3300140: ID216
+    3300142: ID234
+    3300144: ID234 1
+    3300146: ID321
+    3300148: ID329
+    3300150: ID34
+    3300152: ID34 1
+    3300154: ID34 2
+    3300156: ID34 3
+    3300158: ID42
+    3300160: ID42 1
+    3300162: ID42 2
+    3300164: ID42 3
+    3300166: ID48
+    3300168: ID48 1
+    3300170: ID48 2
+    3300172: ID48 3
+    3300174: ID54
+    3300176: ID54 1
+    3300178: ID54 2
+    3300180: ID54 3
+    3300182: image_0
+    3300184: image_0 1
+    3300186: image_1
+    3300188: image_1 1
+    3300190: image_2
+    3300192: image_3
+    3300194: image_4
+    3300196: image_5
+    3300198: Yamaha_DCU5D
+    3300200: Yamaha_PW800
+    3300202: Yamaha_PW800 1
+    4300000: ATA_Rack_Case_-_12_Space
+    4300002: ID169
+    4300004: ID182
+    4300006: ID190
+    4300008: ID198
+    4300010: ID208
+    4300012: ID216
+    4300014: fan_effects_large_1
+    4300016: Group_15
+    4300018: ID34
+    4300020: ID42
+    4300022: ID48
+    4300024: ID54
+    4300026: Component_50
+    4300028: Component_50
+    4300030: Component_59
+    4300032: Component_60
+    4300034: Component_59
+    4300036: Component_60
+    4300038: Yamaha_PW800
+    4300040: ID234
+    4300042: image_0
+    4300044: image_1
+    4300046: Yamaha_DCU5D
+    4300048: image_2
+    4300050: image_3
+    4300052: Furman_P2400_IT
+    4300054: ID321
+    4300056: ID329
+    4300058: image_4
+    4300060: image_5
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .0299999993
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

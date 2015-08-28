@@ -22,7 +22,7 @@ public class WireRenderer : MonoBehaviour {
 	void Awake() { 
 		lr = gameObject.GetComponent<LineRenderer>();
 		if (lr == null)	lr = gameObject.AddComponent<LineRenderer>();
-		lr.material = new Material(Shader.Find ("Custom/WireShader"));
+		lr.material = new Material(Shader.Find ("Unlit/Color"));
 		if (setLooks) {
 			SetLooks (colour, width);
 		} else {
@@ -44,8 +44,9 @@ public class WireRenderer : MonoBehaviour {
 	public void SetLooks(Color _colour, float _width) {
 		colour = _colour;
 		width = _width;
-		Color rendererColour = new Color(_colour.r,_colour.r,_colour.b);
-		lr.material.SetColor ("_EmisColor",rendererColour);
+		Color rendererColour = new Color(_colour.r,_colour.g,_colour.b);
+		//lr.material.SetColor ("_EmisColor",rendererColour);
+		lr.material.SetColor ("_Color",rendererColour);
 		lr.SetColors(_colour,_colour);
 		lr.SetWidth (_width,_width);
 	}

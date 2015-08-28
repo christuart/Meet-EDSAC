@@ -1,19 +1,19 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\WireRenderer.cs">
     <Files>
-      <File FileName="Assets\Scripts\Engine Mechanics\StoryWaypoint.cs" Line="72" Column="53" />
-      <File FileName="Assets\Scripts\XML\EdsacXmlGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets\WireRenderer.cs" Line="38" Column="18" />
+      <File FileName="Assets\Scripts\Engine Mechanics\StoryWaypoint.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\XML\EdsacXmlGenerator.cs" Line="368" Column="25" />
       <File FileName="Assets\StoryTitleController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Graphics\LineRendererCulling.cs" Line="1" Column="1" />
-      <File FileName="Assets\WireRenderer.cs" Line="41" Column="26" />
       <File FileName="Assets\WireBuilder.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Engine Mechanics\KinectInfoInterpreter.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Engine Mechanics\MyKinectListener.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Engine Mechanics\InfoHolderController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Engine Mechanics\StoryController.cs" Line="84" Column="46" />
-      <File FileName="Assets\Scripts\View Point Mesh System\ViewPointMeshVertex.cs" Line="42" Column="16" />
+      <File FileName="Assets\Scripts\Engine Mechanics\StoryController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\View Point Mesh System\ViewPointMeshVertex.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\setup_rack.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\XML\EdsacXmlPopulater.cs" Line="1" Column="1" />
     </Files>
