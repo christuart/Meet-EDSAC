@@ -10,6 +10,7 @@ public class StoryController : MonoBehaviour {
 	public StoryMode storyMode;
 	public GameObject storyModeIndicator;
 	private ViewPointMeshVertex normalModeVertex;
+	private float normalModeFOV;
 	public int activeWaypointIndex;
 	public StoryWaypoint activeWaypoint;
 	public Controller controller;
@@ -53,7 +54,11 @@ public class StoryController : MonoBehaviour {
 					float remainingTime = nextAnimationKeyframeStart - Time.time;
 					float totalTime = activeWaypoint.cameraAnimation.Keys[lastAnimationKeyframe+1] - activeWaypoint.cameraAnimation.Keys[lastAnimationKeyframe];
 					animationPosition = Vector3.Lerp (activeWaypoint.cameraAnimation.Values[lastAnimationKeyframe+1],activeWaypoint.cameraAnimation.Values[lastAnimationKeyframe],remainingTime/totalTime);
-					animationRotation = Quaternion.Slerp(activeWaypoint.cameraRotationAnimation.Values[lastAnimationKeyframe+1],activeWaypoint.cameraRotationAnimation.Values[lastAnimationKeyframe],remainingTime/totalTime);
+					if (activeWaypoint.cameraRotationAnimation.Values[lastAnimationKeyframe+1] != activeWaypoint.cameraRotationAnimation.Values[lastAnimationKeyframe]) {
+						animationRotation = Quaternion.Slerp(activeWaypoint.cameraRotationAnimation.Values[lastAnimationKeyframe+1],activeWaypoint.cameraRotationAnimation.Values[lastAnimationKeyframe],remainingTime/totalTime);
+					} else {
+						animationRotation = activeWaypoint.cameraRotationAnimation.Values[lastAnimationKeyframe];
+					}
 				}
 				// then get the interpolated animation position
 											// lerp from the next to the previous keyframes
@@ -66,6 +71,7 @@ public class StoryController : MonoBehaviour {
 
 	public void EngageStoryMode() {
 		normalModeVertex = controller.activeVertex;
+		normalModeFOV = controller.cameraZoom.GetZoom();
 		foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
 			ipc.Hide();
 		storyModeIndicator.SetActive (true);
@@ -75,6 +81,7 @@ public class StoryController : MonoBehaviour {
 	}
 	public void LeaveStoryMode() {
 		controller.ActivateVertex (normalModeVertex);
+		controller.cameraZoom.SetZoom(normalModeFOV);
 		foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
 			ipc.Unhide();
 		storyModeIndicator.SetActive (false);
@@ -104,6 +111,7 @@ public class StoryController : MonoBehaviour {
 			cameraController.continuousTarget = true;
 		} else {
 			animationPosition = new Vector3();
+			animationRotation = Quaternion.identity;
 			cameraController.continuousTarget = false;
 		}
 		if (activeWaypoint.videoContent != Videos.NONE) {
@@ -227,7 +235,6 @@ public class StoryController : MonoBehaviour {
 	void OnDrawGizmos() {
 		if (editMode) {
 			if (!_editMode) {
-				DestroyImmediate(visCamera);
 				visualiseWaypoint = _visualiseWaypoint;
 				visualiseNewWaypoint = _visualiseNewWaypoint;
 			}
@@ -264,8 +271,9 @@ public class StoryController : MonoBehaviour {
 			}
 			if (visualiseWaypoint && waypoints.Length == 0) visualiseWaypoint = false;
 			if (visualiseWaypoint) {
-				if (!_visualiseWaypoint) {
+				if (!_visualiseWaypoint || !_editMode) {
 					visualiseNewWaypoint = false;
+					if (visCameraHolder.GetComponent<Camera>() != null) DestroyImmediate (visCameraHolder.GetComponent<Camera>());
 					visCamera = visCameraHolder.AddComponent<Camera>() as Camera;
 					visCamera.depth = 30;
 					visCamera.clearFlags = CameraClearFlags.SolidColor;
@@ -314,6 +322,9 @@ public class StoryController : MonoBehaviour {
 					waypoints[workingWaypoint].cameraPosition = waypointMarker.transform.position;
 					waypoints[workingWaypoint].cameraRotation = waypointMarker.transform.rotation;
 					waypoints[workingWaypoint].cameraFieldOfView = visualisationFieldOfView;
+					waypoints[workingWaypoint].SetAnimation(animationKeys,animationValues,animationRotations);
+					waypoints[workingWaypoint].PopulateAnimation();
+					waypoints[workingWaypoint].loopAnimation = loopAnimation;
 					updateWaypointToVisualisation = false;
 				} else if (revertVisualisationToWaypoint) {
 					waypointMarker.transform.position = waypoints[workingWaypoint].cameraPosition;

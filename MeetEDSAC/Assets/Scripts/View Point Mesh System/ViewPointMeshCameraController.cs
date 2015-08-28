@@ -41,6 +41,7 @@ public class ViewPointMeshCameraController : MonoBehaviour {
 	void Update () {
 		if (continuousTarget) {
 			targetPosition = vert.transform.position;
+			targetRotation = vert.transform.rotation;
 		}
 		if (nudging || (transform.position-targetPosition).magnitude > slideThresh) {
 

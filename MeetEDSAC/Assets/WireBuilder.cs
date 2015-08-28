@@ -29,6 +29,7 @@ public class WireBuilder : MonoBehaviour {
 			outwardDistance = Random.Range(0.06f,0.12f);
 			downwardDistance = Mathf.Pow(Random.Range (0.15f,.65f),2f);
 		}
+		w.outwardDirection = transform.rotation;
 		w.SetWire(start,end,outwardDistance,downwardDistance);
 		if (setLooks) w.SetLooks(colour,width);
 		w.BuildWire();

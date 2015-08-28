@@ -193,7 +193,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 										v.y);
 								}
 							}
-						} else {
+						} else if (!edsac.availableChassisTypes.ContainsValue(ch.chassisType)) {
 							// make it up!
 
 							// probabilities of randomly skipping bits

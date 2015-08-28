@@ -4,7 +4,7 @@
 	<chassistype>1</chassistype>
 	<testingpoints>1</testingpoints>
 	<valve>
-		<valvetype>BigFlat</valvetype>
+		<valvetype>BigShiny</valvetype>
 		<valvex>0.34</valvex>
 		<valvey>0.006</valvey>
 	</valve>
@@ -14,12 +14,12 @@
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigFlat</valvetype>
+		<valvetype>BigShiny</valvetype>
 		<valvex>0.236</valvex>
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigShiny</valvetype>
+		<valvetype>BigFlat</valvetype>
 		<valvex>0.184</valvex>
 		<valvey>0.006</valvey>
 	</valve>
@@ -39,17 +39,17 @@
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigFlat</valvetype>
+		<valvetype>BigShiny</valvetype>
 		<valvex>-0.024</valvex>
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigShiny</valvetype>
+		<valvetype>BigFlat</valvetype>
 		<valvex>-0.076</valvex>
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigShiny</valvetype>
+		<valvetype>BigFlat</valvetype>
 		<valvex>-0.128</valvex>
 		<valvey>0.006</valvey>
 	</valve>
@@ -64,12 +64,12 @@
 		<valvey>0.006</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigFlat</valvetype>
+		<valvetype>BigShiny</valvetype>
 		<valvex>-0.284</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>BigFlat</valvetype>
+		<valvetype>BigShiny</valvetype>
 		<valvex>-0.336</valvex>
 		<valvey>0.006</valvey>
 	</valve>
@@ -79,27 +79,27 @@
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallBlack</valvetype>
+		<valvetype>SmallRed</valvetype>
 		<valvex>0.158</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallCream</valvetype>
+		<valvetype>SmallRed</valvetype>
 		<valvex>0.106</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallRed</valvetype>
+		<valvetype>SmallBlack</valvetype>
 		<valvex>0.054</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallCream</valvetype>
+		<valvetype>SmallBlack</valvetype>
 		<valvex>0.002</valvex>
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallRed</valvetype>
+		<valvetype>SmallCream</valvetype>
 		<valvex>-0.05</valvex>
 		<valvey>0.055</valvey>
 	</valve>
@@ -109,7 +109,7 @@
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallRed</valvetype>
+		<valvetype>SmallCream</valvetype>
 		<valvex>-0.154</valvex>
 		<valvey>0.055</valvey>
 	</valve>
@@ -119,7 +119,7 @@
 		<valvey>0.055</valvey>
 	</valve>
 	<valve>
-		<valvetype>SmallBlack</valvetype>
+		<valvetype>SmallRed</valvetype>
 		<valvex>-0.258</valvex>
 		<valvey>0.055</valvey>
 	</valve>
@@ -127,6 +127,10 @@
 <chassisdefinition>
 	<chassistype>2</chassistype>
 	<testingpoints>4</testingpoints>
+</chassisdefinition>
+<chassisdefinition>
+	<chassistype>39</chassistype>
+	<testingpoints>1</testingpoints>
 </chassisdefinition>
 <row>
 	<rowname>Rear</rowname>
