@@ -50,6 +50,11 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		faceTrackingAvailable = new Dictionary<long, bool> ();
 	}
 
+	void Start() {
+		kinectManager = KinectManager.Instance;
+		//kinectManager.gestureListeners.Add (this);
+	}
+
 	public void UserDetected(long userId, int userIndex)
 	{
 		if (users == 2) {
@@ -133,11 +138,8 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		if((gesture == KinectGestures.Gestures.ZoomOut || gesture == KinectGestures.Gestures.ZoomIn) && progress > 0.5f)
 		{
 
-			//if (!wasZooming) {
-			//	wasZooming = true;
-			//} else {
-				currentZoomDelta[userId] = screenPos.z - lastZoom[userId];
-			//}
+			wasZooming[userId] = true;
+			currentZoomDelta[userId] = screenPos.z - lastZoom[userId];
 			lastZoom[userId] = screenPos.z;
 
 		}
@@ -198,33 +200,37 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 	}
 
 	private void CheckZooming(long userId) {
-		//if (wasZooming) {
-		zoomHistory[userId].Enqueue(currentZoomDelta[userId]);
-		while (zoomHistory[userId].Count > zoomFrames) zoomHistory[userId].Dequeue();
-		float zoomSum = 0f;
-		float thisZoom;
-		for (int i = 0; i < zoomHistory[userId].Count; i++) {
-			thisZoom = zoomHistory[userId].Dequeue();
-			zoomSum += thisZoom;
-			zoomHistory[userId].Enqueue(thisZoom);
-		}
-		if (kinectManager.GetLeftHandState(userId) == KinectInterop.HandState.Closed && kinectManager.GetRightHandState(userId) == KinectInterop.HandState.Closed) {
-			if (zoomSum > zoomThreshold) {
-				(gestureStates[userId])[KinectGestures.Gestures.ZoomIn] = true;
-			} else if (2f * zoomSum < -zoomThreshold) {
-				(gestureStates[userId])[KinectGestures.Gestures.ZoomOut] = true;
+		if (wasZooming[userId]) {
+			zoomHistory[userId].Enqueue(currentZoomDelta[userId]);
+			while (zoomHistory[userId].Count > zoomFrames) zoomHistory[userId].Dequeue();
+			float zoomSum = 0f;
+			float thisZoom;
+			for (int i = 0; i < zoomHistory[userId].Count; i++) {
+				thisZoom = zoomHistory[userId].Dequeue();
+				zoomSum += thisZoom;
+				zoomHistory[userId].Enqueue(thisZoom);
 			}
+			if (kinectManager.GetLeftHandState(userId) == KinectInterop.HandState.Closed && kinectManager.GetRightHandState(userId) == KinectInterop.HandState.Closed) {
+				if (zoomSum > zoomThreshold) {
+					(gestureStates[userId])[KinectGestures.Gestures.ZoomIn] = true;
+				} else if (2f * zoomSum < -zoomThreshold) {
+					(gestureStates[userId])[KinectGestures.Gestures.ZoomOut] = true;
+				} else {
+					wasZooming[userId] = false;
+				}
+			} else {
+				wasZooming[userId] = false;
+			}
+		} else {
+			zoomHistory[userId].Clear();
 		}
-		//} else {
-		//	zoomHistory.Clear();
-		//}
 		currentZoomDelta[userId] = 0f;
 		// This line makes it look as if currentZoomDelta is always 0f, but that's because it's updated outside of the Update loops
 		// It gets set when GestureInProgress is called by KinectManager
 	}
 	private void CheckFaceTrackingAvailability(long userId) {
 		faceTracker = FacetrackingManager.Instance;
-		faceTrackingAvailable [userId] = faceTracker.IsTrackingFace (userId);
+		faceTrackingAvailable [userId] = faceTracker != null && faceTracker.IsTrackingFace (userId);
 	}
 
 	private void ClearUserFromDictionaries(long userId) {
@@ -244,6 +250,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		return (gestureStates[userId].ContainsKey(g)) ? (gestureStates[userId])[g]: false;
 	}
 	public bool IsFaceTrackingAvailable(long userId) {
+		faceTracker = FacetrackingManager.Instance;
 		return (userId == firstUserId || userId == secondUserId) && faceTracker.IsTrackingFace (userId);
 	}
 	public Quaternion GetUserFaceDirection() {

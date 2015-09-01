@@ -11,7 +11,7 @@ public class KinectFeedbackController : MonoBehaviour {
 		"Swipe Down",
 		"Zoom In",
 		"Zoom Out",
-		"Grab",
+		"Activate",
 		"A maximum of two users is allowed.",
 		"Single user Kinect mode activated.",
 		"Dual user Kinect mode activated.",
@@ -20,7 +20,13 @@ public class KinectFeedbackController : MonoBehaviour {
 		"No users. Kinect mode deactivated.",
 		"Unexpected 'user left' event! Who were you...",
 		"Debug mode activated.",
-		"Debug mode deactivated."
+		"Debug mode deactivated.",
+		"Drag Left",
+		"Drag Right",
+		"Drag Up",
+		"Drag Down",
+		"Grab",
+		"Let go"
 	};
 
 	#region MESSAGE-IDS
@@ -31,7 +37,11 @@ public class KinectFeedbackController : MonoBehaviour {
 		{EdsacGestures.DOWN_SWIPE, 3},
 		{EdsacGestures.STRETCH, 4},
 		{EdsacGestures.SQUASH, 5},
-		{EdsacGestures.SELECT, 6}
+		{EdsacGestures.SELECT, 6},
+		{EdsacGestures.LEFT_DRAG, 16},
+		{EdsacGestures.RIGHT_DRAG, 17},
+		{EdsacGestures.UP_DRAG, 18},
+		{EdsacGestures.DOWN_DRAG, 19}
 	};
 	public static int TOO_MANY_PLAYERS = 7;
 	public static int SINGLE_PLAYER = 8;
@@ -42,6 +52,8 @@ public class KinectFeedbackController : MonoBehaviour {
 	public static int UNKNOWN_PLAYER_LEFT = 13;
 	public static int DEBUG_ON = 14;
 	public static int DEBUG_OFF = 15;
+	public static int HAND_CLOSED = 20;
+	public static int HAND_OPENED = 21;
 	#endregion MESSAGE-IDS
 
 	public GameObject prefab;

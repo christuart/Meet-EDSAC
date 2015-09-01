@@ -82,6 +82,14 @@ public class InfoHolderController : MonoBehaviour {
 			}
 		}
 	}
+	public void PressButtonInInfoContent() {
+		GameObject infoContent = ActiveContent ();
+		if (infoContent != null) {
+			Button contentButton = infoContent.GetComponentInChildren<Button>();
+			if (contentButton != null)
+				contentButton.onClick.Invoke();
+		}
+	}
 
 	public GameObject ActiveContent() {
 		if (currentContentId >= 0 && currentContentId < content.Length) {
@@ -104,18 +112,13 @@ public class InfoHolderController : MonoBehaviour {
 		if (scrollContent == null) {
 			yield break;
 		}
-		Debug.Log (infoAreaHeight);
 		float contentHeight = Mathf.Abs (scrollContent.GetComponent<RectTransform>().rect.height);
-		Debug.Log (contentHeight);
 		float scrollableHeight = contentHeight - infoAreaHeight;
-		Debug.Log (scrollableHeight);
 		if (scrollableHeight < 0) {
 			yield break;
 		}
 		float targetScrollRatio = (scrollDown ? -1 : 1) * (3f/4) * infoAreaHeight / scrollableHeight;
-		Debug.Log (targetScrollRatio);
 		float targetScrollBarPosition = Mathf.Clamp01(scrollBar.value+targetScrollRatio);
-		Debug.Log (targetScrollBarPosition);
 		scrolling = true;
 		while (Mathf.Abs(scrollBar.value - targetScrollBarPosition) > 0.01f) {
 			scrollBar.value = Mathf.Lerp (scrollBar.value,targetScrollBarPosition,scrollSlide*Time.deltaTime);

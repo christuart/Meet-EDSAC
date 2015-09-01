@@ -78,6 +78,8 @@ public class FacetrackingManager : MonoBehaviour
     {
         get
         {
+			if (instance == null)
+				instance = GameObject.FindGameObjectWithTag("GameController").AddComponent<FacetrackingManager>() as FacetrackingManager;
             return instance;
         }
     }

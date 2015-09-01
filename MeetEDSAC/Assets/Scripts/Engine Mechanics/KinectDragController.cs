@@ -4,6 +4,7 @@ using System.Collections;
 public class KinectDragController : MonoBehaviour {
 
 	private KinectManager kinect;
+	private KinectFeedbackController feedbackController;
 	public bool isLeftHand;
 	public KinectInterop.JointType handJoint;
 	public long userId;
@@ -13,6 +14,8 @@ public class KinectDragController : MonoBehaviour {
 	public int maxDragSteps = 5;
 
 	public bool canDrag = false;
+	public int dragBuffer = 0;
+	private int dragBufferTriggerSize = 3; // say =3, that means that on the 3rd consecutive hand close step, dragging will start
 	public bool wasDragging = false;
 
 	private Vector2 dragStartPos;
@@ -25,6 +28,10 @@ public class KinectDragController : MonoBehaviour {
 	private bool isDraggingRight = false;
 	private bool isDraggingUp = false;
 	private bool isDraggingDown = false;
+
+	void Awake() {
+		feedbackController = Object.FindObjectOfType<KinectFeedbackController> ();
+	}
 
 	void Start() {
 		if (isLeftHand) {
@@ -56,10 +63,11 @@ public class KinectDragController : MonoBehaviour {
 		isDraggingDown = false;
 		if (canDrag && HandIsGrabbing(kinect)) {
 			if (!wasDragging) {
-				dragStartPos = Tools.Vector2fromXZ(kinect.GetJointPosition(userId,(int)handJoint));
+				dragStartPos = (Vector2)(kinect.GetJointPosition(userId,(int)handJoint));
+				feedbackController.AddItem (KinectFeedbackController.HAND_CLOSED);
 			}
 			wasDragging = true;
-			Vector2 dragVector = Tools.Vector2fromXZ(kinect.GetJointPosition(userId,(int)handJoint)) - dragStartPos;
+			Vector2 dragVector = (Vector2)(kinect.GetJointPosition(userId,(int)handJoint)) - dragStartPos;
 			float dragTan = Mathf.Abs(dragVector.x / dragVector.y);
 			if (dragTan < tan15 || dragTan > tan75) {
 				int steps = Mathf.FloorToInt(dragVector.magnitude / dragStepDistance);
@@ -79,16 +87,26 @@ public class KinectDragController : MonoBehaviour {
 					}
 				}
 			}
-		} else {
+		} else if (wasDragging) {
 			wasDragging = false;
+			feedbackController.AddItem (KinectFeedbackController.HAND_OPENED);
 		}
 	}
 
 	private bool HandIsGrabbing(KinectManager km) {
 		if (isLeftHand) {
-			return km.GetLeftHandState(userId) == KinectInterop.HandState.Closed;
+			if (km.GetLeftHandState(userId) != KinectInterop.HandState.Closed || km.GetRightHandState(userId) == KinectInterop.HandState.Closed) {
+				dragBuffer = 0;
+				return false;
+			}
 		} else {
-			return km.GetRightHandState(userId) == KinectInterop.HandState.Closed;
+			if (km.GetRightHandState(userId) != KinectInterop.HandState.Closed || km.GetLeftHandState(userId) == KinectInterop.HandState.Closed) {
+				dragBuffer = 0;
+				return false;
+			}
 		}
+		if (dragBuffer < dragBufferTriggerSize)
+			dragBuffer++;
+		return dragBuffer == dragBufferTriggerSize;
 	}
 }

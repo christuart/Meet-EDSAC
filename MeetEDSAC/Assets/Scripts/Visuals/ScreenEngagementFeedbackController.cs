@@ -57,7 +57,9 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 	void Update() {
 		if (engagementRegionsModeActive) {
 			if (singleEngagementRegion) {
-				singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,singleEngagementTransitionSlide*20f*Time.deltaTime);
+				if (Mathf.Abs (engagementInput - singleEngagementPosition) > 0.1) {
+					singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,singleEngagementTransitionSlide*20f*Time.deltaTime);
+				}
 				testInputIndicator.transform.localPosition = new Vector3 (0.5f+0.5f*singleEngagementPosition, 0.8f);
 				mainCameraBlurGradual.SetBlur( (singleEngagementPosition < LeftPanelEngagamentDeflectionTrigger()) || (singleEngagementPosition > RightPanelEngagamentDeflectionTrigger()));
 				overlayForLeft.intensity = Mathf.Clamp ((singleEngagementPosition-0.1f)/0.6f,0f,1f) * overlayIntensity;

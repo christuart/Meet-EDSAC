@@ -167,6 +167,9 @@ public class KinectManager : MonoBehaviour
     {
         get
         {
+			if (instance == null) {
+				GameObject.FindGameObjectWithTag ("GameController").AddComponent<KinectManager>();
+			}
             return instance;
         }
     }

@@ -59,8 +59,15 @@ public class KinectInfoInterpreter : MonoBehaviour {
 	}
 
 	void Awake() {
+		//int[] gestureValues = System.Enum.GetValues (typeof(EdsacGestures));
+		//gesturesBeingRead = gestureValues.Length;
+		//foreach (int i in gestureValues)
+			//gesturesBeingRead[i] = (EdsacGestures)i;
+		//gesturesBeingRead = (EdsacGestures[])System.Enum.GetValues (typeof(EdsacGestures));
 		leftDragController = gameObject.AddComponent<KinectDragController>();
+		leftDragController.isLeftHand = true;
 		rightDragController = gameObject.AddComponent<KinectDragController>();
+		rightDragController.isLeftHand = false;
 	}
 
 	void Start() {
@@ -180,25 +187,25 @@ public class KinectInfoInterpreter : MonoBehaviour {
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.Keypad4));
 			} else {
-				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeLeft);
+				return !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeLeft);
 			}
 		case EdsacGestures.RIGHT_SWIPE:
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.Keypad6));
 			} else {
-				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeRight);
+				return !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeRight);
 			}
 		case EdsacGestures.UP_SWIPE:
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.Keypad8));
 			} else {
-				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeUp);
+				return !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeUp);
 			}
 		case EdsacGestures.DOWN_SWIPE:
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.Keypad2));
 			} else {
-				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeDown);
+				return !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeDown);
 			}
 		case EdsacGestures.LEFT_DRAG:
 			return leftDragController.GetDraggingLeft() || rightDragController.GetDraggingLeft();
@@ -220,6 +227,8 @@ public class KinectInfoInterpreter : MonoBehaviour {
 			} else {
 				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.ZoomOut);
 			}
+		case EdsacGestures.SELECT:
+			return leftDragController.GetDraggingRight();
 		default:
 			return false;
 		}
@@ -240,7 +249,9 @@ public class KinectInfoInterpreter : MonoBehaviour {
 	public void SetUserId(long _userId) {
 		userId = _userId;
 		leftDragController.userId = _userId;
+		leftDragController.canDrag = true;
 		rightDragController.userId = _userId;
+		rightDragController.canDrag = true;
 	}
 
 	public void UseNumpad(bool use) {

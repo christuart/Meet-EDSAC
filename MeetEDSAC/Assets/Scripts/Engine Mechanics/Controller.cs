@@ -159,22 +159,30 @@ public class Controller : MonoBehaviour {
 			}
 			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {
 				if (engagementController.IsOnlyModelEngaged()) {
-					OnPanUp();
+					//OnPanUp();
+				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
+					infoHolder.Scroll(false);
 				}
 			}
 			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_DRAG)) {
 				if (engagementController.IsOnlyModelEngaged()) {
 					OnPanUp();
+				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
+					infoHolder.Scroll(false);
 				}
 			}
 			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.UP_SWIPE)) {
 				if (engagementController.IsOnlyModelEngaged()) {
-					OnPanDown();
+					//OnPanDown();
+				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
+					infoHolder.Scroll(true);
 				}
 			}
 			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.UP_DRAG)) {
 				if (engagementController.IsOnlyModelEngaged()) {
 					OnPanDown();
+				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
+					infoHolder.Scroll(true);
 				}
 			}
 			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.STRETCH)) {
@@ -187,6 +195,11 @@ public class Controller : MonoBehaviour {
 				if (engagementController.IsOnlyModelEngaged()) {
 					cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KINECT);
 					OnZoomOut();
+				}
+			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.SELECT)) {
+				if (engagementController.IsOnlyLeftPanelEngaged()) {
+					OnSelectLeftPanel();
 				}
 			}
 		}
@@ -413,7 +426,11 @@ public class Controller : MonoBehaviour {
 	}
 	public void OnNewSecondPlayer() {
 	}
-
+	public void OnSelectLeftPanel() {
+		if (infoController.hingeOut) {
+			infoHolder.PressButtonInInfoContent();
+		}
+	}
 	
 	/*****************************
 	// PUBLIC GAME FUNCTIONS	*/

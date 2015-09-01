@@ -250,7 +250,7 @@ public class KinectGestures
 			gestureData.tagFloat = 0.5f; // this is 100%
 		}
 
-		float distZooming = vectorZooming.magnitude;
+		float distZooming = Mathf.Max(0.2f,vectorZooming.magnitude);
 		gestureData.screenPos.z = initialZoom + (distZooming / gestureData.tagFloat);
 	}
 	
