@@ -16,7 +16,7 @@ public class WireBuilder : MonoBehaviour {
 	public bool setLooks = false;
 	public Color colour;
 	public float width;
-
+	public bool hideUnlessBehind = false;
 	
 	WireRenderer w;
 
@@ -33,7 +33,7 @@ public class WireBuilder : MonoBehaviour {
 		w.SetWire(start,end,outwardDistance,downwardDistance);
 		if (setLooks) w.SetLooks(colour,width);
 		w.BuildWire();
-		g.AddComponent<LineRendererCulling>();
+		g.AddComponent<LineRendererCulling>().hideUnlessBehind = hideUnlessBehind;
 		Destroy (this);
 	}
 

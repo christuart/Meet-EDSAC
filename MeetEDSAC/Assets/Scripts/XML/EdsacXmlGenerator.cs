@@ -334,6 +334,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 						wb.setLooks = true;
 						wb.colour = new Color(.2f,.08f,.08f);
 						wb.width = .005f;
+						wb.hideUnlessBehind = true;
 					}
 				}
 			}
@@ -357,6 +358,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 						wb.setLooks = true;
 						wb.colour = Color.black;
 						wb.width = .0075f;
+						wb.hideUnlessBehind = true;
 						wb = w.AddComponent<WireBuilder>();
 						wb.start = chassisTransform.position + new Vector3(Mathf.Lerp (-.38f,.38f,(i+1)/31f),.058f,.023f);
 						wb.end = wb.start + new Vector3(0f,-.07f,0f);
@@ -366,6 +368,7 @@ public class EdsacXmlGenerator : MonoBehaviour {
 						wb.setLooks = true;
 						wb.colour = new Color(.25f,.08f,.08f);
 						wb.width = .0075f;
+						wb.hideUnlessBehind = true;
 						/**/
 						/* New way * /
 						GameObject wp = Instantiate(prefabBlackWire);
