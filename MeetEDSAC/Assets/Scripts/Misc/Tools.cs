@@ -120,4 +120,7 @@ public abstract class Tools : MonoBehaviour {
 	public static float Cosh(float x) {
 		return 0.5f * (Mathf.Exp(x)+Mathf.Exp(-x));
 	}
+	public static Vector2 Vector2fromXZ(Vector3 xyz) {
+		return new Vector2(xyz.x,xyz.z);
+	}
 }

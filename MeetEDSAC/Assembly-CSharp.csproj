@@ -80,6 +80,7 @@
      <Compile Include="Assets\Scripts\Engine Mechanics\InfoHolderController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InspectionPointController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InspectorController.cs" />
+     <Compile Include="Assets\Scripts\Engine Mechanics\KinectDragController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\KinectInfoInterpreter.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\KinectInspectionPointChooser.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\MenuSceneController.cs" />

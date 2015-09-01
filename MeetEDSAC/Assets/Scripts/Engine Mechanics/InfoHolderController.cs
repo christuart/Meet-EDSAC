@@ -39,9 +39,15 @@ public class InfoHolderController : MonoBehaviour {
 
 	private int currentContentId = -1;
 
+	private float infoAreaHeight;
+	public Scrollbar scrollBar;
+	public float scrollSlide = 3f;
+	private bool scrolling = false;
+	private IEnumerator scrollCoroutine;
+
 	// Use this for initialization
 	void Start () {
-	
+		infoAreaHeight = Mathf.Abs(GetComponent<RectTransform>().rect.height);
 	}
 	
 	// Update is called once per frame
@@ -76,4 +82,47 @@ public class InfoHolderController : MonoBehaviour {
 			}
 		}
 	}
+
+	public GameObject ActiveContent() {
+		if (currentContentId >= 0 && currentContentId < content.Length) {
+			return content[currentContentId];
+		} else {
+			return null;
+		}
+	}
+
+	public void Scroll(bool scrollDown) {
+		if (scrolling) {
+			StopCoroutine(scrollCoroutine);
+		}
+		scrollCoroutine = ScrollActiveContent(scrollDown);
+		StartCoroutine(scrollCoroutine);
+	}
+
+	private IEnumerator ScrollActiveContent(bool scrollDown) {
+		GameObject scrollContent = ActiveContent();
+		if (scrollContent == null) {
+			yield break;
+		}
+		Debug.Log (infoAreaHeight);
+		float contentHeight = Mathf.Abs (scrollContent.GetComponent<RectTransform>().rect.height);
+		Debug.Log (contentHeight);
+		float scrollableHeight = contentHeight - infoAreaHeight;
+		Debug.Log (scrollableHeight);
+		if (scrollableHeight < 0) {
+			yield break;
+		}
+		float targetScrollRatio = (scrollDown ? -1 : 1) * (3f/4) * infoAreaHeight / scrollableHeight;
+		Debug.Log (targetScrollRatio);
+		float targetScrollBarPosition = Mathf.Clamp01(scrollBar.value+targetScrollRatio);
+		Debug.Log (targetScrollBarPosition);
+		scrolling = true;
+		while (Mathf.Abs(scrollBar.value - targetScrollBarPosition) > 0.01f) {
+			scrollBar.value = Mathf.Lerp (scrollBar.value,targetScrollBarPosition,scrollSlide*Time.deltaTime);
+			yield return null;
+		}
+		scrolling = false;
+		yield break;
+	}
+
 }

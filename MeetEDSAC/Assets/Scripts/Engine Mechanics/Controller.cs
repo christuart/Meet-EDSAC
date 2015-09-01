@@ -138,6 +138,11 @@ public class Controller : MonoBehaviour {
 					if (!inspectorController.hingeOut) inspectorController.ToggleHinge();
 				}
 			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_DRAG)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					OnPanRight();
+				}
+			}
 			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
 				if (engagementController.IsOnlyModelEngaged()) {
 					OnPanLeft();
@@ -147,12 +152,27 @@ public class Controller : MonoBehaviour {
 					if (inspectorController.hingeOut) inspectorController.ToggleHinge();
 				}
 			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_DRAG)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					OnPanLeft();
+				}
+			}
 			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {
 				if (engagementController.IsOnlyModelEngaged()) {
 					OnPanUp();
 				}
 			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_DRAG)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					OnPanUp();
+				}
+			}
 			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.UP_SWIPE)) {
+				if (engagementController.IsOnlyModelEngaged()) {
+					OnPanDown();
+				}
+			}
+			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.UP_DRAG)) {
 				if (engagementController.IsOnlyModelEngaged()) {
 					OnPanDown();
 				}
@@ -245,6 +265,9 @@ public class Controller : MonoBehaviour {
 			}
 			if (Input.GetKeyDown (KeyCode.O)) {
 				debugOnlyGUI.SetActive(!debugOnlyGUI.activeSelf);
+			}
+			if (Input.GetKeyDown (KeyCode.P)) {
+				infoHolder.Scroll(true);
 			}
 
 		}

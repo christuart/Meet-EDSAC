@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum EdsacGestures { LEFT_SWIPE, RIGHT_SWIPE, UP_SWIPE, DOWN_SWIPE, STRETCH, SQUASH, SELECT };
+public enum EdsacGestures { LEFT_SWIPE, RIGHT_SWIPE, UP_SWIPE, DOWN_SWIPE, LEFT_DRAG, RIGHT_DRAG, UP_DRAG, DOWN_DRAG, STRETCH, SQUASH, SELECT };
 
 public class KinectInfoInterpreter : MonoBehaviour {
 
@@ -10,6 +10,8 @@ public class KinectInfoInterpreter : MonoBehaviour {
 	public MyKinectListener kinectListener;
 	public KinectFeedbackController feedbackController;
 	private long userId = -1;
+	private KinectDragController leftDragController;
+	private KinectDragController rightDragController;
 
 	public EdsacGestures[] gesturesBeingRead;
 
@@ -54,6 +56,11 @@ public class KinectInfoInterpreter : MonoBehaviour {
 	}
 	public float GetGazeDirection() {
 		return gazeYaw;
+	}
+
+	void Awake() {
+		leftDragController = gameObject.AddComponent<KinectDragController>();
+		rightDragController = gameObject.AddComponent<KinectDragController>();
 	}
 
 	void Start() {
@@ -143,6 +150,10 @@ public class KinectInfoInterpreter : MonoBehaviour {
 				gazeYaw = GazeFromQuaternion (ReadHeadRotation ());
 				if (gazeIndicator != null) gazeIndicator.transform.eulerAngles = new Vector3(0f,180f,gazeYaw*60f);
 			}
+			
+			rightDragController.canDrag = !leftDragController.wasDragging;
+			leftDragController.canDrag = !rightDragController.wasDragging;
+
 		}
 
 	}
@@ -189,6 +200,14 @@ public class KinectInfoInterpreter : MonoBehaviour {
 			} else {
 				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeDown);
 			}
+		case EdsacGestures.LEFT_DRAG:
+			return leftDragController.GetDraggingLeft() || rightDragController.GetDraggingLeft();
+		case EdsacGestures.RIGHT_DRAG:
+			return leftDragController.GetDraggingRight() || rightDragController.GetDraggingRight();
+		case EdsacGestures.UP_DRAG:
+			return leftDragController.GetDraggingUp() || rightDragController.GetDraggingUp();
+		case EdsacGestures.DOWN_DRAG:
+			return leftDragController.GetDraggingDown() || rightDragController.GetDraggingDown();
 		case EdsacGestures.STRETCH:
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.KeypadPlus));
@@ -220,6 +239,8 @@ public class KinectInfoInterpreter : MonoBehaviour {
 
 	public void SetUserId(long _userId) {
 		userId = _userId;
+		leftDragController.userId = _userId;
+		rightDragController.userId = _userId;
 	}
 
 	public void UseNumpad(bool use) {
