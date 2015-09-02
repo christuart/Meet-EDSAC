@@ -53,6 +53,8 @@ public class Controller : MonoBehaviour {
 	
 	public StoryController storyController;
 
+	public UIAudioController audioController;
+
 	private FacetrackingManager faceTrack;
 
 	public ViewPointMeshVertex activeVertex;
@@ -234,6 +236,7 @@ public class Controller : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.F3)) {
 			EnableDebugModes(!debugModes);
 		}
+//#if UNITY_EDITOR
 		if (debugModes) {
 			if (Input.GetKeyDown(KeyCode.V)) {
 				engagementController.UseSingleEngagementRegion(true);
@@ -282,6 +285,7 @@ public class Controller : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.P)) {
 				infoHolder.Scroll(true);
 			}
+//#endif
 
 		}
 
@@ -348,6 +352,7 @@ public class Controller : MonoBehaviour {
 					child.gameObject.layer = 0;
 			}
 		}
+		audioController.RunAudioEvent(UIAudioController.AudioEvent.VERTEX_CHANGED);
 	}
 	public void OnAfterChangeVertex() {
 		if (activeVertex != null) {
@@ -373,6 +378,7 @@ public class Controller : MonoBehaviour {
 			ActivateVertex(nextVertex);
 			cameraZoom.SetZoom(nextVertex.entryByZoomFieldOfView);
 		}
+		audioController.RunAudioEvent(UIAudioController.AudioEvent.ZOOM_CHANGED);
 	}
 	public void OnZoomOut() {
 		if (activeVertex.entryByZoomFieldOfView != 0f && cameraZoom.GetZoom() >= activeVertex.entryByZoomFieldOfView) {
@@ -381,6 +387,7 @@ public class Controller : MonoBehaviour {
 			ActivateVertex(nextVertex);
 			cameraZoom.SetZoom(nextVertex.exitByZoomFieldOfView); // rememeber, naming is set for zooming in, so zoomout must use exit when it enters
 		}
+		audioController.RunAudioEvent(UIAudioController.AudioEvent.ZOOM_CHANGED);
 	}
 	public void OnHingeOut(bool leftHandHinge) {
 		if (leftHandHinge) {
@@ -388,6 +395,7 @@ public class Controller : MonoBehaviour {
 		} else {
 			OnInspectorHingeOut();
 		}
+		audioController.RunAudioEvent(UIAudioController.AudioEvent.HINGE_OUT);
 	}
 	public void OnInfoHingeOut() {
 		engagementController.MarkPanelOut(true, true);
@@ -408,6 +416,7 @@ public class Controller : MonoBehaviour {
 		} else {
 			OnInspectorHingeAway();
 		}
+		audioController.RunAudioEvent(UIAudioController.AudioEvent.HINGE_AWAY);
 	}
 	public void OnInfoHingeAway() {
 		engagementController.MarkPanelOut(true, false);
@@ -429,6 +438,7 @@ public class Controller : MonoBehaviour {
 	public void OnSelectLeftPanel() {
 		if (infoController.hingeOut) {
 			infoHolder.PressButtonInInfoContent();
+			audioController.RunAudioEvent(UIAudioController.AudioEvent.INSPECTION_POINT_CLICKED);
 		}
 	}
 	
@@ -484,8 +494,17 @@ public class Controller : MonoBehaviour {
 	public void ClearSecondPlayer() {
 		secondPlayerKinectInfo.SetUserId (-1);
 	}
-	public void DecideWhetherKinectDebugShows() {
-		kinectUserInfo.SetActive (useKinect);
+	public void SetupKinect() {
+		if (useKinect) {
+			kinectUserInfo.SetActive (true);
+		} else {
+			kinectUserInfo.SetActive (false);
+			Destroy(GetComponent<MyKinectListener>());
+			Destroy(GetComponent<KinectInfoInterpreter>());
+			Destroy(GetComponent<KinectInfoInterpreter>());
+			Destroy(GetComponent<KinectInspectionPointChooser>());
+			audioController.DisableKinectAudio();
+		}
 	}
 	public void SetCameraZoom(float target) {
 		cameraZoom.SetZoom(target);

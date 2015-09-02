@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EngagementDemoController.cs" />
      <Compile Include="Assets\KinectScripts\AvatarController.cs" />
      <Compile Include="Assets\KinectScripts\AvatarControllerClassic.cs" />
      <Compile Include="Assets\KinectScripts\BackgroundRemovalManager.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
      <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
      <Compile Include="Assets\LabelFadeIn.cs" />
+     <Compile Include="Assets\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\CameraZoomController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\Controller.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InfoHolderController.cs" />
@@ -97,6 +99,7 @@
      <Compile Include="Assets\Scripts\Graphics\CameraSettingsMirror.cs" />
      <Compile Include="Assets\Scripts\Graphics\FrameRateManager.cs" />
      <Compile Include="Assets\Scripts\Graphics\LineRendererCulling.cs" />
+     <Compile Include="Assets\Scripts\Loader\EyesController.cs" />
      <Compile Include="Assets\Scripts\Misc\GUIClearOnAwake.cs" />
      <Compile Include="Assets\Scripts\Misc\Persistent.cs" />
      <Compile Include="Assets\Scripts\Misc\SetMaterialNotInstance.cs" />
@@ -124,13 +127,13 @@
      <Compile Include="Assets\Scripts\XML\TinyXmlReader.cs" />
      <Compile Include="Assets\Scripts\setup_rack.cs" />
      <Compile Include="Assets\StoryTitleController.cs" />
+     <Compile Include="Assets\UIAudioController.cs" />
      <Compile Include="Assets\WireBuilder.cs" />
      <Compile Include="Assets\WireRenderer.cs" />
      <None Include="Assets\Resources\BlurShader.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
-     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
@@ -156,7 +159,6 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
-     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
      <None Include="Assets\Shaders\WireShader.shader" />
      <None Include="Assets\Fonts\Bebas\Read me japanese.txt" />
@@ -171,9 +173,7 @@
      <None Include="Assets\Resources\DepthShader.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\GlobalFog.shader" />
-     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Luminance.shader" />
-     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionSelective.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />
@@ -226,10 +226,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="OpenCvSharp">
- <HintPath>C:/Users/chris_000/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/OpenCV/OpenCvSharp.dll</HintPath>
+ <HintPath>C:/Users/cis24/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/OpenCV/OpenCvSharp.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>C:/Users/chris_000/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
+ <HintPath>C:/Users/cis24/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

@@ -64,11 +64,14 @@ public class InspectionPointController : MonoBehaviour {
 			GetComponent<Animator>().SetTrigger("HoverExit");
 		}
 	}
+	public void ChooseByClick() {
+		Choose();
+		GameObject.FindGameObjectWithTag("GameController").GetComponent<Controller>().audioController.RunAudioEvent(UIAudioController.AudioEvent.INSPECTION_POINT_CLICKED);
+	}
 	public void Choose() {
 		Choose (true);
 	}
 	public void Choose(bool pauseOnRechoose) {
-		Debug.Log ("AOHI");
 		InspectorController inspectorController = GameObject.FindObjectOfType<InspectorController>();
 		if (isVideo) {
 			//Debug.Log ("Step a4: It's a video, check if it's the same one as before");
@@ -83,7 +86,7 @@ public class InspectionPointController : MonoBehaviour {
 				inspectorController.SetVideo (videoContent,true);
 			}
 		} else {
-			Debug.Log ("Step b4: It's an image");
+			//Debug.Log ("Step b4: It's an image");
 			inspectorController.SetImage(imageContent);
 		}
 	}

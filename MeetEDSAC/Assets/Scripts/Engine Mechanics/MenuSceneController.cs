@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MenuSceneController : MonoBehaviour {
 
+	private const int MenuSceneNumber = 3;
 	public Toggle kinectSensorToggle;
 	public Toggle keyboardToggle;
 	public Toggle kinectFaceTrackingToggle;
@@ -48,7 +49,7 @@ public class MenuSceneController : MonoBehaviour {
 	}
 	
 	void OnLevelWasLoaded(int level) {
-		if (level == 1) {
+		if (level == MenuSceneNumber) {
 			Controller controller = GameObject.FindObjectOfType<Controller>();
 			if (controller == null) {
 				Debug.Log ("Couldn't find the controller to apply settings. Oops!");
@@ -59,7 +60,7 @@ public class MenuSceneController : MonoBehaviour {
 			controller.useKeyboard = useKeyboard;
 			controller.useFace = useFace;
 			controller.useMouse = useMouse;
-			controller.DecideWhetherKinectDebugShows();
+			controller.SetupKinect();
 		}
 	}
 }
