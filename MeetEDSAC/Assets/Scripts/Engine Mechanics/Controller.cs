@@ -72,6 +72,12 @@ public class Controller : MonoBehaviour {
 	public GameObject debugOnlyGUI;
 
 	private bool updating = false;
+	private bool hasRunSetupKinect = false;
+
+	void Start() {
+		if (!hasRunSetupKinect)
+			SetupKinect ();
+	}
 
 	// Use this for initialization
 	void Awake () {
@@ -82,20 +88,6 @@ public class Controller : MonoBehaviour {
 		Application.targetFrameRate = 60;
 	}
 
-	void Start () {
-		if (useKinect) {
-			foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
-				ipc.Hide();
-			kinectInspectionPointChooser.EnableKinectInspectionPointLabel(true);
-			if (activeVertex != null && storyController.storyMode == StoryController.StoryMode.DISABLED) {
-				kinectInspectionPointChooser.FindNewInspectionPoint(activeVertex.transform.position,activeVertex.transform.rotation);
-			} else if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
-				kinectInspectionPointChooser.chosenInspectionPoint = storyController.inspectionContent;
-			}
-			kinectInspectionPointChooser.ActivateChosenInspectionPointForKinect();
-		}
-	}
-	
 	// Update is called once per frame
 	void Update () {
 
@@ -291,10 +283,9 @@ public class Controller : MonoBehaviour {
 
 		if (useFace) {
 			if (firstPlayerKinectInfo.GetGazeDirectionAvailable()) {
-				//Debug.Log (firstPlayerKinectInfo.GetGazeDirection());
-				engagementController.SetSingleEngagementInput (    Mathf.Clamp(firstPlayerKinectInfo.GetGazeDirection() / (Mathf.PI/4f),-1f,1f)    );
-				//Mathf.Lerp(-1f,1f,0.5f+faceTrack.GetHeadRotation(false).eulerAngles.y/60f)
-				//engagementController.SetSingleEngagementInput (firstPlayerKinectInfo.GetUserFaceDirection());
+				float gaze = firstPlayerKinectInfo.GetGazeDirection();
+				engagementController.SetSingleEngagementInput (    Mathf.Clamp(Mathf.Tan (gaze*1.5f) * firstPlayerKinectInfo.GetGazeOriginDistance() / -2f,-1f,1f)    );
+				//engagementController.SetSingleEngagementInput (    Mathf.Clamp(firstPlayerKinectInfo.GetGazeDirection() / (Mathf.PI/4f),-1f,1f)    );
 			}
 		}
 		
@@ -497,6 +488,16 @@ public class Controller : MonoBehaviour {
 	public void SetupKinect() {
 		if (useKinect) {
 			kinectUserInfo.SetActive (true);
+			KinectManager.Instance.calibrationText = kinectUserInfo.GetComponent<GUIText>();
+			foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
+				ipc.Hide();
+			kinectInspectionPointChooser.EnableKinectInspectionPointLabel(true);
+			if (activeVertex != null && storyController.storyMode == StoryController.StoryMode.DISABLED) {
+				kinectInspectionPointChooser.FindNewInspectionPoint(activeVertex.transform.position,activeVertex.transform.rotation);
+			} else if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
+				kinectInspectionPointChooser.chosenInspectionPoint = storyController.inspectionContent;
+			}
+			kinectInspectionPointChooser.ActivateChosenInspectionPointForKinect();
 		} else {
 			kinectUserInfo.SetActive (false);
 			Destroy(GetComponent<MyKinectListener>());
@@ -505,6 +506,7 @@ public class Controller : MonoBehaviour {
 			Destroy(GetComponent<KinectInspectionPointChooser>());
 			audioController.DisableKinectAudio();
 		}
+		hasRunSetupKinect = true;
 	}
 	public void SetCameraZoom(float target) {
 		cameraZoom.SetZoom(target);

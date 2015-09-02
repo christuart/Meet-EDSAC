@@ -52,7 +52,8 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 
 	void Start() {
 		kinectManager = KinectManager.Instance;
-		//kinectManager.gestureListeners.Add (this);
+		kinectManager.gestureListeners.Clear();
+		kinectManager.gestureListeners.Add(this);
 	}
 
 	public void UserDetected(long userId, int userIndex)
@@ -261,6 +262,15 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 			return faceTracker.GetHeadRotation(userId,false);
 		}
 		return Quaternion.identity;
+	}
+	public Vector3 GetUserFacePosition() {
+		return (users > 0) ? GetUserFacePosition(firstUserId) : Vector3.zero;
+	}
+	public Vector3 GetUserFacePosition(long userId) {
+		if (IsFaceTrackingAvailable(userId)) {
+			return faceTracker.GetHeadPosition(userId,false);
+		}
+		return Vector3.zero;
 	}
 	
 }

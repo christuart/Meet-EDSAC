@@ -1,9 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Engine Mechanics\Controller.cs">
     <Files>
-      <File FileName="Assets\UIAudioController.cs" Line="19" Column="32" />
-      <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="506" Column="41" />
+      <File FileName="Assets\KinectScripts\KinectManager.cs" Line="1634" Column="1" />
+      <File FileName="Assets\UIAudioController.cs" Line="24" Column="19" />
+      <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="509" Column="4" />
+      <File FileName="Assets\Scripts\Engine Mechanics\MyKinectListener.cs" Line="55" Column="39" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

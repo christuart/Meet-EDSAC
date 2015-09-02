@@ -35,6 +35,7 @@ public class KinectInfoInterpreter : MonoBehaviour {
 
 	private bool gazeAvailable;
 	private float gazeYaw;
+	private float gazeDistance;
 	public GameObject gazeIndicator;
 
 	public bool useNumpad = false;
@@ -56,6 +57,9 @@ public class KinectInfoInterpreter : MonoBehaviour {
 	}
 	public float GetGazeDirection() {
 		return gazeYaw;
+	}
+	public float GetGazeOriginDistance() {
+		return gazeDistance;
 	}
 
 	void Awake() {
@@ -155,6 +159,7 @@ public class KinectInfoInterpreter : MonoBehaviour {
 			gazeAvailable = ReadFaceTrackingAvailable ();
 			if (gazeAvailable) {
 				gazeYaw = GazeFromQuaternion (ReadHeadRotation ());
+				gazeDistance = ReadHeadPosition().z;
 				if (gazeIndicator != null) gazeIndicator.transform.eulerAngles = new Vector3(0f,180f,gazeYaw*60f);
 			}
 			
@@ -238,6 +243,9 @@ public class KinectInfoInterpreter : MonoBehaviour {
 	}
 	private Quaternion ReadHeadRotation() {
 		return kinectListener.GetUserFaceDirection(userId);
+	}
+	private Vector3 ReadHeadPosition() {
+		return kinectListener.GetUserFacePosition (userId);
 	}
 
 	private float GazeFromQuaternion(Quaternion headRotation) {
