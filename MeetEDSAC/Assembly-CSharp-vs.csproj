@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CreditController.cs" />
      <Compile Include="Assets\EngagementDemoController.cs" />
      <Compile Include="Assets\KinectScripts\AvatarController.cs" />
      <Compile Include="Assets\KinectScripts\AvatarControllerClassic.cs" />
@@ -77,6 +78,7 @@
      <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
      <Compile Include="Assets\LabelFadeIn.cs" />
      <Compile Include="Assets\LevelLoader.cs" />
+     <Compile Include="Assets\LoadWebsite.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\CameraZoomController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\Controller.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InfoHolderController.cs" />
@@ -230,10 +232,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="OpenCvSharp">
- <HintPath>C:/Users/chris_000/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/OpenCV/OpenCvSharp.dll</HintPath>
+ <HintPath>C:/Users/cis24/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/OpenCV/OpenCvSharp.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>C:/Users/chris_000/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
+ <HintPath>C:/Users/cis24/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

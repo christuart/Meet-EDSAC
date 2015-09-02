@@ -348,8 +348,10 @@ public class Controller : MonoBehaviour {
 	public void OnAfterChangeVertex() {
 		if (activeVertex != null) {
 			if (useKinect) {
-				kinectInspectionPointChooser.FindNewInspectionPoint(activeVertex.transform.position,activeVertex.transform.rotation);
-				kinectInspectionPointChooser.ActivateChosenInspectionPointForKinect();
+				if (storyController.storyMode != StoryController.StoryMode.PLAYING || storyController.activeWaypoint == null || inspector.photoImage.sprite != storyController.activeWaypoint.imageContent) {
+					kinectInspectionPointChooser.FindNewInspectionPoint(activeVertex.transform.position,activeVertex.transform.rotation);
+					kinectInspectionPointChooser.ActivateChosenInspectionPointForKinect();
+				}
 			} else if (activeVertex.associatedInspectionPoints != null) {
 				foreach (InspectionPointController ipc in activeVertex.associatedInspectionPoints) {
 					ipc.gameObject.layer = 16; // Inspection Point Markers Detail

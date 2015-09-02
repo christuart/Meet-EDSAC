@@ -2,8 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public enum Videos { 	TAPE_READ = 0,
-						EDSAC_FILM = 1,
+public enum Videos { 	EDSAC_FILM = 0,
 						NONE };
 
 public class VideoTextureController : MonoBehaviour {

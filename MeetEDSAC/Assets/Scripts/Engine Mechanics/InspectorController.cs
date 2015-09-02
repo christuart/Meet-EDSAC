@@ -61,9 +61,15 @@ public class InspectorController : MonoBehaviour {
 	}
 	public void ResizeToVideo() {
 		float spriteHeight = rectTransform.rect.width * videoController.textureTarget.mainTexture.height / videoController.textureTarget.mainTexture.width;
+		//Debug.Log(videoController.textureTarget.mainTexture.height);
+		//Debug.Log(videoController.textureTarget.mainTexture.width);
+		//Debug.Log(spriteHeight);
+		//Debug.Log(canvasRectTransform.sizeDelta);
 		Resize(spriteHeight);
+		//Debug.Log(canvasRectTransform.sizeDelta);
 	}
 	public void Resize(float spriteHeight) {
+		Debug.Log (spriteHeight);
 		targetSizeDelta = canvasRectTransform.sizeDelta;
 		targetSizeDelta.y -= rectTransform.rect.height - spriteHeight;
 	}

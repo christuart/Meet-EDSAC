@@ -80,6 +80,7 @@ public class InspectionPointController : MonoBehaviour {
 				if (pauseOnRechoose || !inspectorController.videoController.videos[(int)videoContent].isPlaying){
 					//Debug.Log ("Step aa6: Running 'PauseVideo' because it was paused and we want it unpaused");
 					inspectorController.PauseVideo();
+					inspectorController.ResizeToVideo();
 				}
 			} else {
 				//Debug.Log ("Step ba5: It's a different video from before");

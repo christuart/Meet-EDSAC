@@ -82,8 +82,10 @@ public class StoryController : MonoBehaviour {
 	public void LeaveStoryMode() {
 		controller.ActivateVertex (normalModeVertex);
 		controller.cameraZoom.SetZoom(normalModeFOV);
-		foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
-			ipc.Unhide();
+		if (!controller.useKinect) {
+			foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
+				ipc.Unhide();
+		}
 		storyModeIndicator.SetActive (false);
 		storyMode = StoryMode.DISABLED;
 	}
