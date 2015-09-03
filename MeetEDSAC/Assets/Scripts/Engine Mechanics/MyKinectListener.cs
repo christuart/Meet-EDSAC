@@ -99,6 +99,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 		if (users == 2) {
 			if (userId == firstUserId) {
 				mainController.ClearFirstPlayer();
+				mainController.OnReturnToSinglePlayer();
 				ClearUserFromDictionaries(userId);
 				users--;
 				firstUserId = secondUserId;
@@ -106,6 +107,7 @@ public class MyKinectListener : MonoBehaviour, KinectGestures.GestureListenerInt
 				return;
 			} else if (userId == secondUserId) {
 				mainController.ClearSecondPlayer();
+				mainController.OnReturnToSinglePlayer();
 				ClearUserFromDictionaries(userId);
 				users--;
 				if (mainController.useKinect) kinectFeedback.AddItem(KinectFeedbackController.PLAYER_TWO_LEFT);

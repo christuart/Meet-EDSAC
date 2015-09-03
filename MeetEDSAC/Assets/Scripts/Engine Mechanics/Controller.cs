@@ -123,79 +123,15 @@ public class Controller : MonoBehaviour {
 			}
 		}
 		if (useKinect) {
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					OnPanRight();
-				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
-					if (infoController.hingeOut) infoController.ToggleHinge();
-				} else if (engagementController.IsOnlyRightPanelEngaged()) {
-					if (!inspectorController.hingeOut) inspectorController.ToggleHinge();
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_DRAG)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					OnPanRight();
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					OnPanLeft();
-				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
-					if (!infoController.hingeOut) infoController.ToggleHinge();
-				} else if (engagementController.IsOnlyRightPanelEngaged()) {
-					if (inspectorController.hingeOut) inspectorController.ToggleHinge();
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_DRAG)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					OnPanLeft();
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_SWIPE)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					//OnPanUp();
-				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
-					infoHolder.Scroll(false);
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_DRAG)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					OnPanUp();
-				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
-					infoHolder.Scroll(false);
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.UP_SWIPE)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					//OnPanDown();
-				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
-					infoHolder.Scroll(true);
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.UP_DRAG)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					OnPanDown();
-				} else if (engagementController.IsOnlyLeftPanelEngaged()) {
-					infoHolder.Scroll(true);
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.STRETCH)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					cameraZoom.ZoomIn(ZoomSettings.ZoomSource.KINECT);
-					OnZoomIn();
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.SQUASH)) {
-				if (engagementController.IsOnlyModelEngaged()) {
-					cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KINECT);
-					OnZoomOut();
-				}
-			}
-			if (firstPlayerKinectInfo.GetGestureTriggered(EdsacGestures.SELECT)) {
-				if (engagementController.IsOnlyLeftPanelEngaged()) {
-					OnSelectLeftPanel();
-				}
-			}
+
+			if (engagementController.userEngagingModel[0]) CheckModelControlGestures(firstPlayerKinectInfo);
+			else if (engagementController.userEngagingLeftPanel[0]) CheckLeftPanelControlGestures(firstPlayerKinectInfo);
+			else if (engagementController.userEngagingRightPanel[0]) CheckRightPanelControlGestures(firstPlayerKinectInfo);
+
+			if (engagementController.userEngagingModel[1]) CheckModelControlGestures(secondPlayerKinectInfo);
+			else if (engagementController.userEngagingLeftPanel[1]) CheckLeftPanelControlGestures(secondPlayerKinectInfo);
+			else if (engagementController.userEngagingRightPanel[1]) CheckRightPanelControlGestures(secondPlayerKinectInfo);
+
 		}
 		if (useMouse) {
 			if (engagementController.modelEngaged) {
@@ -227,6 +163,20 @@ public class Controller : MonoBehaviour {
 		}
 		if (Input.GetKeyDown(KeyCode.F3)) {
 			EnableDebugModes(!debugModes);
+		}
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
+				storyController.LeaveStoryMode();
+			} else {
+				Application.LoadLevel(1);
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.Pause)) {
+			if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
+				storyController.LeaveStoryMode();
+			} else {
+				storyController.EngageStoryMode();
+			}
 		}
 //#if UNITY_EDITOR
 		if (debugModes) {
@@ -285,6 +235,11 @@ public class Controller : MonoBehaviour {
 			if (firstPlayerKinectInfo.GetGazeDirectionAvailable()) {
 				float gaze = firstPlayerKinectInfo.GetGazeDirection();
 				engagementController.SetSingleEngagementInput (    Mathf.Clamp(Mathf.Tan (gaze*1.5f) * firstPlayerKinectInfo.GetGazeOriginDistance() / -2f,-1f,1f)    );
+				//engagementController.SetSingleEngagementInput (    Mathf.Clamp(firstPlayerKinectInfo.GetGazeDirection() / (Mathf.PI/4f),-1f,1f)    );
+			}
+			if (secondPlayerKinectInfo.GetGazeDirectionAvailable()) {
+				float gaze = secondPlayerKinectInfo.GetGazeDirection();
+				engagementController.SetSecondEngagementInput (    Mathf.Clamp(Mathf.Tan (gaze*1.5f) * secondPlayerKinectInfo.GetGazeOriginDistance() / -2f,-1f,1f)    );
 				//engagementController.SetSingleEngagementInput (    Mathf.Clamp(firstPlayerKinectInfo.GetGazeDirection() / (Mathf.PI/4f),-1f,1f)    );
 			}
 		}
@@ -425,8 +380,13 @@ public class Controller : MonoBehaviour {
 		StartCoroutine(inspector.videoController.Mute());
 	}
 	public void OnNewFirstPlayer() {
+		engagementController.UseSingleEngagementRegion(true);
 	}
 	public void OnNewSecondPlayer() {
+		engagementController.UseDualEngagementRegions(true);
+	}
+	public void OnReturnToSinglePlayer() {
+		engagementController.UseSingleEngagementRegion(true);
 	}
 	public void OnSelectLeftPanel() {
 		if (infoController.hingeOut) {
@@ -517,6 +477,8 @@ public class Controller : MonoBehaviour {
 		storyController.EngageStoryMode();
 	}
 
+	/* Some private functions */
+	
 	private void EnableDebugModes(bool enable) {
 		KinectFeedbackController f = GameObject.FindObjectOfType<KinectFeedbackController>();
 		debugModes = enable;
@@ -530,5 +492,51 @@ public class Controller : MonoBehaviour {
 			secondPlayerKinectInfo.UseNumpad(false);
 		}
 	}
-
+	private void CheckModelControlGestures(KinectInfoInterpreter userKinectInfo) {
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_DRAG)) {
+			OnPanRight();
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_DRAG)) {
+			OnPanLeft();
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.UP_DRAG)) {
+			OnPanDown();
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_DRAG)) {
+			OnPanUp();
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.STRETCH)) {
+			cameraZoom.ZoomIn(ZoomSettings.ZoomSource.KINECT);
+			OnZoomIn();
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.SQUASH)) {
+			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KINECT);
+			OnZoomOut();
+		}
+	}
+	private void CheckLeftPanelControlGestures(KinectInfoInterpreter userKinectInfo) {
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE)) {
+			if (infoController.hingeOut) infoController.ToggleHinge();
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
+			if (!infoController.hingeOut) infoController.ToggleHinge();
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_DRAG)) {
+			infoHolder.Scroll(false);
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.UP_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.UP_DRAG)) {
+			infoHolder.Scroll(true);
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.SELECT)) {
+			OnSelectLeftPanel();
+		}
+	}
+	private void CheckRightPanelControlGestures(KinectInfoInterpreter userKinectInfo) {
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE)) {
+			if (!inspectorController.hingeOut) inspectorController.ToggleHinge();
+		}
+		if (userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE)) {
+			if (inspectorController.hingeOut) inspectorController.ToggleHinge();
+		}
+	}
 }

@@ -29,13 +29,23 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 	private bool leftOut;
 	private bool rightOut;
 
+	// controls for when dual users
+	public bool dualEngagementRegions = false;
+	[Range( -1, 1 )]
+	public float secondEngagementInput = 0f;
+
 	// variables for smoothly sliding the input from face tracking
-	public float singleEngagementTransitionSlide = 0.15f;
+	public float engagementTransitionSlide = 0.15f;
+	public float engagementTransitionStickyThreshold = 0.05f;
 	private float singleEngagementPosition = 0f;
+	private float secondEngagementPosition = 0f;
 
 	public bool modelEngaged = true;
 	public bool leftPanelEngaged = false;
 	public bool rightPanelEngaged = false;
+	public bool[] userEngagingModel = new bool[2];
+	public bool[] userEngagingLeftPanel = new bool[2];
+	public bool[] userEngagingRightPanel = new bool[2];
 
 	// variables for sliding towards the engagement state
 	// requested when multiple users are impacting it
@@ -57,8 +67,8 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 	void Update() {
 		if (engagementRegionsModeActive) {
 			if (singleEngagementRegion) {
-				if (Mathf.Abs (engagementInput - singleEngagementPosition) > 0.1) {
-					singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,singleEngagementTransitionSlide*20f*Time.deltaTime);
+				if (Mathf.Abs (engagementInput - singleEngagementPosition) > engagementTransitionStickyThreshold) {
+					singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,engagementTransitionSlide*20f*Time.deltaTime);
 				}
 				testInputIndicator.transform.localPosition = new Vector3 (0.5f+0.5f*singleEngagementPosition, 0.8f);
 				mainCameraBlurGradual.SetBlur( (singleEngagementPosition < LeftPanelEngagamentDeflectionTrigger()) || (singleEngagementPosition > RightPanelEngagamentDeflectionTrigger()));
@@ -72,6 +82,35 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 					MarkOnlyModelEngaged();
 				} else {
 					MarkOnlyRightPanelEngaged();
+				}
+			} else if (dualEngagementRegions) {
+				if (Mathf.Abs (engagementInput - singleEngagementPosition) > engagementTransitionStickyThreshold) {
+					singleEngagementPosition = Mathf.Lerp(singleEngagementPosition,engagementInput,engagementTransitionSlide*20f*Time.deltaTime);
+				}
+				if (Mathf.Abs (secondEngagementInput - secondEngagementPosition) > engagementTransitionStickyThreshold) {
+					secondEngagementPosition = Mathf.Lerp(secondEngagementPosition,secondEngagementInput,engagementTransitionSlide*20f*Time.deltaTime);
+				}
+				mainCameraBlurGradual.SetBlur(  ((singleEngagementPosition < LeftPanelEngagamentDeflectionTrigger()) || (singleEngagementPosition > RightPanelEngagamentDeflectionTrigger())) && ((secondEngagementPosition < LeftPanelEngagamentDeflectionTrigger()) || (secondEngagementPosition > RightPanelEngagamentDeflectionTrigger()))  );
+				overlayForLeft.intensity = Mathf.Clamp ((Mathf.Min(singleEngagementPosition,secondEngagementPosition)-0.1f)/0.6f,0f,1f) * overlayIntensity;
+				overlayForRight.intensity = Mathf.Clamp ((Mathf.Max(singleEngagementPosition,secondEngagementPosition)+0.1f)/(-0.6f),0f,1f) * overlayIntensity;
+				groupForLeft.alpha = canvasAlpha + (Mathf.Clamp (-Mathf.Min(singleEngagementPosition,secondEngagementPosition),0,0.6f)/0.6f * (1f-canvasAlpha));
+				groupForRight.alpha = canvasAlpha + (Mathf.Clamp (Mathf.Max(singleEngagementPosition,secondEngagementPosition),0,0.6f)/0.6f * (1f-canvasAlpha));
+
+				// now set what is engaged, starting by clearing everything
+				ClearEngagement();
+				if (singleEngagementPosition < LeftPanelEngagamentDeflectionTrigger()) {
+					SetPanelEngaged(0,true);
+				} else if (singleEngagementPosition <= RightPanelEngagamentDeflectionTrigger()) {
+					SetModelEngaged(0);
+				} else {
+					SetPanelEngaged(0,false);
+				}
+				if (secondEngagementPosition < LeftPanelEngagamentDeflectionTrigger()) {
+					SetPanelEngaged(1,true);
+				} else if (secondEngagementPosition <= RightPanelEngagamentDeflectionTrigger()) {
+					SetModelEngaged(1);
+				} else {
+					SetPanelEngaged(1,false);
 				}
 			} else {
 				overlayForLeft.intensity = Mathf.Lerp(overlayForLeft.intensity,leftIntensityTarget,multiEngagementTransitionSlide*20f*Time.deltaTime);
@@ -91,22 +130,31 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 	public void SetSingleEngagementInput(float input) {
 		engagementInput = Mathf.Clamp (input,-1f,1f);
 	}
+	public void SetSecondEngagementInput(float input) {
+		secondEngagementInput = Mathf.Clamp (input,-1f,1f);
+	}
 	public void SetNeutral() {
 		mainCameraBlurGradual.SetBlur(false);
 		groupForLeft.alpha = 1f;
 		groupForRight.alpha = 1f;
 	}
 	public void SetModelEngaged() {
+		SetModelEngaged (0);
+	}
+	public void SetModelEngaged(int user) {
 		// if there are multiple users, then each section will be controlled indiviually, externally
 		if (singleEngagementRegion) {
 			engagementInput = 0f;
 			MarkOnlyModelEngaged();
 		} else {
-			mainCameraBlurGradual.SetBlur(false);
+			userEngagingModel[user] = true;
 			modelEngaged = true;
 		}
 	}
 	public void SetPanelEngaged(bool isLeft) {
+		SetPanelEngaged(0,isLeft);
+	}
+	public void SetPanelEngaged(int user, bool isLeft) {
 		// if there are multiple users, then each section will be controlled indiviually, externally
 		if (singleEngagementRegion) {
 			engagementInput = isLeft ? -1f : 1f;
@@ -118,32 +166,57 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 		}
 		else {
 			if (isLeft) {
+				userEngagingLeftPanel[user] = true;
 				leftPanelEngaged = true;
 			} else {
+				userEngagingRightPanel[user] = true;
 				rightPanelEngaged = true;
 			}
 		}
 	}
 	public void SetModelDisengaged() {
+		SetModelDisengaged (0);
+	}
+	public void SetModelDisengaged(int user) {
 		// if there are multiple users, then each section will be controlled indiviually, externally
 		if (singleEngagementRegion) {
 			Debug.Log ("Cannot disengage model in single engagement mode - what to engage instead?");
 		} else {
+			userEngagingModel[user] = false;
 			modelEngaged = false;
+			foreach (bool maybe in userEngagingModel)
+				modelEngaged = modelEngaged || maybe;
 		}
 	}
 	public void SetPanelDisengaged(bool isLeft) {
+		SetPanelDisengaged (0,isLeft);
+	}
+	public void SetPanelDisengaged(int user, bool isLeft) {
 		// if there are multiple users, then each section will be controlled indiviually, externally
 		if (singleEngagementRegion) {
 			SetModelEngaged();
 		}
 		else {
 			if (isLeft) {
+				userEngagingLeftPanel[user] = false;
 				leftPanelEngaged = false;
+				foreach (bool maybe in userEngagingLeftPanel)
+					leftPanelEngaged = leftPanelEngaged || maybe;
 			} else {
+				userEngagingRightPanel[user] = false;
 				rightPanelEngaged = false;
+				foreach (bool maybe in userEngagingRightPanel)
+					rightPanelEngaged = rightPanelEngaged || maybe;
 			}
 		}
+	}
+	public void ClearEngagement() {
+		SetPanelDisengaged(0,false);
+		SetPanelDisengaged(1,false);
+		SetPanelDisengaged(0,true);
+		SetPanelDisengaged(1,true);
+		SetModelDisengaged(0);
+		SetModelDisengaged(1);
 	}
 	public void MarkOnlyLeftPanelEngaged() {
 		leftPanelEngaged = true;
@@ -174,8 +247,8 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 		if (use) {
 			// make sure that engagement regions are being used at all
 			engagementRegionsModeActive = true;
-		}
-		else if (engagementRegionsModeActive) {
+			dualEngagementRegions = false;
+		} else if (engagementRegionsModeActive) {
 			// if we'll now be using the multi user mode, we don't want to immediately
 			// change the overlays and alphas (we wait for external input to do that) so
 			// we need to set the targets to the current values
@@ -185,8 +258,17 @@ public class ScreenEngagementFeedbackController : MonoBehaviour {
 			rightAlphaTarget = groupForRight.alpha;
 		}
 	}
+	public void UseDualEngagementRegions(bool use) {
+		dualEngagementRegions = use;
+		if (use) {
+			engagementRegionsModeActive = true;
+			singleEngagementRegion = false;
+		}
+	}
 	public void DontUseEngagementRegions() {
 		engagementRegionsModeActive = false;
+		singleEngagementRegion = false;
+		dualEngagementRegions = false;
 	}
 	public void MarkPanelOut(bool isLeft, bool isOut) {
 		if (isLeft) {
