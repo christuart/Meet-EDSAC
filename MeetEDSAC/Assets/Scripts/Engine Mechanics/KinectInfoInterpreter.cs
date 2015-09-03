@@ -39,6 +39,9 @@ public class KinectInfoInterpreter : MonoBehaviour {
 	public GameObject gazeIndicator;
 
 	public bool useNumpad = false;
+
+	public bool useGamepad = false;
+	public int gamepad = -1;
 	
 	public bool GetGestureTriggered(EdsacGestures gesture) {
 		return gestureSwitchedOn[(int)gesture];
@@ -70,8 +73,10 @@ public class KinectInfoInterpreter : MonoBehaviour {
 		//gesturesBeingRead = (EdsacGestures[])System.Enum.GetValues (typeof(EdsacGestures));
 		leftDragController = gameObject.AddComponent<KinectDragController>();
 		leftDragController.isLeftHand = true;
+		leftDragController.kinectInterpreter = this;
 		rightDragController = gameObject.AddComponent<KinectDragController>();
 		rightDragController.isLeftHand = false;
+		rightDragController.kinectInterpreter = this;
 	}
 
 	void Start() {
@@ -192,25 +197,25 @@ public class KinectInfoInterpreter : MonoBehaviour {
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.Keypad4));
 			} else {
-				return !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeLeft);
+				return !useGamepad && !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeLeft);
 			}
 		case EdsacGestures.RIGHT_SWIPE:
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.Keypad6));
 			} else {
-				return !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeRight);
+				return !useGamepad && !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeRight);
 			}
 		case EdsacGestures.UP_SWIPE:
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.Keypad8));
 			} else {
-				return !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeUp);
+				return !useGamepad && !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeUp);
 			}
 		case EdsacGestures.DOWN_SWIPE:
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.Keypad2));
 			} else {
-				return !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeDown);
+				return !useGamepad && !leftDragController.wasDragging && !rightDragController.wasDragging && kinectListener.IsGestureActive(userId, KinectGestures.Gestures.SwipeDown);
 			}
 		case EdsacGestures.LEFT_DRAG:
 			return leftDragController.GetDraggingLeft() || rightDragController.GetDraggingLeft();
@@ -223,17 +228,25 @@ public class KinectInfoInterpreter : MonoBehaviour {
 		case EdsacGestures.STRETCH:
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.KeypadPlus));
+			} else if (useGamepad) {
+				return Input.GetAxis("Zoom" + gamepad) < 0f;
 			} else {
 				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.ZoomIn);
 			}
 		case EdsacGestures.SQUASH:
 			if (useNumpad) {
 				return (useNumpad && Input.GetKey(KeyCode.KeypadMinus));
+			} else if (useGamepad) {
+				return Input.GetAxis("Zoom" + gamepad) > 0f;
 			} else {
 				return kinectListener.IsGestureActive(userId, KinectGestures.Gestures.ZoomOut);
 			}
 		case EdsacGestures.SELECT:
-			return leftDragController.GetDraggingRight();
+			if (useGamepad) {
+				return Input.GetButton("Select" + gamepad);
+			} else {
+				return leftDragController.GetDraggingRight() || rightDragController.GetDraggingRight();
+			}
 		default:
 			return false;
 		}
@@ -260,6 +273,9 @@ public class KinectInfoInterpreter : MonoBehaviour {
 		leftDragController.canDrag = true;
 		rightDragController.userId = _userId;
 		rightDragController.canDrag = true;
+	}
+	public long GetUserId() {
+		return userId;
 	}
 
 	public void UseNumpad(bool use) {

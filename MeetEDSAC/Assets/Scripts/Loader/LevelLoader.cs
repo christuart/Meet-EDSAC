@@ -7,7 +7,14 @@ public class LevelLoader : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (go || Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			if (transform.childCount > 0) {
+				Animator a = GetComponent<Animator> ();
+				a.speed = 50f;
+			}
+		}
+		if (go) {
 			Application.LoadLevel ("Main");
+		}
 	}
 }

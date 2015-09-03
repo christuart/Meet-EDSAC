@@ -121,6 +121,9 @@ public class StoryController : MonoBehaviour {
 		} else if (activeWaypoint.imageContent != null) {
 			controller.inspector.SetImage(activeWaypoint.imageContent);
 		}
+		if (activeWaypoint.inspectorCaption != "") {
+			controller.inspector.SetCaption (activeWaypoint.inspectorCaption);
+		}
 		if (activeWaypoint.audioContent != null) {
 			StartCoroutine(PlayAudioContent(activeWaypoint.audioContent,activeWaypoint.audioDelay));
 		} else {

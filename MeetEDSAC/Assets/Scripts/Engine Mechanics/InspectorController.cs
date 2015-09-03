@@ -7,6 +7,7 @@ public class InspectorController : MonoBehaviour {
 	public Image photoImage;
 	public VideoTextureController videoController;
 	public Sprite startImage;
+	public Text captionText;
 
 	private RectTransform rectTransform;
 	private Canvas canvas;
@@ -43,6 +44,9 @@ public class InspectorController : MonoBehaviour {
 		photoImage.gameObject.SetActive(false);
 		videoController.SetVideo(target,play);
 		ResizeToVideo();
+	}
+	public void SetCaption(string caption) {
+		captionText.text = caption;
 	}
 	public void PauseVideo() {
 		if (videoController.IsPlaying()) {

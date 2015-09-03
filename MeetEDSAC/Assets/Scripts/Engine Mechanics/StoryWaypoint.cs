@@ -43,6 +43,7 @@ public class StoryWaypoint : MonoBehaviour {
 	public StoryContent storyContent = StoryContent.NONE;
 	public Videos videoContent = Videos.NONE;
 	public Sprite imageContent;
+	public string inspectorCaption = "";
 	public AudioClip audioContent;
 	public float audioDelay;
 

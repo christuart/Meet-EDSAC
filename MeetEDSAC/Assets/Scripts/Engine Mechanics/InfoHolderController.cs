@@ -61,6 +61,9 @@ public class InfoHolderController : MonoBehaviour {
 		PlaceObjectInInfoUI((int)contentId);
 	}
 	public void PlaceObjectInInfoUI(int contentId) {
+		if (currentContentId != -1) {
+			DeemphasiseButtonInInfoContent ();
+		}
 		if (contentId < 0 || contentId >= content.Length) {
 			return;
 		}
@@ -90,6 +93,22 @@ public class InfoHolderController : MonoBehaviour {
 				contentButton.onClick.Invoke();
 		}
 	}
+	public void EmphasiseButtonInInfoContent() {
+		GameObject infoContent = ActiveContent ();
+		if (infoContent != null) {
+			Button contentButton = infoContent.GetComponentInChildren<Button>();
+			if (contentButton != null)
+				contentButton.transform.localScale = 1.4f * Vector3.one;
+		}
+	}
+	public void DeemphasiseButtonInInfoContent() {
+		GameObject infoContent = ActiveContent ();
+		if (infoContent != null) {
+			Button contentButton = infoContent.GetComponentInChildren<Button>();
+			if (contentButton != null)
+				contentButton.transform.localScale = Vector3.one;
+		}
+	}
 
 	public GameObject ActiveContent() {
 		if (currentContentId >= 0 && currentContentId < content.Length) {
@@ -106,6 +125,7 @@ public class InfoHolderController : MonoBehaviour {
 		scrollCoroutine = ScrollActiveContent(scrollDown);
 		StartCoroutine(scrollCoroutine);
 	}
+
 
 	private IEnumerator ScrollActiveContent(bool scrollDown) {
 		GameObject scrollContent = ActiveContent();
