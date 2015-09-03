@@ -7,6 +7,7 @@ public class UIAudioController : MonoBehaviour {
 	public enum AudioEvent { VERTEX_CHANGED, ZOOM_CHANGED, HINGE_OUT, HINGE_AWAY, INSPECTION_POINT_CLICKED };
 
 	public AudioSource source;
+	public AudioSource contentAudioSource;
 	public Dictionary<AudioEvent,AudioClip> audioClips;
 	public AudioClip changeVertexClip;
 	public AudioClip changeZoomClip;

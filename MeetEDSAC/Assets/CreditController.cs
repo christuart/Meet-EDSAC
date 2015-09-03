@@ -11,14 +11,19 @@ public class CreditController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		canvasGroup.alpha = 0f;
+		canvasGroup.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha,targetAlpha,alphaSlide);
+		if (canvasGroup.gameObject.activeSelf)
+			canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha,targetAlpha,alphaSlide);
+		if (canvasGroup.alpha < 0.01f)
+			canvasGroup.gameObject.SetActive(false);
 	}
 
 	public void ShowCredits() {
+		canvasGroup.gameObject.SetActive(true);
 		targetAlpha = 1f;
 	}
 	public void HideCredits() {

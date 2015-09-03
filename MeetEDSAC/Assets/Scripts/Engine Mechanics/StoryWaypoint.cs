@@ -43,6 +43,8 @@ public class StoryWaypoint : MonoBehaviour {
 	public StoryContent storyContent = StoryContent.NONE;
 	public Videos videoContent = Videos.NONE;
 	public Sprite imageContent;
+	public AudioClip audioContent;
+	public float audioDelay;
 
 	public LabelController[] associatedLabels;
 	// ALSO NEEDS TO HAVE A LIST OF LABELS TO ACTIVATE SO THAT I CAN MAKE NICE POINTS ABOUT WHAT THE CONTROL UNIT DOES ETC
