@@ -26,7 +26,8 @@ public class KinectFeedbackController : MonoBehaviour {
 		"Drag Up",
 		"Drag Down",
 		"Grab",
-		"Let go"
+		"Let go",
+		"Game controllers swapped."
 	};
 
 	#region MESSAGE-IDS
@@ -54,6 +55,7 @@ public class KinectFeedbackController : MonoBehaviour {
 	public static int DEBUG_OFF = 15;
 	public static int HAND_CLOSED = 20;
 	public static int HAND_OPENED = 21;
+	public static int CONTROLLERS_SWAPPED = 22;
 	#endregion MESSAGE-IDS
 
 	public GameObject prefab;

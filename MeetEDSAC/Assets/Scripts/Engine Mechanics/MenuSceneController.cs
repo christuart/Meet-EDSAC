@@ -52,17 +52,22 @@ public class MenuSceneController : MonoBehaviour {
 	
 	void OnLevelWasLoaded(int level) {
 		if (level == MenuSceneNumber) {
+
 			Controller controller = GameObject.FindObjectOfType<Controller>();
 			if (controller == null) {
 				Debug.Log ("Couldn't find the controller to apply settings. Oops!");
 				Destroy(gameObject);
 				return;
 			}
+
 			controller.useKinect = useKinect;
 			controller.useKeyboard = useKeyboard;
 			controller.useFace = useFace;
 			controller.useMouse = useMouse;
 			controller.SetupKinect();
+			
+			Destroy (gameObject);
+
 		}
 	}
 }

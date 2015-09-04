@@ -148,6 +148,16 @@ public class Controller : MonoBehaviour {
 				CheckRightPanelControlGestures(secondPlayerKinectInfo);
 			}
 
+			if (Input.GetButtonDown("Swap")) {
+				bool temp1 = firstPlayerKinectInfo.useGamepad;
+				int temp2 = firstPlayerKinectInfo.gamepad;
+				firstPlayerKinectInfo.useGamepad = secondPlayerKinectInfo.useGamepad;
+				firstPlayerKinectInfo.gamepad = secondPlayerKinectInfo.gamepad;
+				secondPlayerKinectInfo.useGamepad = temp1;
+				secondPlayerKinectInfo.gamepad = temp2;
+				firstPlayerKinectInfo.feedbackController.AddItem (KinectFeedbackController.CONTROLLERS_SWAPPED);
+			}
+
 		}
 		if (useMouse) {
 			if (engagementController.modelEngaged) {
