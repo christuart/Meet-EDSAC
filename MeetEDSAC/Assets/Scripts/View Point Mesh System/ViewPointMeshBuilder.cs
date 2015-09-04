@@ -45,76 +45,99 @@ public class ViewPointMeshBuilder : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-		camPositions = new Vector3[levels,columns];
-		camRotations = new Quaternion[levels,columns];
-		builtMesh = new GameObject[levels,columns];
-		builtMeshVertices = new ViewPointMeshVertex[levels,columns];
-		
-		float phi0 = anglePhiMin;
-		float dPhi = (anglePhiMax-anglePhiMin)/(levels-1);
-		float theta0 = transform.localRotation.eulerAngles.y + (thetaCentredAtOrigin ? -angleTheta/2f : 0f);
-		float dTheta = angleTheta / (placeColumnAtBothEnds ? columns-1 : columns);
-		
-		for (int i = 0; i < levels; i++) {
-			for (int j = 0; j < columns; j ++) {
-				camPositions[i,j] = new Vector3(
-					Mathf.Cos (Mathf.Deg2Rad * (theta0 + j*dTheta)) * Mathf.Cos (Mathf.Deg2Rad * (phi0 + i*dPhi)) * transform.localScale.x,
-					Mathf.Sin (Mathf.Deg2Rad * (phi0 + i*dPhi)) * transform.localScale.y,
-					Mathf.Sin (Mathf.Deg2Rad * (theta0 + j*dTheta)) * Mathf.Cos (Mathf.Deg2Rad * (phi0 + i*dPhi)) * transform.localScale.z);
-				camRotations[i,j].eulerAngles = -transform.eulerAngles + (new Vector3(phi0 + i*dPhi,-90f + ((thetaCentredAtOrigin ? angleTheta/2f : 0f)) - j*dTheta,0));
-				builtMesh[i,j] = GameObject.Instantiate(viewPointMeshVertex,transform.position+camPositions[i,j],camRotations[i,j]) as GameObject;
-				builtMesh[i,j].transform.parent = transform;
-			}
-		}
-		for (int i = 0; i < levels; i++) {
-			for (int j = 0; j < columns; j ++) {
-				builtMeshVertices[i,j] = builtMesh[i,j].GetComponent<ViewPointMeshVertex>();
-				if (i > 0) {
-					builtMeshVertices[i,j].down = builtMeshVertices[i-1,j];
-					builtMeshVertices[i-1,j].up = builtMeshVertices[i,j];
-				}
-				if (j > 0) {
-					builtMeshVertices[i,j].left = builtMeshVertices[i,j-1];
-					builtMeshVertices[i,j-1].right = builtMeshVertices[i,j];
-				}
-				SetVertexVariables(builtMeshVertices[i,j]);
-			}
-			if (loopAround) {
-				builtMeshVertices[i,0].left = builtMeshVertices[i,columns-1];
-				builtMeshVertices[i,columns-1].right = builtMeshVertices[i,0];
-			}
-		}
-
-		meshBuilt = true;
-		if (connectAnotherBuilderOnTheLeft != null) {
-			if (connectAnotherBuilderOnTheLeft.MeshIsBuilt()) {
-				for (int i = 0; i < levels && i < connectAnotherBuilderOnTheLeft.levels; i++) {
-					builtMeshVertices[i,0].left = connectAnotherBuilderOnTheLeft.builtMeshVertices[i,connectAnotherBuilderOnTheLeft.columns-1];
-					connectAnotherBuilderOnTheLeft.builtMeshVertices[i,connectAnotherBuilderOnTheLeft.columns-1].right = builtMeshVertices[i,0];
+		if (transform.childCount == 0) {
+			camPositions = new Vector3[levels,columns];
+			camRotations = new Quaternion[levels,columns];
+			builtMesh = new GameObject[levels,columns];
+			builtMeshVertices = new ViewPointMeshVertex[levels,columns];
+			
+			float phi0 = anglePhiMin;
+			float dPhi = (anglePhiMax-anglePhiMin)/(levels-1);
+			float theta0 = transform.localRotation.eulerAngles.y + (thetaCentredAtOrigin ? -angleTheta/2f : 0f);
+			float dTheta = angleTheta / (placeColumnAtBothEnds ? columns-1 : columns);
+			
+			for (int i = 0; i < levels; i++) {
+				for (int j = 0; j < columns; j ++) {
+					camPositions[i,j] = new Vector3(
+						Mathf.Cos (Mathf.Deg2Rad * (theta0 + j*dTheta)) * Mathf.Cos (Mathf.Deg2Rad * (phi0 + i*dPhi)) * transform.localScale.x,
+						Mathf.Sin (Mathf.Deg2Rad * (phi0 + i*dPhi)) * transform.localScale.y,
+						Mathf.Sin (Mathf.Deg2Rad * (theta0 + j*dTheta)) * Mathf.Cos (Mathf.Deg2Rad * (phi0 + i*dPhi)) * transform.localScale.z);
+					camRotations[i,j].eulerAngles = -transform.eulerAngles + (new Vector3(phi0 + i*dPhi,-90f + ((thetaCentredAtOrigin ? angleTheta/2f : 0f)) - j*dTheta,0));
+					builtMesh[i,j] = GameObject.Instantiate(viewPointMeshVertex,transform.position+camPositions[i,j],camRotations[i,j]) as GameObject;
+					builtMesh[i,j].transform.parent = transform;
 				}
 			}
-		}
-		if (connectAnotherBuilderOnTheRight != null) {
-			if (connectAnotherBuilderOnTheRight.MeshIsBuilt()) {
-				for (int i = 0; i < levels && i < connectAnotherBuilderOnTheRight.levels; i++) {
-					builtMeshVertices[i,columns-1].right = connectAnotherBuilderOnTheRight.builtMeshVertices[i,0];
-					connectAnotherBuilderOnTheRight.builtMeshVertices[i,0].left = builtMeshVertices[i,columns-1];
+			for (int i = 0; i < levels; i++) {
+				for (int j = 0; j < columns; j ++) {
+					builtMeshVertices[i,j] = builtMesh[i,j].GetComponent<ViewPointMeshVertex>();
+					if (i > 0) {
+						builtMeshVertices[i,j].down = builtMeshVertices[i-1,j];
+						builtMeshVertices[i-1,j].up = builtMeshVertices[i,j];
+					}
+					if (j > 0) {
+						builtMeshVertices[i,j].left = builtMeshVertices[i,j-1];
+						builtMeshVertices[i,j-1].right = builtMeshVertices[i,j];
+					}
+					SetVertexVariables(builtMeshVertices[i,j]);
+				}
+				if (loopAround) {
+					builtMeshVertices[i,0].left = builtMeshVertices[i,columns-1];
+					builtMeshVertices[i,columns-1].right = builtMeshVertices[i,0];
 				}
 			}
-		}
 
-		if (enterDefaultVertexOnStart) {
-			if (defaultVertex.Length == 2) {
-				ViewPointMesh mesh = GetComponentInParent<ViewPointMesh>();
-				mesh.defaultVertex = builtMeshVertices[defaultVertex[0],defaultVertex[1]];
-				GameObject.FindGameObjectWithTag("GameController").GetComponent<Controller>().ActivateVertex(mesh.defaultVertex);
-			} else {
-				Debug.Log ("Couldn't enter default vertex as incorrectly specified.");
+			meshBuilt = true;
+			if (connectAnotherBuilderOnTheLeft != null) {
+				if (connectAnotherBuilderOnTheLeft.MeshIsBuilt()) {
+					for (int i = 0; i < levels && i < connectAnotherBuilderOnTheLeft.levels; i++) {
+						builtMeshVertices[i,0].left = connectAnotherBuilderOnTheLeft.builtMeshVertices[i,connectAnotherBuilderOnTheLeft.columns-1];
+						connectAnotherBuilderOnTheLeft.builtMeshVertices[i,connectAnotherBuilderOnTheLeft.columns-1].right = builtMeshVertices[i,0];
+					}
+				}
 			}
+			if (connectAnotherBuilderOnTheRight != null) {
+				if (connectAnotherBuilderOnTheRight.MeshIsBuilt()) {
+					for (int i = 0; i < levels && i < connectAnotherBuilderOnTheRight.levels; i++) {
+						builtMeshVertices[i,columns-1].right = connectAnotherBuilderOnTheRight.builtMeshVertices[i,0];
+						connectAnotherBuilderOnTheRight.builtMeshVertices[i,0].left = builtMeshVertices[i,columns-1];
+					}
+				}
+			}
+
+			if (enterDefaultVertexOnStart) {
+				if (defaultVertex.Length == 2) {
+					ViewPointMesh mesh = GetComponentInParent<ViewPointMesh>();
+					mesh.defaultVertex = builtMeshVertices[defaultVertex[0],defaultVertex[1]];
+					GameObject.FindGameObjectWithTag("GameController").GetComponent<Controller>().ActivateVertex(mesh.defaultVertex);
+				} else {
+					Debug.Log ("Couldn't enter default vertex as incorrectly specified.");
+				}
+			}
+		} else if (enterDefaultVertexOnStart) {
+			camPositions = new Vector3[levels,columns];
+			camRotations = new Quaternion[levels,columns];
+			builtMesh = new GameObject[levels,columns];
+			builtMeshVertices = new ViewPointMeshVertex[levels,columns];
+			
+			float phi0 = anglePhiMin;
+			float dPhi = (anglePhiMax-anglePhiMin)/(levels-1);
+			float theta0 = transform.localRotation.eulerAngles.y + (thetaCentredAtOrigin ? -angleTheta/2f : 0f);
+			float dTheta = angleTheta / (placeColumnAtBothEnds ? columns-1 : columns);
+			
+			for (int i = 0; i < levels; i++) {
+				for (int j = 0; j < columns; j ++) {
+					camPositions[i,j] = new Vector3(
+						Mathf.Cos (Mathf.Deg2Rad * (theta0 + j*dTheta)) * Mathf.Cos (Mathf.Deg2Rad * (phi0 + i*dPhi)) * transform.localScale.x,
+						Mathf.Sin (Mathf.Deg2Rad * (phi0 + i*dPhi)) * transform.localScale.y,
+						Mathf.Sin (Mathf.Deg2Rad * (theta0 + j*dTheta)) * Mathf.Cos (Mathf.Deg2Rad * (phi0 + i*dPhi)) * transform.localScale.z);
+					camRotations[i,j].eulerAngles = -transform.eulerAngles + (new Vector3(phi0 + i*dPhi,-90f + ((thetaCentredAtOrigin ? angleTheta/2f : 0f)) - j*dTheta,0));
+					builtMesh[i,j] = GameObject.Instantiate(viewPointMeshVertex,transform.position+camPositions[i,j],camRotations[i,j]) as GameObject;
+					builtMesh[i,j].transform.parent = transform;
+				}
+			}
+			ViewPointMesh mesh = GetComponentInParent<ViewPointMesh>();
+			GameObject.FindGameObjectWithTag("GameController").GetComponent<Controller>().ActivateVertex(mesh.defaultVertex);
 		}
-
-
 	}
 
 	public void SetVertexVariables(ViewPointMeshVertex target) {
@@ -268,9 +291,10 @@ public class ViewPointMeshBuilder : MonoBehaviour {
 		 * match for
 		 */
 
-		Vector3 pos = vert.transform.position - transform.position;
+		Vector3 pos;
 
 		if (meshBuilt) {
+			pos = vert.transform.position - transform.position;
 			float bestDistance = 10000f;
 			float dis;
 			for (int i = 0; i < levels; i++) {
@@ -280,6 +304,17 @@ public class ViewPointMeshBuilder : MonoBehaviour {
 						bestDistance = dis;
 						bestBet = builtMeshVertices[i,j];
 					}
+				}
+			}
+		} else {
+			pos = vert.transform.position;
+			float bestDistance = 10000f;
+			float dis;
+			foreach (ViewPointMeshVertex v in GetComponentsInChildren<ViewPointMeshVertex>()) {
+				dis = (v.transform.position - pos).magnitude;
+				if (dis < bestDistance) {
+					bestDistance = dis;
+					bestBet = v;
 				}
 			}
 		}

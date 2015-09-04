@@ -17,6 +17,7 @@
  * Use mesh builders
  * 		Assign info content to mesh builders
  * 		Assign labels to mesh builders
+ *      Set the default vertex in the Mesh
  * 		Generate meshes and copypaste to Editor
  * 		REMOVE the associated label parents from
  *	 		mesh vertices because otherwise they
@@ -323,11 +324,13 @@ public class Controller : MonoBehaviour {
 				foreach (Transform child in ipc.transform)
 					child.gameObject.layer = 0;
 			}
+			activeVertex.isActive = false;
 		}
 		audioController.RunAudioEvent(UIAudioController.AudioEvent.VERTEX_CHANGED);
 	}
 	public void OnAfterChangeVertex() {
 		if (activeVertex != null) {
+			activeVertex.isActive = true;
 			if (useKinect) {
 				if (storyController.storyMode != StoryController.StoryMode.PLAYING || storyController.activeWaypoint == null || inspector.photoImage.sprite != storyController.activeWaypoint.imageContent) {
 					kinectInspectionPointChooser.FindNewInspectionPoint(activeVertex.transform.position,activeVertex.transform.rotation);

@@ -19,6 +19,8 @@ public class ViewPointMeshVertex : MonoBehaviour {
 	public GameObject associatedLabelParent;
 	public bool isCloseToObjects;
 
+	public bool isActive = false;
+
 
 	/* These values are set as if we were zooming in, but apply for the opposite job
 	 * when zooming out. 0f suggests that there is no mesh to zoom in/out to.
@@ -73,7 +75,7 @@ public class ViewPointMeshVertex : MonoBehaviour {
 	}
 
 	public void RepopulateAssociatedLabels() {
-		if (associatedLabelParent != null)
+		if (associatedLabelParent != null && (associatedLabels == null || associatedLabels.Length == 0))
 			associatedLabels = associatedLabelParent.GetComponentsInChildren<LabelController>();
 	}
 

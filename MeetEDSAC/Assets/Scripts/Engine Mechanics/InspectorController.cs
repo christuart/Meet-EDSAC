@@ -73,7 +73,6 @@ public class InspectorController : MonoBehaviour {
 		//Debug.Log(canvasRectTransform.sizeDelta);
 	}
 	public void Resize(float spriteHeight) {
-		Debug.Log (spriteHeight);
 		targetSizeDelta = canvasRectTransform.sizeDelta;
 		targetSizeDelta.y -= rectTransform.rect.height - spriteHeight;
 	}
