@@ -2,10 +2,12 @@
   <MonoDevelop.Ide.Workspace />
   <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Engine Mechanics\InspectorController.cs">
     <Files>
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Engine Mechanics\Controller.cs" Line="332" Column="33" />
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\View Point Mesh System\ViewPointMeshBuilder.cs" Line="313" Column="84" />
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\View Point Mesh System\ViewPointMeshVertex.cs" Line="78" Column="98" />
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Engine Mechanics\InspectorController.cs" Line="75" Column="42" />
+      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Graphics\WireRenderer.cs" Line="8" Column="13" />
+      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Shaders\WireShader.shader" Line="7" Column="12" />
+      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Engine Mechanics\Controller.cs" Line="20" Column="43" />
+      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\View Point Mesh System\ViewPointMeshBuilder.cs" Line="301" Column="20" />
+      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\View Point Mesh System\ViewPointMeshVertex.cs" Line="2" Column="17" />
+      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Engine Mechanics\InspectorController.cs" Line="18" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
