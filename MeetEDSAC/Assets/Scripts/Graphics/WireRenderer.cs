@@ -55,13 +55,18 @@ public class WireRenderer : MonoBehaviour {
 		
 		divisions = 1 + Mathf.FloorToInt (Mathf.Pow (Mathf.Pow (across.magnitude,2)+2*Mathf.Pow (down.magnitude,2)+2*Mathf.Pow (back.magnitude,2),.25f)/ divisionsFactor);
 		
-		lr.SetVertexCount(divisions+1);
-		
+		lr.SetVertexCount(divisions+3);
+
 		for (int i=0; i <= divisions; i++) {
 			float progress = (1f - Mathf.Cos(Mathf.PI * (float)i/divisions))/2f;
 			float coshProgress = 2f - Tools.Cosh((2f*progress-1f)*acosh2);
 			Vector3 xyz = start + progress * across + Mathf.Pow(coshProgress,0.25f) * back + coshProgress * down;
-			lr.SetPosition(i,xyz);
+			lr.SetPosition(i+1,xyz);
+			if (i == 1) {
+				lr.SetPosition(0,xyz);
+			} else if (i==divisions-1) {
+				lr.SetPosition (divisions+2,xyz);
+			}
 		}
 	}
 }

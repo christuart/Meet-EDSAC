@@ -3,8 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class MenuSceneController : MonoBehaviour {
-
-	private const int MenuSceneNumber = 3;
+	
+	private const int MenuSceneNumber = 0;
+	private const int MainSceneNumber = 3;
 	public Toggle kinectSensorToggle;
 	public Toggle keyboardToggle;
 	public Toggle kinectFaceTrackingToggle;
@@ -25,7 +26,8 @@ public class MenuSceneController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape)) {
-			Application.Quit();
+			if (Application.loadedLevel == MenuSceneNumber)
+				Application.Quit();
 		}
 	}
 
@@ -51,7 +53,7 @@ public class MenuSceneController : MonoBehaviour {
 	}
 	
 	void OnLevelWasLoaded(int level) {
-		if (level == MenuSceneNumber) {
+		if (level == MainSceneNumber) {
 
 			Controller controller = GameObject.FindObjectOfType<Controller>();
 			if (controller == null) {

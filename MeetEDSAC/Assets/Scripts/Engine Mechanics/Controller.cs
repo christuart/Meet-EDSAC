@@ -516,13 +516,21 @@ public class Controller : MonoBehaviour {
 	}
 	public void SetupGamepads() {
 		int gamepads = Input.GetJoystickNames ().Length;
+		int lastGamepad = gamepads;
+		foreach (string s in Input.GetJoystickNames()) {
+			if (s == string.Empty) {
+				gamepads--;
+			}
+		}
+		firstPlayerKinectInfo.useGamepad = false;
+		secondPlayerKinectInfo.useGamepad = false;
 		if (gamepads > 0) {
 			firstPlayerKinectInfo.useGamepad = true;
-			firstPlayerKinectInfo.gamepad = 1;
+			firstPlayerKinectInfo.gamepad = lastGamepad - (gamepads) + 1;
 		}
 		if (gamepads > 1) {
 			secondPlayerKinectInfo.useGamepad = true;
-			secondPlayerKinectInfo.gamepad = 2;
+			secondPlayerKinectInfo.gamepad = lastGamepad - (gamepads) + 2;
 		}
 	}
 	public void SetCameraZoom(float target) {
