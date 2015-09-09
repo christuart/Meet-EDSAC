@@ -66,7 +66,6 @@ public class MenuSceneController : MonoBehaviour {
 			controller.useKeyboard = useKeyboard;
 			controller.useFace = useFace;
 			controller.useMouse = useMouse;
-			controller.SetupKinect();
 			
 			Destroy (gameObject);
 

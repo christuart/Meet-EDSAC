@@ -33,9 +33,6 @@ using System.Collections.Generic;
 
 public class Controller : MonoBehaviour {
 	
-	public KinectInfoInterpreter firstPlayerKinectInfo;
-	public KinectInfoInterpreter secondPlayerKinectInfo;
-
 	public ViewPointMeshCameraController meshSystemCameraController;
 
 	public CameraZoomController cameraZoom;
@@ -47,16 +44,12 @@ public class Controller : MonoBehaviour {
 
 	public MouseDragController mouseDrag;
 
-	public KinectInspectionPointChooser kinectInspectionPointChooser;
-
 	public HingeButtonController infoController;
 	public HingeButtonController inspectorController;
 	
 	public StoryController storyController;
 
 	public UIAudioController audioController;
-
-	private FacetrackingManager faceTrack;
 
 	public ViewPointMeshVertex activeVertex;
 	private Queue vertexTargets;
@@ -74,11 +67,6 @@ public class Controller : MonoBehaviour {
 
 	private bool updating = false;
 	private bool hasRunSetupKinect = false;
-
-	void Start() {
-		if (!hasRunSetupKinect)
-			SetupKinect ();
-	}
 
 	// Use this for initialization
 	void Awake () {
@@ -122,43 +110,6 @@ public class Controller : MonoBehaviour {
 				cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KEYBOARD);
 				OnZoomOut();
 			}
-		}
-		if (useKinect) {
-
-			if (engagementController.userEngagingModel[0]) {
-				CheckModelControlGestures(firstPlayerKinectInfo);
-			} else if (engagementController.userEngagingLeftPanel[0]) {
-				if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
-					CheckModelControlGestures(firstPlayerKinectInfo);
-				} else {
-					CheckLeftPanelControlGestures(firstPlayerKinectInfo);
-				}
-			} else if (engagementController.userEngagingRightPanel[0]) {
-				CheckRightPanelControlGestures(firstPlayerKinectInfo);
-			}
-
-			if (engagementController.userEngagingModel[1]) {
-				CheckModelControlGestures(secondPlayerKinectInfo);
-			} else if (engagementController.userEngagingLeftPanel[1]) {
-				if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
-					CheckModelControlGestures(secondPlayerKinectInfo);
-				} else {
-					CheckLeftPanelControlGestures(secondPlayerKinectInfo);
-				}
-			} else if (engagementController.userEngagingRightPanel[1]) {
-				CheckRightPanelControlGestures(secondPlayerKinectInfo);
-			}
-
-			if (Input.GetButtonDown("Swap")) {
-				bool temp1 = firstPlayerKinectInfo.useGamepad;
-				int temp2 = firstPlayerKinectInfo.gamepad;
-				firstPlayerKinectInfo.useGamepad = secondPlayerKinectInfo.useGamepad;
-				firstPlayerKinectInfo.gamepad = secondPlayerKinectInfo.gamepad;
-				secondPlayerKinectInfo.useGamepad = temp1;
-				secondPlayerKinectInfo.gamepad = temp2;
-				firstPlayerKinectInfo.feedbackController.AddItem (KinectFeedbackController.CONTROLLERS_SWAPPED);
-			}
-
 		}
 		if (useMouse) {
 			if (engagementController.modelEngaged) {
@@ -242,12 +193,6 @@ public class Controller : MonoBehaviour {
 				useFace = false;
 				useMouse = true;
 			}
-			if (Input.GetKeyDown (KeyCode.Alpha1)) {
-				firstPlayerKinectInfo.UseNumpad(!firstPlayerKinectInfo.useNumpad);
-			}
-			if (Input.GetKeyDown (KeyCode.Alpha2)) {
-				secondPlayerKinectInfo.UseNumpad(!secondPlayerKinectInfo.useNumpad);
-			}
 			if (Input.GetKeyDown (KeyCode.O)) {
 				debugOnlyGUI.SetActive(!debugOnlyGUI.activeSelf);
 			}
@@ -256,19 +201,6 @@ public class Controller : MonoBehaviour {
 			}
 //#endif
 
-		}
-
-		if (useFace) {
-			if (firstPlayerKinectInfo.GetGazeDirectionAvailable()) {
-				float gaze = firstPlayerKinectInfo.GetGazeDirection();
-				engagementController.SetSingleEngagementInput (    Mathf.Clamp(Mathf.Tan (gaze*1.5f) * firstPlayerKinectInfo.GetGazeOriginDistance() / -2f,-1f,1f)    );
-				//engagementController.SetSingleEngagementInput (    Mathf.Clamp(firstPlayerKinectInfo.GetGazeDirection() / (Mathf.PI/4f),-1f,1f)    );
-			}
-			if (secondPlayerKinectInfo.GetGazeDirectionAvailable()) {
-				float gaze = secondPlayerKinectInfo.GetGazeDirection();
-				engagementController.SetSecondEngagementInput (    Mathf.Clamp(Mathf.Tan (gaze*1.5f) * secondPlayerKinectInfo.GetGazeOriginDistance() / -2f,-1f,1f)    );
-				//engagementController.SetSingleEngagementInput (    Mathf.Clamp(firstPlayerKinectInfo.GetGazeDirection() / (Mathf.PI/4f),-1f,1f)    );
-			}
 		}
 		
 	}
@@ -331,12 +263,7 @@ public class Controller : MonoBehaviour {
 	public void OnAfterChangeVertex() {
 		if (activeVertex != null) {
 			activeVertex.isActive = true;
-			if (useKinect) {
-				if (storyController.storyMode != StoryController.StoryMode.PLAYING || storyController.activeWaypoint == null || inspector.photoImage.sprite != storyController.activeWaypoint.imageContent) {
-					kinectInspectionPointChooser.FindNewInspectionPoint(activeVertex.transform.position,activeVertex.transform.rotation);
-					kinectInspectionPointChooser.ActivateChosenInspectionPointForKinect();
-				}
-			} else if (activeVertex.associatedInspectionPoints != null) {
+			if (activeVertex.associatedInspectionPoints != null) {
 				foreach (InspectionPointController ipc in activeVertex.associatedInspectionPoints) {
 					ipc.gameObject.layer = 16; // Inspection Point Markers Detail
 					foreach (Transform child in ipc.transform)
@@ -408,34 +335,11 @@ public class Controller : MonoBehaviour {
 		}
 		StartCoroutine(inspector.videoController.Mute());
 	}
-	public void OnNewFirstPlayer() {
-		engagementController.UseSingleEngagementRegion(true);
-		SetupGamepads ();
-	}
-	public void OnNewSecondPlayer() {
-		engagementController.UseDualEngagementRegions(true);
-		SetupGamepads ();
-	}
-	public void OnReturnToSinglePlayer() {
-		engagementController.UseSingleEngagementRegion(true);
-		SetupGamepads ();
-	}
 	public void OnSelectLeftPanel() {
 		if (infoController.hingeOut) {
 			infoHolder.PressButtonInInfoContent();
 			audioController.RunAudioEvent(UIAudioController.AudioEvent.INSPECTION_POINT_CLICKED);
 		}
-	}
-	public void OnHandClosed(long userId) {
-		firstPlayerKinectInfo.feedbackController.AddItem (KinectFeedbackController.HAND_CLOSED);
-		int engagementUserId = (firstPlayerKinectInfo.GetUserId () == userId) ? 0 : -1;
-		engagementUserId = (secondPlayerKinectInfo.GetUserId () == userId) ? 1 : engagementUserId;
-		if (engagementController.userEngagingLeftPanel[engagementUserId]) {
-			infoHolder.EmphasiseButtonInInfoContent();
-		}
-	}
-	public void OnHandOpened(long userId) {
-		infoHolder.DeemphasiseButtonInInfoContent();
 	}
 	
 	/*****************************
@@ -478,61 +382,6 @@ public class Controller : MonoBehaviour {
 	public void ActivateInformationContent(StoryContent _story) {
 		infoHolder.PlaceObjectInInfoUI((InformationContent)(int)_story);
 	}
-	public void SetFirstPlayerId(long userId) {
-		firstPlayerKinectInfo.SetUserId(userId);
-	}
-	public void SetSecondPlayerId(long userId) {
-		secondPlayerKinectInfo.SetUserId(userId);
-	}
-	public void ClearFirstPlayer() {
-		firstPlayerKinectInfo.SetUserId (-1);
-	}
-	public void ClearSecondPlayer() {
-		secondPlayerKinectInfo.SetUserId (-1);
-	}
-	public void SetupKinect() {
-		if (useKinect) {
-			kinectUserInfo.SetActive (true);
-			KinectManager.Instance.calibrationText = kinectUserInfo.GetComponent<GUIText>();
-			foreach(InspectionPointController ipc in GameObject.FindObjectsOfType<InspectionPointController>())
-				ipc.Hide();
-			kinectInspectionPointChooser.EnableKinectInspectionPointLabel(true);
-			if (activeVertex != null && storyController.storyMode == StoryController.StoryMode.DISABLED) {
-				kinectInspectionPointChooser.FindNewInspectionPoint(activeVertex.transform.position,activeVertex.transform.rotation);
-			} else if (storyController.storyMode == StoryController.StoryMode.PLAYING) {
-				kinectInspectionPointChooser.chosenInspectionPoint = storyController.inspectionContent;
-			}
-			kinectInspectionPointChooser.ActivateChosenInspectionPointForKinect();
-			SetupGamepads();
-		} else {
-			kinectUserInfo.SetActive (false);
-			Destroy(GetComponent<MyKinectListener>());
-			Destroy(GetComponent<KinectInfoInterpreter>());
-			Destroy(GetComponent<KinectInfoInterpreter>());
-			Destroy(GetComponent<KinectInspectionPointChooser>());
-			audioController.DisableKinectAudio();
-		}
-		hasRunSetupKinect = true;
-	}
-	public void SetupGamepads() {
-		int gamepads = Input.GetJoystickNames ().Length;
-		int lastGamepad = gamepads;
-		foreach (string s in Input.GetJoystickNames()) {
-			if (s == string.Empty) {
-				gamepads--;
-			}
-		}
-		firstPlayerKinectInfo.useGamepad = false;
-		secondPlayerKinectInfo.useGamepad = false;
-		if (gamepads > 0) {
-			firstPlayerKinectInfo.useGamepad = true;
-			firstPlayerKinectInfo.gamepad = lastGamepad - (gamepads) + 1;
-		}
-		if (gamepads > 1) {
-			secondPlayerKinectInfo.useGamepad = true;
-			secondPlayerKinectInfo.gamepad = lastGamepad - (gamepads) + 2;
-		}
-	}
 	public void SetCameraZoom(float target) {
 		cameraZoom.SetZoom(target);
 	}
@@ -543,75 +392,10 @@ public class Controller : MonoBehaviour {
 	/* Some private functions */
 	
 	private void EnableDebugModes(bool enable) {
-		KinectFeedbackController f = GameObject.FindObjectOfType<KinectFeedbackController>();
 		debugModes = enable;
-		if (enable) {
-			f.AddItem(KinectFeedbackController.DEBUG_ON);
-		} else {
-			f.AddItem(KinectFeedbackController.DEBUG_OFF);
+		if (!enable) {
 			useFace = false;
 			useMouse = false;
-			firstPlayerKinectInfo.UseNumpad(false);
-			secondPlayerKinectInfo.UseNumpad(false);
-		}
-	}
-	private void CheckModelControlGestures(KinectInfoInterpreter userKinectInfo) {
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_DRAG)) {
-			OnPanRight();
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_DRAG)) {
-			OnPanLeft();
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.UP_DRAG)) {
-			OnPanDown();
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_DRAG)) {
-			OnPanUp();
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.STRETCH)) {
-			cameraZoom.ZoomIn(ZoomSettings.ZoomSource.KINECT);
-			OnZoomIn();
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.SQUASH)) {
-			cameraZoom.ZoomOut(ZoomSettings.ZoomSource.KINECT);
-			OnZoomOut();
-		}
-	}
-	private void CheckLeftPanelControlGestures(KinectInfoInterpreter userKinectInfo) {
-		bool invert = false;
-		if (userKinectInfo.useGamepad) {
-			invert = true;
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_DRAG)) {
-			if (infoController.hingeOut != invert) infoController.ToggleHinge();
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_DRAG)) {
-			if (!infoController.hingeOut != invert) infoController.ToggleHinge();
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.DOWN_DRAG)) {
-			infoHolder.Scroll(false != invert);
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.UP_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.UP_DRAG)) {
-			infoHolder.Scroll(true != invert);
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.SELECT)) {
-			if (userKinectInfo == firstPlayerKinectInfo && engagementController.userEngagingLeftPanel[0]) {
-				OnSelectLeftPanel();
-			} else if (userKinectInfo == secondPlayerKinectInfo && engagementController.userEngagingLeftPanel[1]) {
-				OnSelectLeftPanel();
-			}
-		}
-	}
-	private void CheckRightPanelControlGestures(KinectInfoInterpreter userKinectInfo) {
-		bool invert = false;
-		if (userKinectInfo.useGamepad) {
-			invert = true;
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.LEFT_DRAG)) {
-			if (!inspectorController.hingeOut != invert) inspectorController.ToggleHinge();
-		}
-		if (userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_SWIPE) || userKinectInfo.GetGestureTriggered(EdsacGestures.RIGHT_DRAG)) {
-			if (inspectorController.hingeOut != invert) inspectorController.ToggleHinge();
 		}
 	}
 }

@@ -45,33 +45,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\KinectScripts\AvatarController.cs" />
-     <Compile Include="Assets\KinectScripts\FacetrackingManager.cs" />
-     <Compile Include="Assets\KinectScripts\Filters\BoneOrientationsConstraint.cs" />
-     <Compile Include="Assets\KinectScripts\Filters\JointPositionsFilter.cs" />
-     <Compile Include="Assets\KinectScripts\InteractionManager.cs" />
-     <Compile Include="Assets\KinectScripts\Interfaces\DepthSensorInterface.cs" />
-     <Compile Include="Assets\KinectScripts\Interfaces\Kinect1Interface.cs" />
-     <Compile Include="Assets\KinectScripts\Interfaces\Kinect2Interface.cs" />
-     <Compile Include="Assets\KinectScripts\Interfaces\OpenNI2Interface.cs" />
-     <Compile Include="Assets\KinectScripts\KinectGestures.cs" />
-     <Compile Include="Assets\KinectScripts\KinectInterop.cs" />
-     <Compile Include="Assets\KinectScripts\KinectManager.cs" />
-     <Compile Include="Assets\KinectScripts\Samples\MouseControl.cs" />
-     <Compile Include="Assets\KinectScripts\SpeechErrorHandler.cs" />
-     <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
-     <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\CameraZoomController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\Controller.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InfoHolderController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InspectionPointController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\InspectorController.cs" />
-     <Compile Include="Assets\Scripts\Engine Mechanics\KinectDragController.cs" />
-     <Compile Include="Assets\Scripts\Engine Mechanics\KinectInfoInterpreter.cs" />
-     <Compile Include="Assets\Scripts\Engine Mechanics\KinectInspectionPointChooser.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\MenuSceneController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\MouseDragController.cs" />
-     <Compile Include="Assets\Scripts\Engine Mechanics\MyKinectListener.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\ScreenEngagementFeedbackController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\SimpleGalleryController.cs" />
      <Compile Include="Assets\Scripts\Engine Mechanics\StoryController.cs" />
@@ -104,8 +84,6 @@
      <Compile Include="Assets\Scripts\Visuals\FrameIndicatorController.cs" />
      <Compile Include="Assets\Scripts\Visuals\HingeButtonController.cs" />
      <Compile Include="Assets\Scripts\Visuals\HingePanelDoubleClickController.cs" />
-     <Compile Include="Assets\Scripts\Visuals\KinectFeedbackController.cs" />
-     <Compile Include="Assets\Scripts\Visuals\KinectFeedbackItemController.cs" />
      <Compile Include="Assets\Scripts\Visuals\KinectOnlyTextRemover.cs" />
      <Compile Include="Assets\Scripts\Visuals\LabelAlignmentOnChassis.cs" />
      <Compile Include="Assets\Scripts\Visuals\LabelController.cs" />
@@ -208,23 +186,11 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
- </Reference>
- <Reference Include="OpenCvSharp">
- <HintPath>C:/Users/cis24/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/OpenCV/OpenCvSharp.dll</HintPath>
- </Reference>
- <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>C:/Users/cis24/Documents/GitHub/Meet-EDSAC/MeetEDSAC/Assets/KinectScripts/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
