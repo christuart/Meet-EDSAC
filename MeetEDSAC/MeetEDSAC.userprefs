@@ -1,13 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Engine Mechanics\InspectorController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Engine Mechanics\StoryController.cs">
     <Files>
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Graphics\WireRenderer.cs" Line="8" Column="13" />
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Shaders\WireShader.shader" Line="7" Column="12" />
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Engine Mechanics\Controller.cs" Line="20" Column="43" />
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\View Point Mesh System\ViewPointMeshBuilder.cs" Line="301" Column="20" />
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\View Point Mesh System\ViewPointMeshVertex.cs" Line="2" Column="17" />
-      <File FileName="..\..\..\MeetEDSAC - no gen 1\Assets\Scripts\Engine Mechanics\InspectorController.cs" Line="18" Column="2" />
+      <File FileName="Assets\Scripts\Engine Mechanics\StoryController.cs" Line="150" Column="94" />
+      <File FileName="Assets\Scripts\Loader\LevelLoader.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Visuals\HingeButtonController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\InspectorController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\InspectionPointController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\VideoTextureController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Graphics\AspectRatioFixer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\UIAudioController.cs" Line="18" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

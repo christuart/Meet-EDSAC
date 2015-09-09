@@ -40,9 +40,14 @@ public class InspectorController : MonoBehaviour {
 		ResizeToImage();
 	}
 	public void SetVideo(Videos target, bool play = true) {
-		videoController.gameObject.SetActive(true);
 		photoImage.gameObject.SetActive(false);
+		videoController.gameObject.SetActive(true);
 		videoController.SetVideo(target,play);
+		ResizeToVideo();
+	}
+	public void ResumeVideo() {
+		photoImage.gameObject.SetActive(false);
+		videoController.gameObject.SetActive(true);
 		ResizeToVideo();
 	}
 	public void SetCaption(string caption) {

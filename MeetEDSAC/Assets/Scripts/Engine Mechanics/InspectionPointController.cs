@@ -66,7 +66,9 @@ public class InspectionPointController : MonoBehaviour {
 	}
 	public void ChooseByClick() {
 		Choose();
-		GameObject.FindGameObjectWithTag("GameController").GetComponent<Controller>().audioController.RunAudioEvent(UIAudioController.AudioEvent.INSPECTION_POINT_CLICKED);
+		Controller c = GameObject.FindGameObjectWithTag("GameController").GetComponent<Controller>();
+		c.audioController.RunAudioEvent(UIAudioController.AudioEvent.INSPECTION_POINT_CLICKED);
+		if (!c.inspectorController.hingeOut) c.OnInspectorHingeOut();
 	}
 	public void Choose() {
 		Choose (true);
@@ -82,6 +84,8 @@ public class InspectionPointController : MonoBehaviour {
 					inspectorController.PauseVideo();
 					inspectorController.ResizeToVideo();
 				}
+				// now make sure that the video is still showing and the image isn't!
+				inspectorController.ResumeVideo();
 			} else {
 				//Debug.Log ("Step ba5: It's a different video from before");
 				inspectorController.SetVideo (videoContent,true);
