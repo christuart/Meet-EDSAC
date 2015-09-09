@@ -75,25 +75,25 @@ public class InspectionPointController : MonoBehaviour {
 	}
 	public void Choose(bool pauseOnRechoose) {
 		InspectorController inspectorController = GameObject.FindObjectOfType<InspectorController>();
-		if (isVideo) {
-			//Debug.Log ("Step a4: It's a video, check if it's the same one as before");
-			if (inspectorController.videoController.textureTarget.mainTexture == inspectorController.videoController.videos[(int)videoContent]) {
-				//Debug.Log ("Step aa5: It's the same one as before, make sure it's playing");
-				if (pauseOnRechoose || !inspectorController.videoController.videos[(int)videoContent].isPlaying){
-					//Debug.Log ("Step aa6: Running 'PauseVideo' because it was paused and we want it unpaused");
-					inspectorController.PauseVideo();
-					inspectorController.ResizeToVideo();
-				}
-				// now make sure that the video is still showing and the image isn't!
-				inspectorController.ResumeVideo();
-			} else {
-				//Debug.Log ("Step ba5: It's a different video from before");
-				inspectorController.SetVideo (videoContent,true);
-			}
-		} else {
+//		if (isVideo) {
+//			//Debug.Log ("Step a4: It's a video, check if it's the same one as before");
+//			if (inspectorController.videoController.textureTarget.mainTexture == inspectorController.videoController.videos[(int)videoContent]) {
+//				//Debug.Log ("Step aa5: It's the same one as before, make sure it's playing");
+//				if (pauseOnRechoose || !inspectorController.videoController.videos[(int)videoContent].isPlaying){
+//					//Debug.Log ("Step aa6: Running 'PauseVideo' because it was paused and we want it unpaused");
+//					inspectorController.PauseVideo();
+//					inspectorController.ResizeToVideo();
+//				}
+//				// now make sure that the video is still showing and the image isn't!
+//				inspectorController.ResumeVideo();
+//			} else {
+//				//Debug.Log ("Step ba5: It's a different video from before");
+//				inspectorController.SetVideo (videoContent,true);
+//			}
+//		} else {
 			//Debug.Log ("Step b4: It's an image");
 			inspectorController.SetImage(imageContent);
-		}
+//		}
 	}
 	public void Hide() {
 		if (hovering) {

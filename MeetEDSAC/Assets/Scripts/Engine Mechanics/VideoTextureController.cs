@@ -7,7 +7,7 @@ public enum Videos { 	EDSAC_FILM = 0,
 
 public class VideoTextureController : MonoBehaviour {
 
-	public MovieTexture[] videos;
+//	public MovieTexture[] videos;
 	public AudioClip[] videoAudio;
 
 	public RawImage textureTarget;
@@ -17,53 +17,53 @@ public class VideoTextureController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (videos.Length > 0 && videoAudio.Length > 0) {
-			SetVideo (0,true);
-		}
+//		if (videos.Length > 0 && videoAudio.Length > 0) {
+//			SetVideo (0,true);
+//		}
 	}
 	
 	public void SetVideo(Videos target, bool play = true) {
-		SetVideo ((int)target,play);
+//		SetVideo ((int)target,play);
 	}
 	public void SetVideo(int target, bool play = true) {
-		Stop();
-		textureTarget.texture = videos[target];
-		audioTarget.clip = videoAudio[target];
-		if (play) 
-			Play();
+//		Stop();
+//		textureTarget.texture = videos[target];
+//		audioTarget.clip = videoAudio[target];
+//		if (play) 
+//			Play();
 	}
 
 	public void Play() {
-		if (textureTarget.mainTexture != null) {
-			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) {
-				((MovieTexture)textureTarget.mainTexture).Play();
-				audioTarget.Play ();	
-			}
-		}
+//		if (textureTarget.mainTexture != null) {
+//			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) {
+//				((MovieTexture)textureTarget.mainTexture).Play();
+//				audioTarget.Play ();	
+//			}
+//		}
 	}
 		
 	public void Stop() {
-		if (textureTarget.mainTexture != null) {
-			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) {
-				((MovieTexture)textureTarget.mainTexture).Stop();
-			}
-		}
-		if (audioTarget != null) audioTarget.Stop();
+//		if (textureTarget.mainTexture != null) {
+//			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) {
+//				((MovieTexture)textureTarget.mainTexture).Stop();
+//			}
+//		}
+//		if (audioTarget != null) audioTarget.Stop();
 	}
 
 	public void Pause() {
-		if (textureTarget.mainTexture != null) {
-			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) ((MovieTexture)textureTarget.mainTexture).Pause();
-			audioTarget.Pause ();
-		}
+//		if (textureTarget.mainTexture != null) {
+//			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) ((MovieTexture)textureTarget.mainTexture).Pause();
+//			audioTarget.Pause ();
+//		}
 	}
 
 	public bool IsPlaying() {
-		if (textureTarget.mainTexture != null) {
-			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) {
-				return ((MovieTexture)textureTarget.mainTexture).isPlaying;
-			}
-		}
+//		if (textureTarget.mainTexture != null) {
+//			if (textureTarget.mainTexture.GetType() == typeof(MovieTexture)) {
+//				return ((MovieTexture)textureTarget.mainTexture).isPlaying;
+//			}
+//		}
 		return false;
 	}
 	
