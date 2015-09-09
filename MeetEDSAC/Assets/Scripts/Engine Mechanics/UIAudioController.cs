@@ -19,8 +19,10 @@ public class UIAudioController : MonoBehaviour {
 
 	public void DisableKinectAudio() {
 		foreach (AudioSource s in gameObject.GetComponents<AudioSource>()) {
-			s.Stop();
-			Destroy (s);
+			if (s != contentAudioSource) {
+				s.Stop();
+				Destroy (s);
+			}
 		}
 		disabled = true;
 	}

@@ -133,13 +133,15 @@ public class EdsacXmlGenerator : MonoBehaviour {
 						chassis.transform.localPosition = new Vector3 (0f,
 						                                               chassis_start_y+i*chassis_delta_y,
 						                                               chassis_offset_z);
-						GameObject chassisLabel = Instantiate(prefabChassisLabel) as GameObject;
-						chassisLabel.transform.SetParent(chassis.transform,false);
-						foreach (TextMesh t in chassisLabel.GetComponentsInChildren<TextMesh>()) {
-							if (t.gameObject.name == "Chassis Name") {
-								t.text = ch.physicalLabelNameText;
-							} else if (t.gameObject.name == "Chassis Number") {
-								t.text = ch.physicalLabelNumberText;
+						if (ch.physicalLabelNameText != "" || ch.physicalLabelNumberText != "") {
+							GameObject chassisLabel = Instantiate(prefabChassisLabel) as GameObject;
+							chassisLabel.transform.SetParent(chassis.transform,false);
+							foreach (TextMesh t in chassisLabel.GetComponentsInChildren<TextMesh>()) {
+								if (t.gameObject.name == "Chassis Name") {
+									t.text = ch.physicalLabelNameText;
+								} else if (t.gameObject.name == "Chassis Number") {
+									t.text = ch.physicalLabelNumberText;
+								}
 							}
 						}
 

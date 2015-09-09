@@ -179,10 +179,10 @@ public class StoryController : MonoBehaviour {
 		return activeWaypointIndex == 0;
 	}
 	private IEnumerator PlayAudioContent(AudioClip content, float delay) {
-		if (!controller.audioController.disabled) {
-			if (delay != 0f) {
-				yield return new WaitForSeconds(delay);
-			}
+		if (delay != 0f) {
+			yield return new WaitForSeconds(delay);
+		}
+		if (controller.storyController.activeWaypoint.audioContent == content) {
 			controller.audioController.contentAudioSource.Stop();
 			controller.audioController.contentAudioSource.clip = content;
 			controller.audioController.contentAudioSource.Play();
