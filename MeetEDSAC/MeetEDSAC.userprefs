@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Engine Mechanics\InfoHolderController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\Color2DepthShader.shader">
     <Files>
-      <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="425" Column="30" />
+      <File FileName="Assets\Resources\Color2DepthShader.shader" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Engine Mechanics\InfoHolderController.cs" Line="98" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
