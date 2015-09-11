@@ -68,6 +68,11 @@ public class LabelController : MonoBehaviour {
 		}
 		if (active) {
 
+			// This whole if statement is a confusing and horrific little bit of code, and if you are
+			// reading this I feel bad for you. Sorry! I was going to comment it up, but I can't even
+			// remember what the heck I was thinking with all these different checks of
+			// "if (keepWithinScreen)" over and over. Fun times!
+
 			Vector4 minMaxViewport = Tools.ViewportFromRenderer(targetForLabel,viewCamera);
 			Vector2 min = Tools.ViewportToCameraPoint(viewCamera,new Vector2(minMaxViewport.x,minMaxViewport.y));
 			Vector2 max = Tools.ViewportToCameraPoint(viewCamera,new Vector2(minMaxViewport.z,minMaxViewport.w));

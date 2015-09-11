@@ -1,8 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Engine Mechanics\StoryController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Visuals\LabelController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Engine Mechanics\StoryController.cs" Line="162" Column="16" />
+      <File FileName="Assets\Scripts\View Point Mesh System\ViewPointMeshVertex.cs" Line="84" Column="25" />
+      <File FileName="Assets\Scripts\View Point Mesh System\ViewPointMeshCameraController.cs" Line="101" Column="54" />
+      <File FileName="Assets\Scripts\View Point Mesh System\ViewPointMeshBuilder.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\Controller.cs" Line="352" Column="45" />
+      <File FileName="Assets\Scripts\Engine Mechanics\CameraZoomController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\View Point Mesh System\ViewPointMesh.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Engine Mechanics\StoryViewpointSystemVertex.cs" Line="4" Column="42" />
+      <File FileName="Assets\Scripts\Engine Mechanics\StoryController.cs" Line="26" Column="19" />
+      <File FileName="Assets\Scripts\Visuals\LabelController.cs" Line="55" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
